@@ -4,22 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SSA Onboarding Workbook | Keypath Education</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --kp-blue: #003057;
-    --kp-teal: #00A9CE;
-    --kp-light: #E8F4F8;
-    --kp-accent: #F2A900;
+    --kp-navy: #0B1C38;
+    --kp-blue: #2AACE2;
+    --kp-blue-dark: #1A8FBF;
+    --kp-light: #E8F5FC;
     --kp-green: #00843D;
     --kp-red: #C8102E;
     --sidebar-w: 270px;
-    --radius: 10px;
+    --radius: 8px;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    font-family: 'Segoe UI', Arial, sans-serif;
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
     background: #f0f4f8;
     color: #1a2533;
     min-height: 100vh;
@@ -30,7 +33,7 @@
   #sidebar {
     width: var(--sidebar-w);
     min-height: 100vh;
-    background: var(--kp-blue);
+    background: var(--kp-navy);
     color: #fff;
     display: flex;
     flex-direction: column;
@@ -41,23 +44,54 @@
   }
 
   #sidebar-header {
-    padding: 24px 20px 16px;
-    border-bottom: 1px solid rgba(255,255,255,0.12);
+    padding: 22px 20px 18px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    background: rgba(0,0,0,0.15);
   }
 
-  #sidebar-header .logo-text {
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--kp-teal);
-    margin-bottom: 6px;
+  #sidebar-header .kp-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  #sidebar-header .kp-logo-squares {
+    display: grid;
+    grid-template-columns: repeat(3, 6px);
+    gap: 2px;
+    flex-shrink: 0;
+  }
+
+  #sidebar-header .kp-logo-squares span {
+    width: 6px; height: 6px;
+    background: var(--kp-blue);
+    border-radius: 1px;
+    display: block;
+  }
+
+  #sidebar-header .kp-logo-squares span:nth-child(2),
+  #sidebar-header .kp-logo-squares span:nth-child(6) {
+    opacity: 0.4;
+  }
+
+  #sidebar-header .kp-logo-text {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #fff;
+  }
+
+  #sidebar-header .kp-logo-text span {
+    color: var(--kp-blue);
   }
 
   #sidebar-header h1 {
-    font-size: 15px;
-    font-weight: 700;
-    line-height: 1.3;
-    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: rgba(255,255,255,0.7);
+    padding-left: 26px;
   }
 
   #progress-bar-wrap {
@@ -82,7 +116,7 @@
 
   #progress-fill {
     height: 100%;
-    background: var(--kp-teal);
+    background: var(--kp-blue);
     border-radius: 3px;
     transition: width 0.4s ease;
     width: 0%;
@@ -117,9 +151,9 @@
   .nav-item:hover { background: rgba(255,255,255,0.06); color: #fff; }
 
   .nav-item.active {
-    background: rgba(0,169,206,0.18);
-    color: var(--kp-teal);
-    border-left-color: var(--kp-teal);
+    background: rgba(42,172,226,0.15);
+    color: var(--kp-blue);
+    border-left-color: var(--kp-blue);
     font-weight: 600;
   }
 
@@ -156,7 +190,7 @@
 
   .page-badge {
     display: inline-block;
-    background: var(--kp-teal);
+    background: var(--kp-navy);
     color: #fff;
     font-size: 11px;
     font-weight: 700;
@@ -170,7 +204,7 @@
   .page-header h2 {
     font-size: 26px;
     font-weight: 700;
-    color: var(--kp-blue);
+    color: var(--kp-navy);
     margin-bottom: 8px;
   }
 
@@ -194,7 +228,7 @@
   .card-title {
     font-size: 15px;
     font-weight: 700;
-    color: var(--kp-blue);
+    color: var(--kp-navy);
     margin-bottom: 16px;
     display: flex;
     align-items: center;
@@ -208,6 +242,7 @@
     display: flex; align-items: center; justify-content: center;
     font-size: 14px;
     flex-shrink: 0;
+    color: var(--kp-blue);
   }
 
   /* Form fields */
@@ -239,8 +274,8 @@
 
   input[type="text"]:focus, input[type="date"]:focus, textarea:focus {
     outline: none;
-    border-color: var(--kp-teal);
-    box-shadow: 0 0 0 3px rgba(0,169,206,0.12);
+    border-color: var(--kp-blue);
+    box-shadow: 0 0 0 3px rgba(42,172,226,0.12);
     background: #fff;
   }
 
@@ -268,7 +303,7 @@
   }
 
   .call-log-header {
-    background: var(--kp-blue);
+    background: var(--kp-navy);
     color: #fff;
     padding: 10px 16px;
     font-size: 13px;
@@ -284,7 +319,7 @@
 
   /* Role play */
   .scenario-card {
-    border-left: 4px solid var(--kp-teal);
+    border-left: 4px solid var(--kp-blue);
     background: #fff;
     border-radius: var(--radius);
     padding: 18px 20px;
@@ -297,7 +332,7 @@
     font-weight: 700;
     letter-spacing: 1px;
     text-transform: uppercase;
-    color: var(--kp-teal);
+    color: var(--kp-blue);
     margin-bottom: 4px;
   }
 
@@ -318,7 +353,7 @@
     line-height: 1.5;
   }
 
-  .scenario-objective strong { color: var(--kp-blue); }
+  .scenario-objective strong { color: var(--kp-navy); }
 
   .scenario-done-check {
     display: flex;
@@ -330,12 +365,12 @@
     cursor: pointer;
   }
 
-  .scenario-done-check input { width: auto; cursor: pointer; accent-color: var(--kp-green); }
+  .scenario-done-check input { width: auto; cursor: pointer; accent-color: var(--kp-blue); }
 
   /* Goals table */
   .goals-table { width: 100%; border-collapse: collapse; }
   .goals-table th {
-    background: var(--kp-blue);
+    background: var(--kp-navy);
     color: #fff;
     font-size: 12px;
     padding: 9px 12px;
@@ -390,10 +425,10 @@
     transition: all 0.15s;
     display: flex; align-items: center; justify-content: center;
   }
-  .rating-btn:hover { border-color: var(--kp-teal); color: var(--kp-teal); }
+  .rating-btn:hover { border-color: var(--kp-blue); color: var(--kp-blue); }
   .rating-btn.selected {
-    background: var(--kp-blue);
-    border-color: var(--kp-blue);
+    background: var(--kp-navy);
+    border-color: var(--kp-navy);
     color: #fff;
   }
 
@@ -406,33 +441,48 @@
 
   /* Welcome page */
   .welcome-hero {
-    background: linear-gradient(135deg, var(--kp-blue) 0%, #005a8e 100%);
+    background: linear-gradient(135deg, var(--kp-navy) 0%, #162d58 100%);
     color: #fff;
     border-radius: var(--radius);
-    padding: 36px 32px;
+    padding: 40px 36px;
     margin-bottom: 24px;
     position: relative;
     overflow: hidden;
   }
 
+  /* Keypath brand squares pattern */
+  .welcome-hero::before {
+    content: '';
+    position: absolute;
+    right: 32px; top: 20px;
+    width: 120px; height: 120px;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 10px, transparent 10px),
+      repeating-linear-gradient(90deg, transparent, transparent 10px, transparent 10px);
+    background-size: 14px 14px;
+    opacity: 0.15;
+  }
+
   .welcome-hero::after {
     content: '';
     position: absolute;
-    right: -40px; top: -40px;
-    width: 200px; height: 200px;
-    background: var(--kp-teal);
-    border-radius: 50%;
-    opacity: 0.12;
+    right: 36px; top: 24px;
+    width: 100px; height: 100px;
+    background-image:
+      linear-gradient(var(--kp-blue) 1px, transparent 1px),
+      linear-gradient(90deg, var(--kp-blue) 1px, transparent 1px);
+    background-size: 14px 14px;
+    opacity: 0.25;
   }
 
-  .welcome-hero h2 { font-size: 28px; margin-bottom: 10px; }
-  .welcome-hero p { font-size: 15px; opacity: 0.85; max-width: 500px; line-height: 1.6; }
+  .welcome-hero h2 { font-size: 26px; font-weight: 700; margin-bottom: 10px; }
+  .welcome-hero p { font-size: 14px; opacity: 0.85; max-width: 500px; line-height: 1.7; }
 
   .welcome-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 14px;
-    margin-bottom: 24px;
+    margin-bottom: 14px;
   }
 
   .welcome-tile {
@@ -448,17 +498,22 @@
   }
 
   .welcome-tile:hover {
-    border-color: var(--kp-teal);
-    box-shadow: 0 2px 12px rgba(0,169,206,0.15);
+    border-color: var(--kp-blue);
+    box-shadow: 0 2px 12px rgba(42,172,226,0.15);
     transform: translateY(-1px);
   }
 
   .welcome-tile-icon {
-    font-size: 24px;
+    width: 36px; height: 36px;
+    background: var(--kp-light);
+    border-radius: 6px;
     flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
   }
 
-  .welcome-tile h3 { font-size: 14px; color: var(--kp-blue); margin-bottom: 3px; }
+  .welcome-tile-icon svg { width: 18px; height: 18px; stroke: var(--kp-blue); fill: none; stroke-width: 2; }
+
+  .welcome-tile h3 { font-size: 14px; font-weight: 600; color: var(--kp-navy); margin-bottom: 3px; }
   .welcome-tile p { font-size: 12px; color: #718096; line-height: 1.4; }
 
   /* Buttons */
@@ -467,25 +522,26 @@
     align-items: center;
     gap: 6px;
     padding: 10px 22px;
-    border-radius: 7px;
+    border-radius: 6px;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
     border: none;
     transition: all 0.15s;
     text-decoration: none;
+    font-family: inherit;
   }
 
   .btn-primary {
-    background: var(--kp-teal);
+    background: var(--kp-blue);
     color: #fff;
   }
-  .btn-primary:hover { background: #0095b8; }
+  .btn-primary:hover { background: var(--kp-blue-dark); }
 
   .btn-outline {
     background: transparent;
-    border: 2px solid var(--kp-teal);
-    color: var(--kp-teal);
+    border: 2px solid var(--kp-navy);
+    color: var(--kp-navy);
   }
   .btn-outline:hover { background: var(--kp-light); }
 
@@ -523,8 +579,8 @@
     transition: all 0.15s;
   }
 
-  .week-tab:hover { border-color: var(--kp-teal); color: var(--kp-teal); }
-  .week-tab.active { background: var(--kp-blue); border-color: var(--kp-blue); color: #fff; }
+  .week-tab:hover { border-color: var(--kp-blue); color: var(--kp-blue); }
+  .week-tab.active { background: var(--kp-navy); border-color: var(--kp-navy); color: #fff; }
   .week-tab.done { border-color: var(--kp-green); color: var(--kp-green); }
   .week-tab.done.active { background: var(--kp-green); color: #fff; }
 
@@ -533,19 +589,20 @@
 
   /* Tip box */
   .tip-box {
-    background: #fffbeb;
-    border: 1.5px solid #fde68a;
+    background: var(--kp-light);
+    border: 1.5px solid var(--kp-blue);
     border-radius: 8px;
-    padding: 12px 16px;
+    padding: 14px 16px;
     font-size: 13px;
-    color: #92400e;
+    color: #1a2533;
     margin-bottom: 16px;
     display: flex;
     gap: 10px;
     align-items: flex-start;
+    line-height: 1.6;
   }
 
-  .tip-box .tip-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .tip-box .tip-icon { flex-shrink: 0; margin-top: 1px; color: var(--kp-blue); }
 
   /* Checklist */
   .checklist-item {
@@ -606,8 +663,15 @@
 <!-- ── Sidebar ── -->
 <aside id="sidebar">
   <div id="sidebar-header">
-    <div class="logo-text">Keypath Education</div>
-    <h1>SSA Onboarding<br>Workbook</h1>
+    <div class="kp-logo">
+      <div class="kp-logo-squares">
+        <span></span><span></span><span></span>
+        <span></span><span></span><span></span>
+        <span></span><span></span><span></span>
+      </div>
+      <div class="kp-logo-text">key<span>path</span></div>
+    </div>
+    <h1>SSA Onboarding Workbook</h1>
   </div>
 
   <div id="progress-bar-wrap">
@@ -622,7 +686,7 @@
     <div class="nav-group">
       <div class="nav-group-title">Getting Started</div>
       <div class="nav-item active" data-page="welcome" onclick="showPage('welcome', this)">
-        <div class="nav-check">✓</div> Welcome &amp; Setup
+        <div class="nav-check">&#10003;</div> Welcome &amp; Setup
       </div>
     </div>
 
@@ -661,12 +725,12 @@
   <!-- WELCOME -->
   <div class="page active" id="page-welcome">
     <div class="welcome-hero">
-      <h2>Welcome to Keypath! 👋</h2>
+      <h2>Welcome to Keypath</h2>
       <p>This workbook supports your first 8 weeks as a Student Success Advisor. Work through each section at your own pace. Make sure to bookmark this page so you can return to your progress at any time.</p>
     </div>
 
     <div class="card">
-      <div class="card-title"><div class="icon">👤</div> Your Details</div>
+      <div class="card-title"><div class="icon"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div> Your Details</div>
       <div class="field-row">
         <div>
           <label class="field-label">Employee Name</label>
@@ -690,48 +754,33 @@
     </div>
 
     <div class="card">
-      <div class="card-title"><div class="icon">🗺️</div> Your 8-Week Journey</div>
+      <div class="card-title"><div class="icon"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div> Your 8-Week Journey</div>
       <div class="welcome-grid">
         <div class="welcome-tile" onclick="showPage('calls', document.querySelector('[data-page=calls]'))">
-          <div class="welcome-tile-icon">📞</div>
-          <div>
-            <h3>Call Listening Log</h3>
-            <p>Shadow 5 calls in Weeks 1–2. Record what you observe and what you'll do differently.</p>
-          </div>
+          <div class="welcome-tile-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.4 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.18 6.18l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div><h3>Call Listening Log</h3><p>Shadow 5 calls in Weeks 1–2. Record what you observe and what you'll do differently.</p></div>
         </div>
         <div class="welcome-tile" onclick="showPage('roleplays', document.querySelector('[data-page=roleplays]'))">
-          <div class="welcome-tile-icon">🎭</div>
-          <div>
-            <h3>Role Play Scenarios</h3>
-            <p>Practice 5 key call types with your buddy or manager before going independent.</p>
-          </div>
+          <div class="welcome-tile-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div><h3>Role Play Scenarios</h3><p>Practice 5 key call types with your buddy or manager before going independent.</p></div>
         </div>
         <div class="welcome-tile" onclick="showPage('goals', document.querySelector('[data-page=goals]'))">
-          <div class="welcome-tile-icon">🎯</div>
-          <div>
-            <h3>Weekly Goals</h3>
-            <p>Set 2–3 specific goals each week with your manager and track your achievement.</p>
-          </div>
+          <div class="welcome-tile-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+          <div><h3>Weekly Goals</h3><p>Set 2–3 specific goals each week with your manager and track your achievement.</p></div>
         </div>
         <div class="welcome-tile" onclick="showPage('reflections', document.querySelector('[data-page=reflections]'))">
-          <div class="welcome-tile-icon">📔</div>
-          <div>
-            <h3>Weekly Reflections</h3>
-            <p>End each week with a reflection before your catch-up. This is your private record.</p>
-          </div>
+          <div class="welcome-tile-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
+          <div><h3>Weekly Reflections</h3><p>End each week with a reflection before your catch-up. This is your private record.</p></div>
         </div>
       </div>
       <div class="welcome-tile" style="margin-bottom:0" onclick="showPage('assessment', document.querySelector('[data-page=assessment]'))">
-        <div class="welcome-tile-icon">✅</div>
-        <div>
-          <h3>Self-Assessment (Week 8)</h3>
-          <p>Rate yourself across 10 key competencies before your Month 2 probation review.</p>
-        </div>
+        <div class="welcome-tile-icon"><svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <div><h3>Self-Assessment (Week 8)</h3><p>Rate yourself across 10 key competencies before your Month 2 probation review.</p></div>
       </div>
     </div>
 
     <div class="page-actions">
-      <button class="btn btn-primary" onclick="showPage('calls', document.querySelector('[data-page=calls]'))">Start: Call Listening Log →</button>
+      <button class="btn btn-primary" onclick="showPage('calls', document.querySelector('[data-page=calls]'))">Start: Call Listening Log &rarr;</button>
     </div>
   </div>
 
@@ -739,14 +788,14 @@
   <div class="page" id="page-calls">
     <div class="page-header">
       <div class="page-badge">Weeks 1–2</div>
-      <h2>📞 Call Listening Log</h2>
+      <h2>Call Listening Log</h2>
       <p>Shadow at least 5 calls during Weeks 1 and 2. Complete one log entry per call. Focus on tone, structure, how objections are handled, and how the SSA builds rapport with the student.</p>
     </div>
 
     <div class="tip-box">
-      <div class="tip-icon">💡</div>
+      <div class="tip-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
       <div>Ask your buddy or manager to sit with you for your first call shadows. Jot quick notes during the call, then complete this log right after while it's fresh.<br><br>
-      <strong>Call recordings to listen to:</strong> <a href="https://keypaus-my.sharepoint.com/:x:/g/personal/brett_sanderson_keypathedu_com_au/IQAQn2GgKm4ISbWVSfVtd4uAAWObudPoRmuzHW7SFT3w-Ss?e=O5Vbux&isSPOFile=1&ovuser=05b2ee58-b1a4-49f1-82d5-df22ee8f2956%2Cgreg.banks%40keypathedu.com.au&wdExp=TEAMS-TREATMENT&web=1&clickparams=eyJBcHBOYW1lIjoiVGVhbXMtRGVza3RvcCIsIkFwcFZlcnNpb24iOiI0OS8yNjAyMjcwNDIxNSJ9" target="_blank" style="color:var(--kp-blue);font-weight:600;">Open call library</a></div>
+      <strong>Call recordings to listen to:</strong> <a href="https://keypaus-my.sharepoint.com/:x:/g/personal/brett_sanderson_keypathedu_com_au/IQAQn2GgKm4ISbWVSfVtd4uAAWObudPoRmuzHW7SFT3w-Ss?e=O5Vbux&isSPOFile=1&ovuser=05b2ee58-b1a4-49f1-82d5-df22ee8f2956%2Cgreg.banks%40keypathedu.com.au&wdExp=TEAMS-TREATMENT&web=1&clickparams=eyJBcHBOYW1lIjoiVGVhbXMtRGVza3RvcCIsIkFwcFZlcnNpb24iOiI0OS8yNjAyMjcwNDIxNSJ9" target="_blank" style="color:var(--kp-navy);font-weight:600;">Open call library</a></div>
     </div>
 
     <!-- 5 call logs -->
@@ -754,7 +803,7 @@
     function callLog(n) {
       return `
       <div class="call-log">
-        <div class="call-log-header">📞 Call ${n}</div>
+        <div class="call-log-header">Call ${n}</div>
         <div class="call-log-body">
           <div class="call-meta">
             <div>
@@ -787,7 +836,7 @@
     </script>
 
     <div class="card" style="background:#f0f9ff; border-color:#bae6fd;">
-      <div class="card-title"><div class="icon">🔍</div> Reflection: After completing all 5 call logs</div>
+      <div class="card-title"><div class="icon"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div> Reflection: After completing all 5 call logs</div>
       <label class="field-label">What is one pattern you noticed across multiple calls?</label>
       <textarea class="tall" data-save="calls-pattern" placeholder="e.g. Students often bring up time pressure when discussing study load…"></textarea>
       <label class="field-label">What is one thing you want to focus on in your own calls?</label>
@@ -806,12 +855,12 @@
   <div class="page" id="page-roleplays">
     <div class="page-header">
       <div class="page-badge">Weeks 1–2</div>
-      <h2>🎭 Role Play Scenarios</h2>
+      <h2>Role Play Scenarios</h2>
       <p>Complete these role plays with your buddy or manager before going fully independent on calls. Repeat any scenario until you feel confident. Tick the box when you're happy with your performance.</p>
     </div>
 
     <div class="tip-box">
-      <div class="tip-icon">💡</div>
+      <div class="tip-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
       <div>It's fine to repeat a scenario more than once. The goal is confidence, not just completion. Your notes here will be useful to revisit as you start taking real calls.</div>
     </div>
 
@@ -880,7 +929,7 @@
   <div class="page" id="page-goals">
     <div class="page-header">
       <div class="page-badge">Weeks 1–8</div>
-      <h2>🎯 Weekly Goal Setting</h2>
+      <h2>Weekly Goal Setting</h2>
       <p>Set 2–3 goals at the start of each week with your manager. Goals should be specific, achievable within the week, and linked to your development focus or probation objectives.</p>
     </div>
 
@@ -902,7 +951,7 @@
   <div class="page" id="page-reflections">
     <div class="page-header">
       <div class="page-badge">Weeks 1–8</div>
-      <h2>📔 Weekly Reflection Journal</h2>
+      <h2>Weekly Reflection Journal</h2>
       <p>Complete your reflection at the end of each week before your catch-up with your manager. This is your personal record, not a formal assessment — be honest with yourself.</p>
     </div>
 
@@ -910,8 +959,8 @@
     <div id="refl-panels"></div>
 
     <div class="page-actions">
-      <button class="btn btn-primary" onclick="showPage('assessment', document.querySelector('[data-page=assessment]'))">Next: Self-Assessment →</button>
-      <button class="btn btn-secondary" onclick="showPage('goals', document.querySelector('[data-page=goals]'))">← Back</button>
+      <button class="btn btn-primary" onclick="showPage('assessment', document.querySelector('[data-page=assessment]'))">Next: Self-Assessment &rarr;</button>
+      <button class="btn btn-secondary" onclick="showPage('goals', document.querySelector('[data-page=goals]'))">&larr; Back</button>
     </div>
   </div>
 
@@ -919,16 +968,16 @@
   <div class="page" id="page-assessment">
     <div class="page-header">
       <div class="page-badge">Week 8</div>
-      <h2>✅ Self-Assessment</h2>
+      <h2>Self-Assessment</h2>
       <p>Complete this at the end of Week 8 before your Month 2 probation review. Rate yourself honestly — this is a conversation starter, not a test.</p>
     </div>
 
     <div class="rating-legend">
       <strong>Rating scale:</strong> &nbsp;
-      1 = Not yet confident &nbsp;·&nbsp;
-      2 = Developing &nbsp;·&nbsp;
-      3 = Mostly there &nbsp;·&nbsp;
-      4 = Confident &nbsp;·&nbsp;
+      1 = Not yet confident &nbsp;&middot;&nbsp;
+      2 = Developing &nbsp;&middot;&nbsp;
+      3 = Mostly there &nbsp;&middot;&nbsp;
+      4 = Confident &nbsp;&middot;&nbsp;
       5 = Strong — could coach others
     </div>
 
@@ -937,7 +986,7 @@
     </div>
 
     <div class="card" style="margin-top:20px">
-      <div class="card-title"><div class="icon">💬</div> Comments</div>
+      <div class="card-title"><div class="icon"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div> Comments</div>
       <label class="field-label">What are you most proud of from your first 8 weeks?</label>
       <textarea class="tall" data-save="assess-proud" placeholder="Take a moment to celebrate your wins…"></textarea>
       <label class="field-label">What is your biggest focus area going into Month 3?</label>
@@ -945,7 +994,7 @@
     </div>
 
     <div class="card" style="background:#f0fdf4; border-color:#86efac;">
-      <div class="card-title"><div class="icon">✍️</div> Sign-Off</div>
+      <div class="card-title"><div class="icon"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></div> Sign-Off</div>
       <div class="field-row">
         <div>
           <label class="field-label">Employee Name</label>
@@ -963,9 +1012,9 @@
     </div>
 
     <div class="page-actions">
-      <button class="btn btn-primary" onclick="window.print()">🖨️ Print / Save as PDF</button>
-      <button class="btn btn-outline" onclick="exportData()">💾 Export my data</button>
-      <button class="btn btn-secondary" onclick="showPage('reflections', document.querySelector('[data-page=reflections]'))">← Back</button>
+      <button class="btn btn-primary" onclick="window.print()">Print / Save as PDF</button>
+      <button class="btn btn-outline" onclick="exportData()">Export my data</button>
+      <button class="btn btn-secondary" onclick="showPage('reflections', document.querySelector('[data-page=reflections]'))">&larr; Back</button>
     </div>
   </div>
 
@@ -1096,7 +1145,7 @@ function buildGoals() {
 
     panel.innerHTML = `
       <div class="card">
-        <div class="card-title"><div class="icon">🎯</div> Week ${w} Goals <span style="font-weight:400;font-size:12px;color:#a0aec0;margin-left:6px">${label}</span></div>
+        <div class="card-title"><div class="icon"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div> Week ${w} Goals <span style="font-weight:400;font-size:12px;color:#a0aec0;margin-left:6px">${label}</span></div>
         <table class="goals-table">
           <thead><tr><th style="width:36px">#</th><th>Goal</th><th style="width:220px">How I'll know I achieved it</th><th style="width:180px">Support needed</th></tr></thead>
           <tbody>
@@ -1136,7 +1185,7 @@ function buildReflections() {
     const qs = reflectionQs[w];
     panel.innerHTML = `
       <div class="card">
-        <div class="card-title"><div class="icon">📔</div> Week ${w} Reflection</div>
+        <div class="card-title"><div class="icon"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div> Week ${w} Reflection</div>
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
           <label class="field-label" style="margin:0">Date completed</label>
           <input type="date" data-save="refl-w${w}-date" style="width:160px;margin:0">
