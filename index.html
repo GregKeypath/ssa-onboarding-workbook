@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SSA Onboarding Workbook | Keypath Education</title>
+<style>
+  :root {
+    --kp-blue: #003057;
+    --kp-teal: #00A9CE;
+    --kp-light: #E8F4F8;
+    --kp-accent: #F2A900;
+    --kp-green: #00843D;
+    --kp-red: #C8102E;
+    --sidebar-w: 270px;
+    --radius: 10px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f0f4f8;
+    color: #1a2533;
+    min-height: 100vh;
+    display: flex;
+  }
+
+  /* ── Sidebar ── */
+  #sidebar {
+    width: var(--sidebar-w);
+    min-height: 100vh;
+    background: var(--kp-blue);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    overflow-y: auto;
+    z-index: 100;
+  }
+
+  #sidebar-header {
+    padding: 24px 20px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+  }
+
+  #sidebar-header .logo-text {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--kp-teal);
+    margin-bottom: 6px;
+  }
+
+  #sidebar-header h1 {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #fff;
+  }
+
+  #progress-bar-wrap {
+    padding: 14px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  #progress-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #progress-bar {
+    height: 6px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  #progress-fill {
+    height: 100%;
+    background: var(--kp-teal);
+    border-radius: 3px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  nav { flex: 1; padding: 10px 0; }
+
+  .nav-group { margin-bottom: 2px; }
+
+  .nav-group-title {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    padding: 10px 20px 4px;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 20px;
+    cursor: pointer;
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+    text-decoration: none;
+    position: relative;
+  }
+
+  .nav-item:hover { background: rgba(255,255,255,0.06); color: #fff; }
+
+  .nav-item.active {
+    background: rgba(0,169,206,0.18);
+    color: var(--kp-teal);
+    border-left-color: var(--kp-teal);
+    font-weight: 600;
+  }
+
+  .nav-item .nav-check {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.25);
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px;
+    transition: all 0.2s;
+  }
+
+  .nav-item.done .nav-check {
+    background: var(--kp-green);
+    border-color: var(--kp-green);
+    color: #fff;
+  }
+
+  /* ── Main content ── */
+  #main {
+    margin-left: var(--sidebar-w);
+    flex: 1;
+    padding: 32px 40px 60px;
+    max-width: 900px;
+  }
+
+  .page { display: none; }
+  .page.active { display: block; }
+
+  .page-header {
+    margin-bottom: 28px;
+  }
+
+  .page-badge {
+    display: inline-block;
+    background: var(--kp-teal);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+
+  .page-header h2 {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--kp-blue);
+    margin-bottom: 8px;
+  }
+
+  .page-header p {
+    font-size: 14px;
+    color: #4a5568;
+    line-height: 1.6;
+    max-width: 680px;
+  }
+
+  /* Cards */
+  .card {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    border: 1px solid #e2e8f0;
+  }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--kp-blue);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card-title .icon {
+    width: 28px; height: 28px;
+    background: var(--kp-light);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  /* Form fields */
+  label.field-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #4a5568;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 5px;
+    margin-top: 14px;
+  }
+
+  label.field-label:first-of-type { margin-top: 0; }
+
+  input[type="text"], input[type="date"], textarea, select {
+    width: 100%;
+    border: 1.5px solid #dde1e9;
+    border-radius: 7px;
+    padding: 9px 12px;
+    font-size: 14px;
+    font-family: inherit;
+    color: #1a2533;
+    background: #fafbfc;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    resize: vertical;
+  }
+
+  input[type="text"]:focus, input[type="date"]:focus, textarea:focus {
+    outline: none;
+    border-color: var(--kp-teal);
+    box-shadow: 0 0 0 3px rgba(0,169,206,0.12);
+    background: #fff;
+  }
+
+  textarea { min-height: 80px; }
+  textarea.tall { min-height: 110px; }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .field-row-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+  }
+
+  /* Call log card */
+  .call-log {
+    border: 1.5px solid #e2e8f0;
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+
+  .call-log-header {
+    background: var(--kp-blue);
+    color: #fff;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .call-log-body { padding: 16px; }
+
+  .call-meta { display: grid; grid-template-columns: 1fr 1fr 120px; gap: 12px; margin-bottom: 14px; }
+
+  /* Role play */
+  .scenario-card {
+    border-left: 4px solid var(--kp-teal);
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+
+  .scenario-num {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--kp-teal);
+    margin-bottom: 4px;
+  }
+
+  .scenario-text {
+    font-size: 14px;
+    color: #2d3748;
+    margin-bottom: 8px;
+    line-height: 1.55;
+  }
+
+  .scenario-objective {
+    font-size: 12px;
+    color: #718096;
+    background: #f7f9fc;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+
+  .scenario-objective strong { color: var(--kp-blue); }
+
+  .scenario-done-check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    font-size: 13px;
+    color: #4a5568;
+    cursor: pointer;
+  }
+
+  .scenario-done-check input { width: auto; cursor: pointer; accent-color: var(--kp-green); }
+
+  /* Goals table */
+  .goals-table { width: 100%; border-collapse: collapse; }
+  .goals-table th {
+    background: var(--kp-blue);
+    color: #fff;
+    font-size: 12px;
+    padding: 9px 12px;
+    text-align: left;
+    font-weight: 600;
+  }
+  .goals-table td { padding: 6px 8px; border-bottom: 1px solid #edf2f7; vertical-align: top; }
+  .goals-table td input, .goals-table td textarea { border: 1.5px solid #e2e8f0; min-height: 50px; font-size: 13px; }
+  .goals-table tr:last-child td { border-bottom: none; }
+  .goals-table td:first-child { width: 36px; text-align: center; color: #a0aec0; font-weight: 700; }
+
+  /* Reflection */
+  .reflection-prompt {
+    font-size: 14px;
+    color: #2d3748;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+
+  /* Self-assessment */
+  .assessment-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid #edf2f7;
+  }
+  .assessment-row:last-child { border-bottom: none; }
+
+  .assessment-statement {
+    flex: 1;
+    font-size: 14px;
+    color: #2d3748;
+    line-height: 1.4;
+  }
+
+  .rating-group {
+    display: flex;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  .rating-btn {
+    width: 34px; height: 34px;
+    border: 2px solid #dde1e9;
+    border-radius: 6px;
+    background: #fafbfc;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    color: #718096;
+    transition: all 0.15s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .rating-btn:hover { border-color: var(--kp-teal); color: var(--kp-teal); }
+  .rating-btn.selected {
+    background: var(--kp-blue);
+    border-color: var(--kp-blue);
+    color: #fff;
+  }
+
+  .rating-legend {
+    font-size: 11px;
+    color: #a0aec0;
+    padding: 10px 0 16px;
+    line-height: 1.6;
+  }
+
+  /* Welcome page */
+  .welcome-hero {
+    background: linear-gradient(135deg, var(--kp-blue) 0%, #005a8e 100%);
+    color: #fff;
+    border-radius: var(--radius);
+    padding: 36px 32px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .welcome-hero::after {
+    content: '';
+    position: absolute;
+    right: -40px; top: -40px;
+    width: 200px; height: 200px;
+    background: var(--kp-teal);
+    border-radius: 50%;
+    opacity: 0.12;
+  }
+
+  .welcome-hero h2 { font-size: 28px; margin-bottom: 10px; }
+  .welcome-hero p { font-size: 15px; opacity: 0.85; max-width: 500px; line-height: 1.6; }
+
+  .welcome-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  .welcome-tile {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    border: 1.5px solid #e2e8f0;
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .welcome-tile:hover {
+    border-color: var(--kp-teal);
+    box-shadow: 0 2px 12px rgba(0,169,206,0.15);
+    transform: translateY(-1px);
+  }
+
+  .welcome-tile-icon {
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+
+  .welcome-tile h3 { font-size: 14px; color: var(--kp-blue); margin-bottom: 3px; }
+  .welcome-tile p { font-size: 12px; color: #718096; line-height: 1.4; }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 22px;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.15s;
+    text-decoration: none;
+  }
+
+  .btn-primary {
+    background: var(--kp-teal);
+    color: #fff;
+  }
+  .btn-primary:hover { background: #0095b8; }
+
+  .btn-outline {
+    background: transparent;
+    border: 2px solid var(--kp-teal);
+    color: var(--kp-teal);
+  }
+  .btn-outline:hover { background: var(--kp-light); }
+
+  .btn-secondary {
+    background: #edf2f7;
+    color: #4a5568;
+  }
+  .btn-secondary:hover { background: #e2e8f0; }
+
+  .page-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid #edf2f7;
+  }
+
+  /* Week tabs */
+  .week-tabs {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .week-tab {
+    padding: 7px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 2px solid #dde1e9;
+    background: #fff;
+    color: #718096;
+    transition: all 0.15s;
+  }
+
+  .week-tab:hover { border-color: var(--kp-teal); color: var(--kp-teal); }
+  .week-tab.active { background: var(--kp-blue); border-color: var(--kp-blue); color: #fff; }
+  .week-tab.done { border-color: var(--kp-green); color: var(--kp-green); }
+  .week-tab.done.active { background: var(--kp-green); color: #fff; }
+
+  .week-panel { display: none; }
+  .week-panel.active { display: block; }
+
+  /* Tip box */
+  .tip-box {
+    background: #fffbeb;
+    border: 1.5px solid #fde68a;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #92400e;
+    margin-bottom: 16px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .tip-box .tip-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+  /* Checklist */
+  .checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #edf2f7;
+    font-size: 14px;
+    color: #2d3748;
+  }
+  .checklist-item:last-child { border-bottom: none; }
+  .checklist-item input[type="checkbox"] {
+    width: auto;
+    margin-top: 2px;
+    flex-shrink: 0;
+    cursor: pointer;
+    accent-color: var(--kp-blue);
+    width: 16px; height: 16px;
+  }
+  .checklist-item.checked label { text-decoration: line-through; color: #a0aec0; }
+
+  /* Save indicator */
+  #save-indicator {
+    position: fixed;
+    bottom: 20px; right: 24px;
+    background: var(--kp-green);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 20px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  /* Print */
+  @media print {
+    #sidebar { display: none; }
+    #main { margin-left: 0; padding: 20px; }
+    .page { display: block !important; page-break-after: always; }
+    .week-panel { display: block !important; }
+    .btn, .page-actions, #save-indicator { display: none; }
+  }
+
+  @media (max-width: 768px) {
+    #sidebar { display: none; }
+    #main { margin-left: 0; padding: 16px; }
+    .field-row, .field-row-3, .welcome-grid { grid-template-columns: 1fr; }
+    .call-meta { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── Sidebar ── -->
+<aside id="sidebar">
+  <div id="sidebar-header">
+    <div class="logo-text">Keypath Education</div>
+    <h1>SSA Onboarding<br>Workbook</h1>
+  </div>
+
+  <div id="progress-bar-wrap">
+    <div id="progress-label">
+      <span>Your progress</span>
+      <span id="progress-pct">0%</span>
+    </div>
+    <div id="progress-bar"><div id="progress-fill"></div></div>
+  </div>
+
+  <nav>
+    <div class="nav-group">
+      <div class="nav-group-title">Getting Started</div>
+      <div class="nav-item active" data-page="welcome" onclick="showPage('welcome', this)">
+        <div class="nav-check">✓</div> Welcome &amp; Setup
+      </div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">Weeks 1–2</div>
+      <div class="nav-item" data-page="calls" onclick="showPage('calls', this)">
+        <div class="nav-check"></div> Call Listening Log
+      </div>
+      <div class="nav-item" data-page="roleplays" onclick="showPage('roleplays', this)">
+        <div class="nav-check"></div> Role Play Scenarios
+      </div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">Weekly Journey</div>
+      <div class="nav-item" data-page="goals" onclick="showPage('goals', this)">
+        <div class="nav-check"></div> Weekly Goals
+      </div>
+      <div class="nav-item" data-page="reflections" onclick="showPage('reflections', this)">
+        <div class="nav-check"></div> Weekly Reflections
+      </div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">Week 8</div>
+      <div class="nav-item" data-page="assessment" onclick="showPage('assessment', this)">
+        <div class="nav-check"></div> Self-Assessment
+      </div>
+    </div>
+  </nav>
+</aside>
+
+<!-- ── Main ── -->
+<main id="main">
+
+  <!-- WELCOME -->
+  <div class="page active" id="page-welcome">
+    <div class="welcome-hero">
+      <h2>Welcome to Keypath! 👋</h2>
+      <p>This workbook supports your first 8 weeks as a Student Success Advisor. Work through each section at your own pace — your progress saves automatically in your browser.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><div class="icon">👤</div> Your Details</div>
+      <div class="field-row">
+        <div>
+          <label class="field-label">Employee Name</label>
+          <input type="text" id="starter-name" placeholder="Your full name" data-save="starter-name">
+        </div>
+        <div>
+          <label class="field-label">Start Date</label>
+          <input type="date" id="starter-date" data-save="starter-date">
+        </div>
+      </div>
+      <div class="field-row" style="margin-top:12px">
+        <div>
+          <label class="field-label">Role</label>
+          <input type="text" id="starter-role" value="Student Success Advisor" data-save="starter-role">
+        </div>
+        <div>
+          <label class="field-label">Manager</label>
+          <input type="text" id="starter-manager" placeholder="Manager's name" data-save="starter-manager">
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><div class="icon">🗺️</div> Your 8-Week Journey</div>
+      <div class="welcome-grid">
+        <div class="welcome-tile" onclick="showPage('calls', document.querySelector('[data-page=calls]'))">
+          <div class="welcome-tile-icon">📞</div>
+          <div>
+            <h3>Call Listening Log</h3>
+            <p>Shadow 5 calls in Weeks 1–2. Record what you observe and what you'll do differently.</p>
+          </div>
+        </div>
+        <div class="welcome-tile" onclick="showPage('roleplays', document.querySelector('[data-page=roleplays]'))">
+          <div class="welcome-tile-icon">🎭</div>
+          <div>
+            <h3>Role Play Scenarios</h3>
+            <p>Practice 5 key call types with your buddy or manager before going independent.</p>
+          </div>
+        </div>
+        <div class="welcome-tile" onclick="showPage('goals', document.querySelector('[data-page=goals]'))">
+          <div class="welcome-tile-icon">🎯</div>
+          <div>
+            <h3>Weekly Goals</h3>
+            <p>Set 2–3 specific goals each week with your manager and track your achievement.</p>
+          </div>
+        </div>
+        <div class="welcome-tile" onclick="showPage('reflections', document.querySelector('[data-page=reflections]'))">
+          <div class="welcome-tile-icon">📔</div>
+          <div>
+            <h3>Weekly Reflections</h3>
+            <p>End each week with a reflection before your catch-up. This is your private record.</p>
+          </div>
+        </div>
+      </div>
+      <div class="welcome-tile" style="margin-bottom:0" onclick="showPage('assessment', document.querySelector('[data-page=assessment]'))">
+        <div class="welcome-tile-icon">✅</div>
+        <div>
+          <h3>Self-Assessment (Week 8)</h3>
+          <p>Rate yourself across 10 key competencies before your Month 2 probation review.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-actions">
+      <button class="btn btn-primary" onclick="showPage('calls', document.querySelector('[data-page=calls]'))">Start: Call Listening Log →</button>
+    </div>
+  </div>
+
+  <!-- CALL LISTENING LOG -->
+  <div class="page" id="page-calls">
+    <div class="page-header">
+      <div class="page-badge">Weeks 1–2</div>
+      <h2>📞 Call Listening Log</h2>
+      <p>Shadow at least 5 calls during Weeks 1 and 2. Complete one log entry per call. Focus on tone, structure, how objections are handled, and how the SSA builds rapport with the student.</p>
+    </div>
+
+    <div class="tip-box">
+      <div class="tip-icon">💡</div>
+      <div>Ask your buddy or manager to sit with you for your first call shadows. Jot quick notes during the call, then complete this log right after while it's fresh.</div>
+    </div>
+
+    <!-- 5 call logs -->
+    <script>
+    function callLog(n) {
+      return `
+      <div class="call-log">
+        <div class="call-log-header">📞 Call ${n}</div>
+        <div class="call-log-body">
+          <div class="call-meta">
+            <div>
+              <label class="field-label">Date</label>
+              <input type="date" data-save="call${n}-date">
+            </div>
+            <div>
+              <label class="field-label">SSA Observed</label>
+              <input type="text" placeholder="Name of SSA" data-save="call${n}-ssa">
+            </div>
+            <div>
+              <label class="field-label">Duration</label>
+              <input type="text" placeholder="e.g. 12 min" data-save="call${n}-duration">
+            </div>
+          </div>
+          <label class="field-label">One question that came up</label>
+          <textarea data-save="call${n}-q1" placeholder="What did the student ask, or what question arose?"></textarea>
+          <label class="field-label">One thing done well</label>
+          <textarea data-save="call${n}-q2" placeholder="What stood out as effective or impressive?"></textarea>
+          <label class="field-label">One thing I would do differently</label>
+          <textarea data-save="call${n}-q3" placeholder="If it were your call, what might you try instead?"></textarea>
+          <label class="field-label">My overall takeaway</label>
+          <textarea data-save="call${n}-q4" placeholder="The key lesson from this call…"></textarea>
+        </div>
+      </div>`;
+    }
+    document.write(callLog(1)+callLog(2)+callLog(3)+callLog(4)+callLog(5));
+    </script>
+
+    <div class="card" style="background:#f0f9ff; border-color:#bae6fd;">
+      <div class="card-title"><div class="icon">🔍</div> Reflection: After completing all 5 call logs</div>
+      <label class="field-label">What is one pattern you noticed across multiple calls?</label>
+      <textarea class="tall" data-save="calls-pattern" placeholder="e.g. Students often bring up time pressure when discussing study load…"></textarea>
+      <label class="field-label">What is one thing you want to focus on in your own calls?</label>
+      <textarea data-save="calls-focus" placeholder="e.g. How to transition smoothly from rapport-building into the support conversation…"></textarea>
+      <label class="field-label">What is one question you still have about the call process?</label>
+      <textarea data-save="calls-question" placeholder="e.g. When should I escalate to a wellbeing referral vs handle it myself?"></textarea>
+    </div>
+
+    <div class="page-actions">
+      <button class="btn btn-primary" onclick="showPage('roleplays', document.querySelector('[data-page=roleplays]'))">Next: Role Plays →</button>
+      <button class="btn btn-secondary" onclick="showPage('welcome', document.querySelector('[data-page=welcome]'))">← Back</button>
+    </div>
+  </div>
+
+  <!-- ROLE PLAYS -->
+  <div class="page" id="page-roleplays">
+    <div class="page-header">
+      <div class="page-badge">Weeks 1–2</div>
+      <h2>🎭 Role Play Scenarios</h2>
+      <p>Complete these role plays with your buddy or manager before going fully independent on calls. Repeat any scenario until you feel confident. Tick the box when you're happy with your performance.</p>
+    </div>
+
+    <div class="tip-box">
+      <div class="tip-icon">💡</div>
+      <div>It's fine to repeat a scenario more than once. The goal is confidence, not just completion. Your notes here will be useful to revisit as you start taking real calls.</div>
+    </div>
+
+    <div class="scenario-card">
+      <div class="scenario-num">Scenario 1</div>
+      <div class="scenario-text">A student calls in saying they are thinking about withdrawing. They feel overwhelmed with study and work and have not engaged for 3 weeks.</div>
+      <div class="scenario-objective"><strong>Objective:</strong> Practice empathetic listening, identify the root concern and explore re-engagement options.</div>
+      <label class="field-label">Notes / Debrief</label>
+      <textarea data-save="rp1-notes" placeholder="What went well? What was tricky? What will you do differently?"></textarea>
+      <label class="scenario-done-check">
+        <input type="checkbox" data-save="rp1-done" onchange="updateScenarioChecks()"> I feel confident with this scenario
+      </label>
+    </div>
+
+    <div class="scenario-card">
+      <div class="scenario-num">Scenario 2</div>
+      <div class="scenario-text">You call a student to check in. They are short with you and say they are too busy and do not see the point of these calls.</div>
+      <div class="scenario-objective"><strong>Objective:</strong> Practice handling resistance and finding a reason to reconnect.</div>
+      <label class="field-label">Notes / Debrief</label>
+      <textarea data-save="rp2-notes" placeholder="What went well? What was tricky? What will you do differently?"></textarea>
+      <label class="scenario-done-check">
+        <input type="checkbox" data-save="rp2-done" onchange="updateScenarioChecks()"> I feel confident with this scenario
+      </label>
+    </div>
+
+    <div class="scenario-card">
+      <div class="scenario-num">Scenario 3</div>
+      <div class="scenario-text">A student tells you they are struggling academically and worried about failing their next assessment. They are distressed.</div>
+      <div class="scenario-objective"><strong>Objective:</strong> Practice active listening, provide appropriate support and referral pathways, and document the call correctly.</div>
+      <label class="field-label">Notes / Debrief</label>
+      <textarea data-save="rp3-notes" placeholder="What went well? What was tricky? What will you do differently?"></textarea>
+      <label class="scenario-done-check">
+        <input type="checkbox" data-save="rp3-done" onchange="updateScenarioChecks()"> I feel confident with this scenario
+      </label>
+    </div>
+
+    <div class="scenario-card">
+      <div class="scenario-num">Scenario 4</div>
+      <div class="scenario-text">You are following up on a re-enrolment for a student who has not responded to 3 previous contact attempts. You finally reach them.</div>
+      <div class="scenario-objective"><strong>Objective:</strong> Practice a confident re-enrolment conversation that leads to a commitment or a clear next step.</div>
+      <label class="field-label">Notes / Debrief</label>
+      <textarea data-save="rp4-notes" placeholder="What went well? What was tricky? What will you do differently?"></textarea>
+      <label class="scenario-done-check">
+        <input type="checkbox" data-save="rp4-done" onchange="updateScenarioChecks()"> I feel confident with this scenario
+      </label>
+    </div>
+
+    <div class="scenario-card">
+      <div class="scenario-num">Scenario 5</div>
+      <div class="scenario-text">A student is very engaged and mentions a friend who is also studying and struggling. They ask if you can help their friend.</div>
+      <div class="scenario-objective"><strong>Objective:</strong> Practice navigating an out-of-scope request professionally while maintaining the positive relationship.</div>
+      <label class="field-label">Notes / Debrief</label>
+      <textarea data-save="rp5-notes" placeholder="What went well? What was tricky? What will you do differently?"></textarea>
+      <label class="scenario-done-check">
+        <input type="checkbox" data-save="rp5-done" onchange="updateScenarioChecks()"> I feel confident with this scenario
+      </label>
+    </div>
+
+    <div class="page-actions">
+      <button class="btn btn-primary" onclick="showPage('goals', document.querySelector('[data-page=goals]'))">Next: Weekly Goals →</button>
+      <button class="btn btn-secondary" onclick="showPage('calls', document.querySelector('[data-page=calls]'))">← Back</button>
+    </div>
+  </div>
+
+  <!-- WEEKLY GOALS -->
+  <div class="page" id="page-goals">
+    <div class="page-header">
+      <div class="page-badge">Weeks 1–8</div>
+      <h2>🎯 Weekly Goal Setting</h2>
+      <p>Set 2–3 goals at the start of each week with your manager. Goals should be specific, achievable within the week, and linked to your development focus or probation objectives.</p>
+    </div>
+
+    <div class="week-tabs" id="goals-tabs">
+      <!-- tabs generated by JS -->
+    </div>
+
+    <div id="goals-panels">
+      <!-- panels generated by JS -->
+    </div>
+
+    <div class="page-actions">
+      <button class="btn btn-primary" onclick="showPage('reflections', document.querySelector('[data-page=reflections]'))">Next: Weekly Reflections →</button>
+      <button class="btn btn-secondary" onclick="showPage('roleplays', document.querySelector('[data-page=roleplays]'))">← Back</button>
+    </div>
+  </div>
+
+  <!-- REFLECTIONS -->
+  <div class="page" id="page-reflections">
+    <div class="page-header">
+      <div class="page-badge">Weeks 1–8</div>
+      <h2>📔 Weekly Reflection Journal</h2>
+      <p>Complete your reflection at the end of each week before your catch-up with your manager. This is your personal record, not a formal assessment — be honest with yourself.</p>
+    </div>
+
+    <div class="week-tabs" id="refl-tabs"></div>
+    <div id="refl-panels"></div>
+
+    <div class="page-actions">
+      <button class="btn btn-primary" onclick="showPage('assessment', document.querySelector('[data-page=assessment]'))">Next: Self-Assessment →</button>
+      <button class="btn btn-secondary" onclick="showPage('goals', document.querySelector('[data-page=goals]'))">← Back</button>
+    </div>
+  </div>
+
+  <!-- SELF-ASSESSMENT -->
+  <div class="page" id="page-assessment">
+    <div class="page-header">
+      <div class="page-badge">Week 8</div>
+      <h2>✅ Self-Assessment</h2>
+      <p>Complete this at the end of Week 8 before your Month 2 probation review. Rate yourself honestly — this is a conversation starter, not a test.</p>
+    </div>
+
+    <div class="rating-legend">
+      <strong>Rating scale:</strong> &nbsp;
+      1 = Not yet confident &nbsp;·&nbsp;
+      2 = Developing &nbsp;·&nbsp;
+      3 = Mostly there &nbsp;·&nbsp;
+      4 = Confident &nbsp;·&nbsp;
+      5 = Strong — could coach others
+    </div>
+
+    <div class="card">
+      <div id="assessment-items"></div>
+    </div>
+
+    <div class="card" style="margin-top:20px">
+      <div class="card-title"><div class="icon">💬</div> Comments</div>
+      <label class="field-label">What are you most proud of from your first 8 weeks?</label>
+      <textarea class="tall" data-save="assess-proud" placeholder="Take a moment to celebrate your wins…"></textarea>
+      <label class="field-label">What is your biggest focus area going into Month 3?</label>
+      <textarea class="tall" data-save="assess-focus" placeholder="What do you want to work on most?"></textarea>
+    </div>
+
+    <div class="card" style="background:#f0fdf4; border-color:#86efac;">
+      <div class="card-title"><div class="icon">✍️</div> Sign-Off</div>
+      <div class="field-row">
+        <div>
+          <label class="field-label">Employee Name</label>
+          <input type="text" data-save="signoff-employee" placeholder="Your name">
+          <label class="field-label" style="margin-top:10px">Date</label>
+          <input type="date" data-save="signoff-employee-date">
+        </div>
+        <div>
+          <label class="field-label">Manager Name</label>
+          <input type="text" data-save="signoff-manager" placeholder="Manager's name">
+          <label class="field-label" style="margin-top:10px">Date</label>
+          <input type="date" data-save="signoff-manager-date">
+        </div>
+      </div>
+    </div>
+
+    <div class="page-actions">
+      <button class="btn btn-primary" onclick="window.print()">🖨️ Print / Save as PDF</button>
+      <button class="btn btn-outline" onclick="exportData()">💾 Export my data</button>
+      <button class="btn btn-secondary" onclick="showPage('reflections', document.querySelector('[data-page=reflections]'))">← Back</button>
+    </div>
+  </div>
+
+</main>
+
+<div id="save-indicator">✓ Saved</div>
+
+<script>
+// ── Data ──
+const STORAGE_KEY = 'ssa-workbook-v1';
+let data = {};
+
+function load() {
+  try { data = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch(e) { data = {}; }
+}
+
+function save() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  const ind = document.getElementById('save-indicator');
+  ind.style.opacity = '1';
+  clearTimeout(save._t);
+  save._t = setTimeout(() => ind.style.opacity = '0', 1500);
+}
+
+function getVal(key) { return data[key] || ''; }
+function setVal(key, val) { data[key] = val; save(); }
+
+// ── Build weekly panels ──
+const goalQuestions = [
+  null, // week 0 placeholder
+  null,null,null,null,null,null,null,null // 8 weeks
+];
+
+const reflectionQs = {
+  1: [
+    "What was the most useful thing I learned or observed this week?",
+    "What felt most challenging or unfamiliar?",
+    "What is one thing I want to do differently next week?",
+    "What support would help me most right now?"
+  ],
+  2: [
+    "How has my confidence on calls changed since Week 1?",
+    "What feedback have I received and how have I acted on it?",
+    "What am I most proud of from this week?",
+    "What is my biggest development focus going into Week 3?"
+  ],
+  3: [
+    "What feels more natural now compared to Week 1?",
+    "How am I tracking against my contact targets?",
+    "What is one habit I am building that will support my performance?",
+    "What do I want to discuss with my manager this week?"
+  ],
+  4: [
+    "Month 1 is complete — how do I feel about my progress overall?",
+    "Which area am I most confident in? Which needs the most attention?",
+    "What has surprised me most about the role?",
+    "What would I tell a brand new starter about what to focus on first?"
+  ],
+  5: [
+    "How am I tracking against my contact targets for Month 2?",
+    "What is one thing I do well in calls now that I struggled with in Week 1?",
+    "Where do I still need to grow before Month 3 KPI targets apply?",
+    "What is one thing I have done this week that I am proud of?"
+  ],
+  6: [
+    "What feedback have I received this month and how am I acting on it?",
+    "How am I managing my time and workload across the week?",
+    "What is one skill I want to sharpen before the end of Month 2?",
+    "What support do I need from my manager right now?"
+  ],
+  7: [
+    "How am I feeling about my performance as I approach the end of onboarding?",
+    "What do I feel genuinely confident about in the role?",
+    "What is my biggest development focus heading into Month 3?",
+    "Is there anything I have not yet asked for help with that I should?"
+  ],
+  8: [
+    "Looking back across 8 weeks, what has been my biggest growth area?",
+    "What do I feel most ready for going into Month 3?",
+    "What is my number one focus for the next 3 months?",
+    "What kind of support do I want from my manager going forward?"
+  ]
+};
+
+function buildGoals() {
+  const tabsEl = document.getElementById('goals-tabs');
+  const panelsEl = document.getElementById('goals-panels');
+
+  for (let w = 1; w <= 8; w++) {
+    const tab = document.createElement('div');
+    tab.className = 'week-tab' + (w === 1 ? ' active' : '');
+    tab.textContent = `Week ${w}`;
+    tab.onclick = () => switchWeekTab('goals', w);
+    tabsEl.appendChild(tab);
+
+    const panel = document.createElement('div');
+    panel.className = 'week-panel' + (w === 1 ? ' active' : '');
+    panel.id = `goals-week-${w}`;
+
+    const label = w <= 2 ? 'Weeks 1–2 focus' : w <= 4 ? 'Month 1' : w <= 6 ? 'Month 2' : 'Final stretch';
+
+    panel.innerHTML = `
+      <div class="card">
+        <div class="card-title"><div class="icon">🎯</div> Week ${w} Goals <span style="font-weight:400;font-size:12px;color:#a0aec0;margin-left:6px">${label}</span></div>
+        <table class="goals-table">
+          <thead><tr><th style="width:36px">#</th><th>Goal</th><th style="width:220px">How I'll know I achieved it</th><th style="width:180px">Support needed</th></tr></thead>
+          <tbody>
+            ${[1,2,3].map(g => `
+            <tr>
+              <td>${g}</td>
+              <td><textarea data-save="goal-w${w}-g${g}-goal" placeholder="e.g. Shadow 2 calls and complete my log entries"></textarea></td>
+              <td><textarea data-save="goal-w${w}-g${g}-measure" placeholder="e.g. Both logs completed before Friday catch-up"></textarea></td>
+              <td><textarea data-save="goal-w${w}-g${g}-support" placeholder="e.g. Buddy to sit with me for first call"></textarea></td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+        <div style="margin-top:12px">
+          <label class="field-label">End of week: How did I go?</label>
+          <textarea data-save="goal-w${w}-review" placeholder="Brief reflection — what did you achieve? What didn't happen and why?"></textarea>
+        </div>
+      </div>`;
+    panelsEl.appendChild(panel);
+  }
+}
+
+function buildReflections() {
+  const tabsEl = document.getElementById('refl-tabs');
+  const panelsEl = document.getElementById('refl-panels');
+
+  for (let w = 1; w <= 8; w++) {
+    const tab = document.createElement('div');
+    tab.className = 'week-tab' + (w === 1 ? ' active' : '');
+    tab.textContent = `Week ${w}`;
+    tab.onclick = () => switchWeekTab('refl', w);
+    tabsEl.appendChild(tab);
+
+    const panel = document.createElement('div');
+    panel.className = 'week-panel' + (w === 1 ? ' active' : '');
+    panel.id = `refl-week-${w}`;
+
+    const qs = reflectionQs[w];
+    panel.innerHTML = `
+      <div class="card">
+        <div class="card-title"><div class="icon">📔</div> Week ${w} Reflection</div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+          <label class="field-label" style="margin:0">Date completed</label>
+          <input type="date" data-save="refl-w${w}-date" style="width:160px;margin:0">
+        </div>
+        ${qs.map((q, i) => `
+          <div class="reflection-prompt">${q}</div>
+          <textarea class="tall" data-save="refl-w${w}-q${i+1}" placeholder="Your thoughts…" style="margin-bottom:16px"></textarea>
+        `).join('')}
+      </div>`;
+    panelsEl.appendChild(panel);
+  }
+}
+
+function buildAssessment() {
+  const statements = [
+    "I understand my role and what is expected of me",
+    "I can navigate all key systems and platforms independently",
+    "I feel confident making calls to students",
+    "I handle objections and difficult conversations appropriately",
+    "I document my work accurately in the CRM",
+    "I understand my KPI targets and how I am tracking",
+    "I ask for help when I need it",
+    "I am building positive relationships with my team",
+    "I reflect on my performance and actively try to improve",
+    "I am on track to meet my Month 3 KPI targets"
+  ];
+
+  const container = document.getElementById('assessment-items');
+  statements.forEach((s, i) => {
+    const key = `assess-rating-${i}`;
+    const row = document.createElement('div');
+    row.className = 'assessment-row';
+    row.innerHTML = `
+      <div class="assessment-statement">${s}</div>
+      <div class="rating-group" id="rating-group-${i}">
+        ${[1,2,3,4,5].map(n => `
+          <button class="rating-btn ${getVal(key)==n?'selected':''}"
+                  onclick="setRating(${i},'${key}',${n})"
+                  title="${n}">${n}</button>
+        `).join('')}
+      </div>`;
+    container.appendChild(row);
+  });
+}
+
+function setRating(idx, key, val) {
+  setVal(key, val);
+  const group = document.getElementById(`rating-group-${idx}`);
+  group.querySelectorAll('.rating-btn').forEach((btn, i) => {
+    btn.classList.toggle('selected', i + 1 === val);
+  });
+  updateProgress();
+}
+
+function switchWeekTab(prefix, week) {
+  document.querySelectorAll(`#${prefix}-tabs .week-tab`).forEach((t, i) => {
+    t.classList.toggle('active', i + 1 === week);
+  });
+  document.querySelectorAll(`#${prefix}-panels .week-panel`).forEach((p, i) => {
+    p.classList.toggle('active', i + 1 === week);
+  });
+}
+
+// ── Page navigation ──
+function showPage(id, navEl) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  if (navEl) navEl.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ── Field binding ──
+function bindFields() {
+  document.querySelectorAll('[data-save]').forEach(el => {
+    const key = el.dataset.save;
+    const saved = getVal(key);
+
+    if (el.type === 'checkbox') {
+      el.checked = saved === 'true';
+    } else {
+      if (saved) el.value = saved;
+    }
+
+    el.addEventListener('input', () => {
+      const v = el.type === 'checkbox' ? String(el.checked) : el.value;
+      setVal(key, v);
+      updateProgress();
+    });
+
+    el.addEventListener('change', () => {
+      const v = el.type === 'checkbox' ? String(el.checked) : el.value;
+      setVal(key, v);
+      updateProgress();
+    });
+  });
+}
+
+function updateScenarioChecks() {
+  // called from inline onchange; progress updated via field binding
+}
+
+// ── Progress ──
+function updateProgress() {
+  const fields = document.querySelectorAll('[data-save]');
+  let filled = 0;
+  fields.forEach(el => {
+    const key = el.dataset.save;
+    const v = getVal(key);
+    if (v && v !== 'false') filled++;
+  });
+
+  // assessment ratings
+  let ratings = 0;
+  for (let i = 0; i < 10; i++) {
+    if (getVal(`assess-rating-${i}`)) ratings++;
+  }
+
+  const total = fields.length + 10;
+  const done = filled + ratings;
+  const pct = Math.round((done / total) * 100);
+
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-pct').textContent = pct + '%';
+}
+
+// ── Export ──
+function exportData() {
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'ssa-workbook-backup.json';
+  a.click();
+}
+
+// ── Init ──
+load();
+buildGoals();
+buildReflections();
+buildAssessment();
+bindFields();
+updateProgress();
+</script>
+</body>
+</html>
