@@ -720,6 +720,13 @@
       </div>
     </div>
   </nav>
+
+  <div style="padding:16px 20px;border-top:1px solid rgba(255,255,255,0.08);margin-top:auto">
+    <button onclick="exportPDF()" style="width:100%;background:#2AACE2;color:#fff;border:none;padding:10px 16px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 18 15 15"/></svg>
+      Export PDF Summary
+    </button>
+  </div>
 </aside>
 
 <!-- ── Main ── -->
@@ -975,7 +982,7 @@
     </div>
 
     <div class="page-actions">
-      <button class="btn btn-primary" onclick="window.print()">Print / Save as PDF</button>
+      <button class="btn btn-primary" onclick="exportPDF()">Export PDF Summary</button>
       <button class="btn btn-outline" onclick="exportData()">Export my data</button>
       <button class="btn btn-secondary" onclick="showPage('week-8', document.querySelector('[data-page=week-8]'))">&larr; Back</button>
     </div>
@@ -1347,6 +1354,185 @@ function exportData() {
   a.href = URL.createObjectURL(blob);
   a.download = 'ssa-workbook-backup.json';
   a.click();
+}
+
+function exportPDF() {
+  const v = k => getVal(k) || '';
+  const row = (label, val) => val
+    ? `<tr><td class="lbl">${label}</td><td>${val.replace(/\n/g,'<br>')}</td></tr>`
+    : `<tr><td class="lbl">${label}</td><td class="empty">—</td></tr>`;
+  const section = (title, body) =>
+    `<div class="section"><h2>${title}</h2>${body}</div>`;
+
+  const assessStatements = [
+    "I understand my role and what is expected of me",
+    "I can navigate all key systems and platforms independently",
+    "I feel confident making calls to students",
+    "I handle objections and difficult conversations appropriately",
+    "I document my work accurately in the CRM",
+    "I understand my KPI targets and how I am tracking",
+    "I ask for help when I need it",
+    "I am building positive relationships with my team",
+    "I reflect on my performance and actively try to improve",
+    "I am on track to meet my Month 3 KPI targets"
+  ];
+  const ratingLabel = n => ['','Needs Development','Learning','Developing','Proficient','Excellent'][n] || '—';
+
+  // Personal details
+  const details = `<table>
+    ${row('Employee Name', v('starter-name'))}
+    ${row('Start Date', v('starter-date'))}
+    ${row('Role', v('starter-role'))}
+    ${row('Manager', v('starter-manager'))}
+  </table>`;
+
+  // Call logs
+  let callsHtml = '';
+  for (let n = 1; n <= 5; n++) {
+    callsHtml += `<h3>Call ${n}</h3><table>
+      ${row('Date', v(`call${n}-date`))}
+      ${row('SSA Observed', v(`call${n}-ssa`))}
+      ${row('Duration', v(`call${n}-duration`))}
+      ${row('Call Link', v(`call${n}-link`))}
+      ${row('One question that came up', v(`call${n}-q1`))}
+      ${row('One thing done well', v(`call${n}-q2`))}
+      ${row('One thing I would do differently', v(`call${n}-q3`))}
+      ${row('My overall takeaway', v(`call${n}-q4`))}
+    </table>`;
+  }
+  callsHtml += `<h3>Overall Reflection</h3><table>
+    ${row('Pattern noticed across calls', v('calls-pattern'))}
+    ${row('One thing to focus on in my own calls', v('calls-focus'))}
+    ${row('One question still outstanding', v('calls-question'))}
+  </table>`;
+
+  // Role plays
+  const rpTitles = [
+    'Student considering withdrawal (overwhelmed)',
+    'Resistant student — too busy, no point in calls',
+    'Academically struggling, distressed student',
+    'Re-enrolment after 3 failed contact attempts',
+    'Student unhappy with their subject or course'
+  ];
+  let rpHtml = '';
+  for (let n = 1; n <= 5; n++) {
+    rpHtml += `<h3>Scenario ${n}: ${rpTitles[n-1]}</h3><table>
+      ${row('Completed', v(`rp${n}-done`) === 'true' ? 'Yes — confident' : 'Not yet')}
+      ${row('Notes / Debrief', v(`rp${n}-notes`))}
+    </table>`;
+  }
+
+  // Weeks
+  const weekBands = {1:'Weeks 1–2',2:'Weeks 1–2',3:'Month 1',4:'Month 1',5:'Month 2',6:'Month 2',7:'Final Stretch',8:'Final Stretch'};
+  const reflQs = {
+    1:["What was the most useful thing I learned or observed this week?","What felt most challenging or unfamiliar?","What is one thing I want to do differently next week?","What support would help me most right now?"],
+    2:["How has my confidence on calls changed since Week 1?","What feedback have I received and how have I acted on it?","What am I most proud of from this week?","What is my biggest development focus going into Week 3?"],
+    3:["What feels more natural now compared to Week 1?","How am I tracking against my contact targets?","What is one habit I am building that will support my performance?","What do I want to discuss with my manager this week?"],
+    4:["Month 1 is complete — how do I feel about my progress overall?","Which area am I most confident in? Which needs the most attention?","What has surprised me most about the role?","What would I tell a brand new starter about what to focus on first?"],
+    5:["How am I tracking against my contact targets for Month 2?","What is one thing I do well in calls now that I struggled with in Week 1?","Where do I still need to grow before Month 3 KPI targets apply?","What is one thing I have done this week that I am proud of?"],
+    6:["What feedback have I received this month and how am I acting on it?","How am I managing my time and workload across the week?","What is one skill I want to sharpen before the end of Month 2?","What support do I need from my manager right now?"],
+    7:["How am I feeling about my performance as I approach the end of onboarding?","What do I feel genuinely confident about in the role?","What is my biggest development focus heading into Month 3?","Is there anything I have not yet asked for help with that I should?"],
+    8:["Looking back across 8 weeks, what has been my biggest growth area?","What do I feel most ready for going into Month 3?","What is my number one focus for the next 3 months?","What kind of support do I want from my manager going forward?"]
+  };
+
+  let weeksHtml = '';
+  for (let w = 1; w <= 8; w++) {
+    const nextLabel = w < 8 ? `Week ${w+1}` : 'the final stretch';
+    let wHtml = `<h3>Goals for next week (set Friday — for ${nextLabel})</h3><table>`;
+    for (let g = 1; g <= 3; g++) {
+      wHtml += row(`Goal ${g}`, v(`goal-w${w}-g${g}-goal`));
+      wHtml += row(`  Measure`, v(`goal-w${w}-g${g}-measure`));
+      wHtml += row(`  Support needed`, v(`goal-w${w}-g${g}-support`));
+    }
+    wHtml += row('End of week — how did I go?', v(`goal-w${w}-review`));
+    wHtml += `</table>`;
+
+    wHtml += `<h3>Ideas for improvement</h3><table>`;
+    for (let g = 1; g <= 2; g++) {
+      wHtml += row(`Improvement ${g} — what`, v(`improve-w${w}-g${g}-what`));
+      wHtml += row(`Improvement ${g} — how`, v(`improve-w${w}-g${g}-how`));
+    }
+    wHtml += `</table>`;
+
+    wHtml += `<h3>Reflection (Monday morning)</h3><table>`;
+    wHtml += row('Date completed', v(`refl-w${w}-date`));
+    reflQs[w].forEach((q, i) => { wHtml += row(q, v(`refl-w${w}-q${i+1}`)); });
+    wHtml += `</table>`;
+
+    if (w === 8) {
+      wHtml += `<h3>Goals for end of probation (next 4 months)</h3><table>`;
+      for (let g = 1; g <= 3; g++) {
+        wHtml += row(`Probation Goal ${g}`, v(`probation-g${g}-goal`));
+        wHtml += row(`  Measure`, v(`probation-g${g}-measure`));
+        wHtml += row(`  Support needed`, v(`probation-g${g}-support`));
+      }
+      wHtml += `</table>`;
+    }
+
+    weeksHtml += section(`Week ${w} <span class="band">${weekBands[w]}</span>`, wHtml);
+  }
+
+  // Self-assessment
+  let assessHtml = `<table>`;
+  assessStatements.forEach((s, i) => {
+    const rating = getVal(`assess-rating-${i}`);
+    assessHtml += row(s, rating ? `${rating} — ${ratingLabel(Number(rating))}` : '');
+  });
+  assessHtml += row('Overall reflection notes', v('assess-notes'));
+  assessHtml += `</table>`;
+
+  const exportDate = new Date().toLocaleDateString('en-AU', { day:'numeric', month:'long', year:'numeric' });
+  const starterName = v('starter-name') || starterId;
+
+  const html = `<!DOCTYPE html><html><head><meta charset="UTF-8">
+  <title>SSA Onboarding Summary — ${starterName}</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; font-size: 10pt; color: #1a202c; line-height: 1.5; }
+    .cover { background: #0B1C38; color: #fff; padding: 36px 48px; margin-bottom: 24px; }
+    .cover h1 { font-size: 22pt; font-weight: 700; margin-bottom: 4px; }
+    .cover .sub { font-size: 11pt; color: #2AACE2; margin-bottom: 16px; }
+    .cover .meta { font-size: 9pt; color: #94a3b8; }
+    .section { padding: 0 48px 24px; break-inside: avoid-page; }
+    h2 { font-size: 13pt; color: #0B1C38; border-bottom: 2px solid #2AACE2; padding-bottom: 4px; margin: 20px 0 10px; }
+    h2 .band { font-size: 9pt; font-weight: 400; color: #64748b; margin-left: 8px; }
+    h3 { font-size: 10pt; color: #2AACE2; margin: 14px 0 6px; font-weight: 600; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 8px; }
+    td { padding: 5px 8px; border: 1px solid #e2e8f0; vertical-align: top; }
+    td.lbl { width: 34%; background: #f8fafc; color: #475569; font-weight: 500; font-size: 9pt; }
+    td.empty { color: #cbd5e1; font-style: italic; }
+    @media print {
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .cover { background: #0B1C38 !important; }
+      h2 { border-color: #2AACE2 !important; }
+      .no-print { display: none; }
+    }
+    .print-btn { position: fixed; top: 16px; right: 16px; background: #0B1C38; color: #fff;
+      border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-size: 11pt;
+      font-family: Arial, sans-serif; z-index: 999; }
+    .print-btn:hover { background: #2AACE2; }
+  </style>
+  </head><body>
+  <button class="print-btn no-print" onclick="window.print()">Print / Save as PDF</button>
+  <div class="cover">
+    <h1>SSA Onboarding Workbook</h1>
+    <div class="sub">Keypath Education</div>
+    <div class="meta">
+      ${starterName} &nbsp;|&nbsp; ${v('starter-role') || 'Student Success Advisor'} &nbsp;|&nbsp; Manager: ${v('starter-manager') || '—'}<br>
+      Start date: ${v('starter-date') || '—'} &nbsp;|&nbsp; Exported: ${exportDate}
+    </div>
+  </div>
+  ${section('Personal Details', details)}
+  ${section('Call Listening Log', callsHtml)}
+  ${section('Role Play Scenarios', rpHtml)}
+  ${weeksHtml}
+  ${section('Self-Assessment', assessHtml)}
+  </body></html>`;
+
+  const w = window.open('', '_blank');
+  w.document.write(html);
+  w.document.close();
+  setTimeout(() => w.print(), 600);
 }
 
 // ── Init ──
