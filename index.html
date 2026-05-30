@@ -1103,24 +1103,54 @@ function buildWeekPages() {
     page.className = 'page';
     page.id = `page-week-${w}`;
 
-    page.innerHTML = `
-      <div class="page-header">
-        <div class="page-badge">${label}</div>
-        <h2>Week ${w}</h2>
-      </div>
-
-      <!-- GOALS -->
-      <div class="card">
+    const nextWeekLabel = w < 8 ? `Week ${w + 1}` : 'the final stretch';
+    const probationSection = w === 8 ? `
+      <!-- END OF PROBATION GOALS (Week 8 only) -->
+      <div class="card" style="margin-top:4px">
         <div class="card-title">
-          <div class="icon"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
-          Goals
-          <span style="font-weight:400;font-size:12px;color:#a0aec0;margin-left:8px">Set on the Friday before this week</span>
+          <div class="icon"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          Goals for end of probation
+          <span style="font-weight:400;font-size:12px;color:#a0aec0;margin-left:8px">Next 4 months — set before your probation review</span>
         </div>
         <table class="goals-table">
           <thead>
             <tr>
               <th style="width:36px">#</th>
               <th>Goal</th>
+              <th style="width:220px">How I'll know I achieved it</th>
+              <th style="width:180px">Support needed</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${[1,2,3].map(g => `
+            <tr>
+              <td>${g}</td>
+              <td><textarea data-save="probation-g${g}-goal" placeholder="e.g. Consistently hit my call target each week"></textarea></td>
+              <td><textarea data-save="probation-g${g}-measure" placeholder="e.g. CRM shows 100% of calls logged on time"></textarea></td>
+              <td><textarea data-save="probation-g${g}-support" placeholder="e.g. Weekly check-in with manager"></textarea></td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>` : '';
+
+    page.innerHTML = `
+      <div class="page-header">
+        <div class="page-badge">${label}</div>
+        <h2>Week ${w}</h2>
+      </div>
+
+      <!-- GOALS FOR NEXT WEEK -->
+      <div class="card">
+        <div class="card-title">
+          <div class="icon"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+          Goals for next week
+          <span style="font-weight:400;font-size:12px;color:#a0aec0;margin-left:8px">Set on Friday — for ${nextWeekLabel}</span>
+        </div>
+        <table class="goals-table">
+          <thead>
+            <tr>
+              <th style="width:36px">#</th>
+              <th>Goal for next week</th>
               <th style="width:220px">How I'll know I achieved it</th>
               <th style="width:180px">Support needed</th>
             </tr>
@@ -1139,6 +1169,34 @@ function buildWeekPages() {
           <label class="field-label">End of week: How did I go?</label>
           <textarea data-save="goal-w${w}-review" placeholder="Brief notes — what did you achieve? What didn't happen and why?"></textarea>
         </div>
+      </div>
+
+      ${probationSection}
+
+      <!-- IDEAS FOR IMPROVEMENT -->
+      <div class="card" style="margin-top:4px">
+        <div class="card-title">
+          <div class="icon"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
+          Ideas for improvement
+          <span style="font-weight:400;font-size:12px;color:#a0aec0;margin-left:8px">1–3 things you'd do differently</span>
+        </div>
+        <table class="goals-table">
+          <thead>
+            <tr>
+              <th style="width:36px">#</th>
+              <th>What I would improve</th>
+              <th style="width:300px">How I would improve it</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${[1,2,3].map(g => `
+            <tr>
+              <td>${g}</td>
+              <td><textarea data-save="improve-w${w}-g${g}-what" placeholder="e.g. How I handle objections on calls"></textarea></td>
+              <td><textarea data-save="improve-w${w}-g${g}-how" placeholder="e.g. Practise the script with my buddy before Week ${w+1}"></textarea></td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
       </div>
 
       <!-- REFLECTION -->
