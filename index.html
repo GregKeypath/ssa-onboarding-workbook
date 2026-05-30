@@ -971,20 +971,47 @@
 <div id="save-indicator">✓ Saved</div>
 
 <script>
-// ── Data ──
-const STORAGE_KEY = 'ssa-workbook-v1';
-let data = {};
+// ── Firebase Config ──
+const DB_ROOT = 'https://ssa-onboarding-workbook-default-rtdb.asia-southeast1.firebasedatabase.app';
 
-function load() {
-  try { data = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch(e) { data = {}; }
+// Starter ID from URL ?starter=name, or prompt on first load
+let starterId = new URLSearchParams(location.search).get('starter');
+if (!starterId) {
+  starterId = prompt('Enter your name to load your workbook (e.g. jane-smith):') || 'default';
+  starterId = starterId.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+  const url = new URL(location.href);
+  url.searchParams.set('starter', starterId);
+  history.replaceState(null, '', url);
+}
+
+const DB_URL = `${DB_ROOT}/starters/${starterId}.json`;
+
+let data = {};
+let saveTimer = null;
+
+async function load() {
+  try {
+    const res = await fetch(DB_URL);
+    const remote = await res.json();
+    if (remote) data = remote;
+  } catch(e) { data = {}; }
 }
 
 function save() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-  const ind = document.getElementById('save-indicator');
-  ind.style.opacity = '1';
-  clearTimeout(save._t);
-  save._t = setTimeout(() => ind.style.opacity = '0', 1500);
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(async () => {
+    try {
+      await fetch(DB_URL, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      const ind = document.getElementById('save-indicator');
+      ind.style.opacity = '1';
+      clearTimeout(save._t);
+      save._t = setTimeout(() => ind.style.opacity = '0', 1500);
+    } catch(e) { console.error('Save failed', e); }
+  }, 800);
 }
 
 function getVal(key) { return data[key] || ''; }
@@ -1243,12 +1270,18 @@ function exportData() {
 }
 
 // ── Init ──
-load();
-buildGoals();
-buildReflections();
-buildAssessment();
-bindFields();
-updateProgress();
+(async () => {
+  // Show starter name in sidebar
+  document.querySelector('#sidebar-header h1').innerHTML =
+    `SSA Onboarding<br>Workbook<br><span style="font-size:11px;color:var(--kp-teal);font-weight:400;margin-top:4px;display:block">👤 ${starterId}</span>`;
+
+  await load();
+  buildGoals();
+  buildReflections();
+  buildAssessment();
+  bindFields();
+  updateProgress();
+})();
 </script>
 </body>
 </html>
