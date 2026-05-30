@@ -662,7 +662,7 @@
   <div class="page active" id="page-welcome">
     <div class="welcome-hero">
       <h2>Welcome to Keypath! 👋</h2>
-      <p>This workbook supports your first 8 weeks as a Student Success Advisor. Work through each section at your own pace — your progress saves automatically in your browser.</p>
+      <p>This workbook supports your first 8 weeks as a Student Success Advisor. Work through each section at your own pace. Make sure to bookmark this page so you can return to your progress at any time.</p>
     </div>
 
     <div class="card">
@@ -745,7 +745,8 @@
 
     <div class="tip-box">
       <div class="tip-icon">💡</div>
-      <div>Ask your buddy or manager to sit with you for your first call shadows. Jot quick notes during the call, then complete this log right after while it's fresh.</div>
+      <div>Ask your buddy or manager to sit with you for your first call shadows. Jot quick notes during the call, then complete this log right after while it's fresh.<br><br>
+      <strong>Call recordings to listen to:</strong> <a href="https://keypaus-my.sharepoint.com/:x:/g/personal/brett_sanderson_keypathedu_com_au/IQAQn2GgKm4ISbWVSfVtd4uAAWObudPoRmuzHW7SFT3w-Ss?e=O5Vbux&isSPOFile=1&ovuser=05b2ee58-b1a4-49f1-82d5-df22ee8f2956%2Cgreg.banks%40keypathedu.com.au&wdExp=TEAMS-TREATMENT&web=1&clickparams=eyJBcHBOYW1lIjoiVGVhbXMtRGVza3RvcCIsIkFwcFZlcnNpb24iOiI0OS8yNjAyMjcwNDIxNSJ9" target="_blank" style="color:var(--kp-blue);font-weight:600;">Open call library</a></div>
     </div>
 
     <!-- 5 call logs -->
@@ -1204,6 +1205,7 @@ function showPage(id, navEl) {
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   if (navEl) navEl.classList.add('active');
   window.scrollTo(0, 0);
+  location.hash = id;
 }
 
 // ── Field binding ──
@@ -1281,6 +1283,14 @@ function exportData() {
   buildAssessment();
   bindFields();
   updateProgress();
+
+  // Restore last page from URL hash
+  const hash = location.hash.replace('#', '');
+  const validPages = ['welcome', 'calls', 'roleplays', 'goals', 'reflections', 'assessment'];
+  if (hash && validPages.includes(hash)) {
+    const navEl = document.querySelector(`[data-page="${hash}"]`);
+    showPage(hash, navEl);
+  }
 })();
 </script>
 </body>
