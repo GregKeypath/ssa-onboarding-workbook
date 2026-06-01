@@ -692,12 +692,18 @@
     </div>
 
     <div class="nav-group">
-      <div class="nav-group-title">Weeks 1–2</div>
+      <div class="nav-group-title">Core Tasks</div>
       <div class="nav-item" data-page="calls" onclick="showPage('calls', this)">
         <div class="nav-check"></div> Call Listening Log
       </div>
       <div class="nav-item" data-page="roleplays" onclick="showPage('roleplays', this)">
         <div class="nav-check"></div> Role Play Scenarios
+      </div>
+      <div class="nav-item" data-page="scenarios" onclick="showPage('scenarios', this)">
+        <div class="nav-check"></div> Critical Thinking
+      </div>
+      <div class="nav-item" data-page="research" onclick="showPage('research', this)">
+        <div class="nav-check"></div> Research Task
       </div>
     </div>
 
@@ -793,7 +799,7 @@
   <!-- CALL LISTENING LOG -->
   <div class="page" id="page-calls">
     <div class="page-header">
-      <div class="page-badge">Weeks 1–2</div>
+      <div class="page-badge">Core Task</div>
       <h2>Call Listening Log</h2>
       <p>Shadow at least 5 calls during Weeks 1 and 2. Complete one log entry per call. Focus on tone, structure, how objections are handled, and how the SSA builds rapport with the student.</p>
     </div>
@@ -860,7 +866,7 @@
   <!-- ROLE PLAYS -->
   <div class="page" id="page-roleplays">
     <div class="page-header">
-      <div class="page-badge">Weeks 1–2</div>
+      <div class="page-badge">Core Task</div>
       <h2>Role Play Scenarios</h2>
       <p>Complete these role plays with your buddy or manager before going fully independent on calls. Repeat any scenario until you feel confident. Tick the box when you're happy with your performance.</p>
     </div>
@@ -926,7 +932,7 @@
     </div>
 
     <div class="page-actions">
-      <button class="btn btn-primary" onclick="showPage('week-1', document.querySelector('[data-page=week-1]'))">Next: Week 1 &rarr;</button>
+      <button class="btn btn-primary" onclick="showPage('scenarios', document.querySelector('[data-page=scenarios]'))">Next: Critical Thinking &rarr;</button>
       <button class="btn btn-secondary" onclick="showPage('calls', document.querySelector('[data-page=calls]'))">&larr; Back</button>
     </div>
   </div>
@@ -988,6 +994,170 @@
     </div>
   </div>
 
+  <!-- CRITICAL THINKING SCENARIOS -->
+  <div class="page" id="page-scenarios">
+    <div class="page-header">
+      <div class="page-badge">Core Task</div>
+      <h2>Critical Thinking Scenarios</h2>
+      <p>Read each scenario and the SSA's response. Think carefully — was this the right approach? There is no single perfect answer. The goal is to develop your own professional judgement.</p>
+    </div>
+
+    <div class="tip-box">
+      <div class="tip-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div>There are no trick questions here — but some responses are more effective than others. Consider what the student needed, what best practice looks like, and what you would do differently if at all.</div>
+    </div>
+
+    <!-- Scenario A -->
+    <div class="scenario-card">
+      <div class="scenario-num">Scenario A</div>
+      <div class="scenario-text">A student calls saying they want to withdraw. They say they are overwhelmed with work and haven't engaged for three weeks. The SSA responds: "No problem at all, I'll put that through for you now. Is there anything else I can help you with today?"</div>
+      <div class="scenario-objective"><strong>What the SSA did:</strong> Immediately processed the withdrawal without exploring the student's situation or offering any support options.</div>
+      <div class="field-row" style="margin-top:16px;gap:12px">
+        <div style="flex:0 0 auto">
+          <label class="field-label">Was this the right approach?</label>
+          <select data-save="ct-a-rating" style="margin-top:4px">
+            <option value="">Select…</option>
+            <option value="yes">Yes — this was effective</option>
+            <option value="partly">Partly — some things worked, some didn't</option>
+            <option value="no">No — a different approach was needed</option>
+          </select>
+        </div>
+      </div>
+      <label class="field-label" style="margin-top:12px">Your reasoning — what would you have done and why?</label>
+      <textarea class="tall" data-save="ct-a-reason" placeholder="Think about: what did the student actually need? What options weren't explored? What does best practice look like here?"></textarea>
+    </div>
+
+    <!-- Scenario B -->
+    <div class="scenario-card">
+      <div class="scenario-num">Scenario B</div>
+      <div class="scenario-text">An SSA calls a student for a routine check-in. The student is short and says "I'm really busy, I don't see the point of these calls." The SSA continues to read from their script: "I just wanted to check in on your studies and see if you needed any support with your upcoming assessment…"</div>
+      <div class="scenario-objective"><strong>What the SSA did:</strong> Acknowledged the student was busy but continued with the planned call structure without adjusting their approach.</div>
+      <div class="field-row" style="margin-top:16px;gap:12px">
+        <div style="flex:0 0 auto">
+          <label class="field-label">Was this the right approach?</label>
+          <select data-save="ct-b-rating" style="margin-top:4px">
+            <option value="">Select…</option>
+            <option value="yes">Yes — this was effective</option>
+            <option value="partly">Partly — some things worked, some didn't</option>
+            <option value="no">No — a different approach was needed</option>
+          </select>
+        </div>
+      </div>
+      <label class="field-label" style="margin-top:12px">Your reasoning — what would you have done and why?</label>
+      <textarea class="tall" data-save="ct-b-reason" placeholder="Think about: how do you build rapport with a resistant student? When should you adapt your script? What could have opened the conversation?"></textarea>
+    </div>
+
+    <!-- Scenario C -->
+    <div class="scenario-card">
+      <div class="scenario-num">Scenario C</div>
+      <div class="scenario-text">During a call, a student mentions they have been really struggling with their mental health lately and haven't been sleeping. The SSA listens carefully and then immediately says "I'm going to transfer you through to the university counselling service right now."</div>
+      <div class="scenario-objective"><strong>What the SSA did:</strong> Recognised a wellbeing concern and acted quickly to connect the student with support — but did not check in with the student first about whether they were open to a referral.</div>
+      <div class="field-row" style="margin-top:16px;gap:12px">
+        <div style="flex:0 0 auto">
+          <label class="field-label">Was this the right approach?</label>
+          <select data-save="ct-c-rating" style="margin-top:4px">
+            <option value="">Select…</option>
+            <option value="yes">Yes — this was effective</option>
+            <option value="partly">Partly — some things worked, some didn't</option>
+            <option value="no">No — a different approach was needed</option>
+          </select>
+        </div>
+      </div>
+      <label class="field-label" style="margin-top:12px">Your reasoning — what would you have done and why?</label>
+      <textarea class="tall" data-save="ct-c-reason" placeholder="Think about: what should happen before a referral? How do you check if someone is open to support? What does the student's consent look like here?"></textarea>
+    </div>
+
+    <!-- Scenario D -->
+    <div class="scenario-card">
+      <div class="scenario-num">Scenario D</div>
+      <div class="scenario-text">After a high call-volume day, an SSA logs all 14 of their calls in the CRM as "Spoke to student — no concerns noted." Several of those calls included complex conversations about re-enrolment, academic risk, and one student who mentioned financial hardship.</div>
+      <div class="scenario-objective"><strong>What the SSA did:</strong> Completed CRM documentation for all calls but used a generic template entry for each, not capturing the actual content of the conversations.</div>
+      <div class="field-row" style="margin-top:16px;gap:12px">
+        <div style="flex:0 0 auto">
+          <label class="field-label">Was this the right approach?</label>
+          <select data-save="ct-d-rating" style="margin-top:4px">
+            <option value="">Select…</option>
+            <option value="yes">Yes — this was effective</option>
+            <option value="partly">Partly — some things worked, some didn't</option>
+            <option value="no">No — a different approach was needed</option>
+          </select>
+        </div>
+      </div>
+      <label class="field-label" style="margin-top:12px">Your reasoning — what would you have done and why?</label>
+      <textarea class="tall" data-save="ct-d-reason" placeholder="Think about: why does accurate CRM data matter? Who relies on these records? What are the risks of incomplete documentation?"></textarea>
+    </div>
+
+    <!-- Scenario E -->
+    <div class="scenario-card">
+      <div class="scenario-num">Scenario E</div>
+      <div class="scenario-text">A student has missed three calls and has not responded to emails. The SSA makes one final call, gets through, and spends 20 minutes listening to the student's concerns about their workload. By the end of the call the student agrees to re-enrol in one subject and the SSA sends a follow-up email summarising the plan and next steps.</div>
+      <div class="scenario-objective"><strong>What the SSA did:</strong> Persisted with outreach, invested time in understanding the student's situation, secured a commitment, and followed up in writing.</div>
+      <div class="field-row" style="margin-top:16px;gap:12px">
+        <div style="flex:0 0 auto">
+          <label class="field-label">Was this the right approach?</label>
+          <select data-save="ct-e-rating" style="margin-top:4px">
+            <option value="">Select…</option>
+            <option value="yes">Yes — this was effective</option>
+            <option value="partly">Partly — some things worked, some didn't</option>
+            <option value="no">No — a different approach was needed</option>
+          </select>
+        </div>
+      </div>
+      <label class="field-label" style="margin-top:12px">Your reasoning — what made this work, or what would you add?</label>
+      <textarea class="tall" data-save="ct-e-reason" placeholder="What did the SSA do well? Is there anything you would add or do differently? What can you take from this example into your own practice?"></textarea>
+    </div>
+
+    <div class="page-actions">
+      <button class="btn btn-primary" onclick="showPage('research', document.querySelector('[data-page=research]'))">Next: Research Task &rarr;</button>
+      <button class="btn btn-secondary" onclick="showPage('roleplays', document.querySelector('[data-page=roleplays]'))">&larr; Role Plays</button>
+    </div>
+  </div>
+
+  <!-- RESEARCH TASK -->
+  <div class="page" id="page-research">
+    <div class="page-header">
+      <div class="page-badge">Core Task</div>
+      <h2>Research Task</h2>
+      <p>Pick a unit from one of the programs you support. Research it thoroughly, then practise how you would talk about it with a student. Do this for at least two units across different programs.</p>
+    </div>
+
+    <div class="tip-box">
+      <div class="tip-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div>Students often ask what a unit is really about, whether it is manageable, and how it connects to their career. Knowing the answer confidently builds trust and reduces withdrawal risk. Use the university handbook, Canvas, or your manager as your research sources.</div>
+    </div>
+
+    ${[1, 2, 3].map(u => `
+    <div class="card" style="margin-bottom:4px">
+      <div class="card-title">
+        <div class="icon"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 0 3-3h7z"/></svg></div>
+        Unit ${u}
+      </div>
+      <div class="field-row">
+        <div>
+          <label class="field-label">Program</label>
+          <input type="text" data-save="res-u${u}-program" placeholder="e.g. Master of Business Administration">
+        </div>
+        <div>
+          <label class="field-label">Unit / Subject name</label>
+          <input type="text" data-save="res-u${u}-unit" placeholder="e.g. Strategic Management">
+        </div>
+      </div>
+      <label class="field-label" style="margin-top:12px">Learning outcomes — what will the student be able to do after this unit?</label>
+      <textarea data-save="res-u${u}-outcomes" placeholder="List 3–5 key learning outcomes from the unit handbook…"></textarea>
+      <label class="field-label" style="margin-top:12px">Key assessments — what does the student need to complete?</label>
+      <textarea data-save="res-u${u}-assessments" placeholder="e.g. Group case study (40%), final exam (60%), weekly discussion posts…"></textarea>
+      <label class="field-label" style="margin-top:12px">How I would talk to a student about this unit</label>
+      <textarea class="tall" data-save="res-u${u}-pitch" placeholder="Imagine a student asks: 'What is this unit actually about and is it worth doing?' How would you answer in a way that is honest, clear, and encouraging?"></textarea>
+      <label class="field-label" style="margin-top:12px">What makes this unit valuable — how does it connect to their career or program goals?</label>
+      <textarea data-save="res-u${u}-value" placeholder="What is the real-world relevance? Why should a student care about this unit?"></textarea>
+    </div>`).join('')}
+
+    <div class="page-actions">
+      <button class="btn btn-primary" onclick="showPage('week-1', document.querySelector('[data-page=week-1]'))">Next: Week 1 &rarr;</button>
+      <button class="btn btn-secondary" onclick="showPage('scenarios', document.querySelector('[data-page=scenarios]'))">&larr; Critical Thinking</button>
+    </div>
+  </div>
+
 </main>
 
 <div id="save-indicator">✓ Saved</div>
@@ -1007,19 +1177,44 @@ if (!starterId) {
 }
 
 const DB_URL = `${DB_ROOT}/starters/${starterId}.json`;
+const LS_KEY = `ssa-workbook-${starterId}`;
 
 let data = {};
 let saveTimer = null;
 
 async function load() {
+  // 1. Load from localStorage first — instant, always works
+  try {
+    const local = localStorage.getItem(LS_KEY);
+    if (local) data = JSON.parse(local);
+  } catch(e) {}
+
+  // 2. Try Firebase and merge — Firebase wins per key so cross-device edits propagate
   try {
     const res = await fetch(DB_URL);
-    const remote = await res.json();
-    if (remote) data = remote;
-  } catch(e) { data = {}; }
+    if (res.ok) {
+      const remote = await res.json();
+      if (remote && typeof remote === 'object') {
+        data = { ...data, ...remote };
+        localStorage.setItem(LS_KEY, JSON.stringify(data)); // keep local in sync
+      }
+    }
+  } catch(e) { /* offline or rules issue — local data still loaded above */ }
 }
 
 function save() {
+  // Always write to localStorage immediately — data can never be lost
+  try { localStorage.setItem(LS_KEY, JSON.stringify(data)); } catch(e) {}
+
+  // Show saved indicator right away
+  const ind = document.getElementById('save-indicator');
+  if (ind) {
+    ind.style.opacity = '1';
+    clearTimeout(save._t);
+    save._t = setTimeout(() => ind.style.opacity = '0', 1500);
+  }
+
+  // Debounced Firebase sync
   clearTimeout(saveTimer);
   saveTimer = setTimeout(async () => {
     try {
@@ -1028,11 +1223,7 @@ function save() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       });
-      const ind = document.getElementById('save-indicator');
-      ind.style.opacity = '1';
-      clearTimeout(save._t);
-      save._t = setTimeout(() => ind.style.opacity = '0', 1500);
-    } catch(e) { console.error('Save failed', e); }
+    } catch(e) { console.warn('Firebase sync failed — data safe in localStorage', e); }
   }, 800);
 }
 
@@ -1472,6 +1663,38 @@ function exportPDF() {
     weeksHtml += section(`Week ${w} <span class="band">${weekBands[w]}</span>`, wHtml);
   }
 
+  // Critical thinking scenarios
+  const ctScenarios = [
+    ['A', 'Student wants to withdraw — SSA processes it immediately without exploring the situation'],
+    ['B', 'Resistant student on check-in — SSA continues reading from script'],
+    ['C', 'Student mentions mental health struggles — SSA immediately transfers to counselling without consent check'],
+    ['D', 'Busy day — SSA logs all 14 calls as "no concerns" in CRM'],
+    ['E', 'Hard-to-reach student — SSA persists, listens deeply, secures re-enrolment and follows up in writing'],
+  ];
+  const ratingText = {'yes':'Yes — effective','partly':'Partly — mixed','no':'No — different approach needed','':`—`};
+  let ctHtml = '';
+  ctScenarios.forEach(([id, desc]) => {
+    const key = id.toLowerCase();
+    ctHtml += `<h3>Scenario ${id}: ${desc}</h3><table>
+      ${row('Rating', ratingText[v(`ct-${key}-rating`)] || '—')}
+      ${row('Reasoning', v(`ct-${key}-reason`))}
+    </table>`;
+  });
+
+  // Research task
+  let resHtml = '';
+  for (let u = 1; u <= 3; u++) {
+    if (v(`res-u${u}-unit`)) {
+      resHtml += `<h3>Unit ${u}: ${v(`res-u${u}-unit`)} (${v(`res-u${u}-program`)})</h3><table>
+        ${row('Learning outcomes', v(`res-u${u}-outcomes`))}
+        ${row('Key assessments', v(`res-u${u}-assessments`))}
+        ${row('How I would talk to a student about this unit', v(`res-u${u}-pitch`))}
+        ${row('What makes this unit valuable', v(`res-u${u}-value`))}
+      </table>`;
+    }
+  }
+  if (!resHtml) resHtml = `<p style="color:#94a3b8;font-style:italic">No units researched yet.</p>`;
+
   // Self-assessment
   let assessHtml = `<table>`;
   assessStatements.forEach((s, i) => {
@@ -1525,6 +1748,8 @@ function exportPDF() {
   ${section('Personal Details', details)}
   ${section('Call Listening Log', callsHtml)}
   ${section('Role Play Scenarios', rpHtml)}
+  ${section('Critical Thinking Scenarios', ctHtml)}
+  ${section('Research Task', resHtml)}
   ${weeksHtml}
   ${section('Self-Assessment', assessHtml)}
   </body></html>`;
@@ -1549,7 +1774,7 @@ function exportPDF() {
 
   // Restore last page from URL hash
   const hash = location.hash.replace('#', '');
-  const validPages = ['welcome', 'calls', 'roleplays', 'week-1', 'week-2', 'week-3', 'week-4', 'week-5', 'week-6', 'week-7', 'week-8', 'assessment'];
+  const validPages = ['welcome', 'calls', 'roleplays', 'scenarios', 'research', 'week-1', 'week-2', 'week-3', 'week-4', 'week-5', 'week-6', 'week-7', 'week-8', 'assessment'];
   if (hash && validPages.includes(hash)) {
     const navEl = document.querySelector(`[data-page="${hash}"]`);
     showPage(hash, navEl);
