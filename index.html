@@ -705,6 +705,9 @@
       <div class="nav-item" data-page="research" onclick="showPage('research', this)">
         <div class="nav-check"></div> Research Task
       </div>
+      <div class="nav-item" data-page="connections" onclick="showPage('connections', this)">
+        <div class="nav-check"></div> Team Connections
+      </div>
     </div>
 
     <div class="nav-group">
@@ -1018,6 +1021,55 @@
     </div>
   </div>
 
+  <!-- TEAM CONNECTIONS -->
+  <div class="page" id="page-connections">
+    <div class="page-header">
+      <div class="page-badge">Core Task</div>
+      <h2>Team Connections</h2>
+      <p>Reach out to 3 different SSAs or SEAs — people you haven't worked closely with yet. Have a genuine conversation, not just a quick hello. Record what you learned below.</p>
+    </div>
+
+    <div class="tip-box">
+      <div class="tip-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div>This is not a formal interview — it is a conversation. Ask them about their life outside work too, not just their role. Building genuine connections early will make your first few months much easier and more enjoyable.</div>
+    </div>
+
+    ${[1, 2, 3].map(n => `
+    <div class="card" style="margin-bottom:4px">
+      <div class="card-title">
+        <div class="icon"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        Connection ${n}
+      </div>
+      <div class="field-row">
+        <div>
+          <label class="field-label">Name</label>
+          <input type="text" data-save="conn-${n}-name" placeholder="Their name">
+        </div>
+        <div>
+          <label class="field-label">Role</label>
+          <input type="text" data-save="conn-${n}-role" placeholder="e.g. SSA, SEA, Team Lead">
+        </div>
+        <div>
+          <label class="field-label">Date of catch-up</label>
+          <input type="date" data-save="conn-${n}-date">
+        </div>
+      </div>
+      <label class="field-label" style="margin-top:14px">What did you learn about them personally?</label>
+      <textarea data-save="conn-${n}-personal" placeholder="e.g. Where they are from, what they do outside work, something that surprised you…"></textarea>
+      <label class="field-label" style="margin-top:12px">What did you learn about their work and how they approach the role?</label>
+      <textarea data-save="conn-${n}-work" placeholder="e.g. How long they have been in the role, what they find most rewarding or challenging, how they structure their day…"></textarea>
+      <label class="field-label" style="margin-top:12px">What are they currently focused on or working towards?</label>
+      <textarea data-save="conn-${n}-focus" placeholder="e.g. A project, a goal, a skill they are developing, something they are excited about…"></textarea>
+      <label class="field-label" style="margin-top:12px">One thing you will take from this conversation into your own practice</label>
+      <textarea data-save="conn-${n}-takeaway" placeholder="e.g. A tip they shared, an approach you want to try, something that shifted your thinking…"></textarea>
+    </div>`).join('')}
+
+    <div class="page-actions">
+      <button class="btn btn-primary" onclick="showPage('week-1', document.querySelector('[data-page=week-1]'))">Next: Week 1 &rarr;</button>
+      <button class="btn btn-secondary" onclick="showPage('research', document.querySelector('[data-page=research]'))">&larr; Research Task</button>
+    </div>
+  </div>
+
   <!-- CRITICAL THINKING SCENARIOS -->
   <div class="page" id="page-scenarios">
     <div class="page-header">
@@ -1177,7 +1229,7 @@
     </div>`).join('')}
 
     <div class="page-actions">
-      <button class="btn btn-primary" onclick="showPage('week-1', document.querySelector('[data-page=week-1]'))">Next: Week 1 &rarr;</button>
+      <button class="btn btn-primary" onclick="showPage('connections', document.querySelector('[data-page=connections]'))">Next: Team Connections &rarr;</button>
       <button class="btn btn-secondary" onclick="showPage('scenarios', document.querySelector('[data-page=scenarios]'))">&larr; Critical Thinking</button>
     </div>
   </div>
@@ -1774,6 +1826,21 @@ function exportPDF() {
   ${section('Role Play Scenarios', rpHtml)}
   ${section('Critical Thinking Scenarios', ctHtml)}
   ${section('Research Task', resHtml)}
+  ${section('Team Connections', (() => {
+    let h = '';
+    for (let n = 1; n <= 3; n++) {
+      if (v(`conn-${n}-name`)) {
+        h += `<h3>Connection ${n}: ${v(`conn-${n}-name`)} (${v(`conn-${n}-role`) || '—'})</h3><table>
+          ${row('Date', v(`conn-${n}-date`))}
+          ${row('What I learned about them personally', v(`conn-${n}-personal`))}
+          ${row('What I learned about their work', v(`conn-${n}-work`))}
+          ${row('What they are currently focused on', v(`conn-${n}-focus`))}
+          ${row('One thing I will take into my own practice', v(`conn-${n}-takeaway`))}
+        </table>`;
+      }
+    }
+    return h || '<p style="color:#94a3b8;font-style:italic">No connections recorded yet.</p>';
+  })())}
   ${weeksHtml}
   ${section('Self-Assessment', assessHtml)}
   </body></html>`;
@@ -1798,7 +1865,7 @@ function exportPDF() {
 
   // Restore last page from URL hash
   const hash = location.hash.replace('#', '');
-  const validPages = ['welcome', 'calls', 'roleplays', 'scenarios', 'research', 'week-1', 'week-2', 'week-3', 'week-4', 'week-5', 'week-6', 'week-7', 'week-8', 'assessment'];
+  const validPages = ['welcome', 'calls', 'roleplays', 'scenarios', 'research', 'connections', 'week-1', 'week-2', 'week-3', 'week-4', 'week-5', 'week-6', 'week-7', 'week-8', 'assessment'];
   if (hash && validPages.includes(hash)) {
     const navEl = document.querySelector(`[data-page="${hash}"]`);
     showPage(hash, navEl);
