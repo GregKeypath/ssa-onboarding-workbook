@@ -1168,7 +1168,7 @@
     <div class="tip-box">
       <div class="tip-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
       <div>There are no trick questions here — but some responses are more effective than others. Write your own reasoning first before submitting. The more detail you give, the more useful the feedback will be.<br><br>
-      <span style="font-size:12px;color:#64748b">AI feedback needs a Gemini API key (starts with <code>AIza</code>). If yours isn't working, <a href="#" onclick="localStorage.removeItem('ssa-gemini-key');alert('API key cleared. Click Submit for feedback to enter a new one.');return false;" style="color:var(--kp-blue)">click here to reset it</a>.</span></div>
+      <span style="font-size:12px;color:#64748b">AI feedback is powered by Google Gemini. If something isn't working, <a href="#" onclick="localStorage.removeItem('ssa-gemini-key');alert('API key cleared.');return false;" style="color:var(--kp-blue)">click here to reset it</a>.</span></div>
     </div>
 
     <!-- Scenario A -->
@@ -1773,7 +1773,7 @@ async function getScenarioFeedback(key) {
   // Use hardcoded key if set, otherwise fall back to stored key
   let apiKey = GEMINI_KEY || localStorage.getItem('ssa-gemini-key');
   if (!apiKey) {
-    apiKey = prompt('Enter your Google Gemini API key to enable AI feedback (starts with AIza…):');
+    apiKey = prompt('Enter your Google Gemini API key to enable AI feedback:');
     if (!apiKey) return;
     localStorage.setItem('ssa-gemini-key', apiKey.trim());
     apiKey = apiKey.trim();
@@ -1815,10 +1815,16 @@ Evaluate the quality of their critical thinking. Return ONLY valid JSON (no mark
     );
 
     if (!res.ok) {
-      localStorage.removeItem('ssa-gemini-key');
       const errBody = await res.json().catch(() => ({}));
       const errMsg = errBody?.error?.message || `HTTP ${res.status}`;
-      alert(`API key error: ${errMsg}\n\nPlease click Submit again and enter a valid Gemini API key (starts with AIza…).`);
+      // Only clear the key for actual auth failures
+      if (res.status === 401 || res.status === 403) {
+        localStorage.removeItem('ssa-gemini-key');
+        alert(`API key error: ${errMsg}\n\nPlease contact your manager to reset the feedback key.`);
+      } else {
+        // Temporary error (server busy, quota spike etc) — just ask to retry
+        alert(`Feedback unavailable right now: ${errMsg}\n\nPlease wait a moment and try again.`);
+      }
       btn.disabled = false;
       btn.innerHTML = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm-1-5h2v2h-2zm0-8h2v6h-2z"/></svg> Submit for feedback`;
       return;
