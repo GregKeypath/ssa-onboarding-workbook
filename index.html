@@ -1809,7 +1809,7 @@ Evaluate the quality of their critical thinking. Return ONLY valid JSON (no mark
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: { maxOutputTokens: 500 }
+          generationConfig: { maxOutputTokens: 2000 }
         })
       }
     );
