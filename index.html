@@ -1352,6 +1352,9 @@
 <div id="save-indicator">✓ Saved</div>
 
 <script>
+// ── Gemini API Key — paste your key between the quotes ──
+const GEMINI_KEY = '';
+
 // ── Firebase Config ──
 const DB_ROOT = 'https://ssa-onboarding-workbook-default-rtdb.asia-southeast1.firebasedatabase.app';
 
@@ -1767,10 +1770,10 @@ async function getScenarioFeedback(key) {
     return;
   }
 
-  // Get or prompt for API key
-  let apiKey = localStorage.getItem('ssa-gemini-key');
+  // Use hardcoded key if set, otherwise fall back to stored key
+  let apiKey = GEMINI_KEY || localStorage.getItem('ssa-gemini-key');
   if (!apiKey) {
-    apiKey = prompt('Enter your Google Gemini API key to enable AI feedback (stored locally on this device only):');
+    apiKey = prompt('Enter your Google Gemini API key to enable AI feedback (starts with AIza…):');
     if (!apiKey) return;
     localStorage.setItem('ssa-gemini-key', apiKey.trim());
     apiKey = apiKey.trim();
