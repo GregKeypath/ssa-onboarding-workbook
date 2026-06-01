@@ -745,11 +745,22 @@
     </div>
   </nav>
 
-  <div style="padding:16px 20px;border-top:1px solid rgba(255,255,255,0.08);margin-top:auto">
+  <div style="padding:16px 20px;border-top:1px solid rgba(255,255,255,0.08);margin-top:auto;display:flex;flex-direction:column;gap:8px">
     <button onclick="exportPDF()" style="width:100%;background:#2AACE2;color:#fff;border:none;padding:10px 16px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;">
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 18 15 15"/></svg>
       Export PDF Summary
     </button>
+    <div style="display:flex;gap:6px">
+      <button onclick="backupData()" title="Download a backup file of all your data" style="flex:1;background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.12);padding:8px;border-radius:8px;font-size:11px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;">
+        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Backup
+      </button>
+      <label title="Restore from a previously downloaded backup file" style="flex:1;background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.12);padding:8px;border-radius:8px;font-size:11px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;">
+        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Restore
+        <input type="file" accept=".json" onchange="restoreData(event)" style="display:none">
+      </label>
+    </div>
   </div>
 </aside>
 
@@ -1031,7 +1042,7 @@
 
     <div class="page-actions">
       <button class="btn btn-primary" onclick="exportPDF()">Export PDF Summary</button>
-      <button class="btn btn-outline" onclick="exportData()">Export my data</button>
+      <button class="btn btn-outline" onclick="backupData()">Download backup file</button>
       <button class="btn btn-secondary" onclick="showPage('week-8', document.querySelector('[data-page=week-8]'))">&larr; Back</button>
     </div>
   </div>
@@ -1629,13 +1640,40 @@ function updateProgress() {
   document.getElementById('progress-pct').textContent = pct + '%';
 }
 
-// ── Export ──
-function exportData() {
+// ── Backup & Restore ──
+function backupData() {
+  const name = (getVal('starter-name') || starterId).toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+  const date = new Date().toISOString().slice(0, 10);
+  const filename = `ssa-workbook-${name}-${date}.json`;
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = 'ssa-workbook-backup.json';
+  a.download = filename;
   a.click();
+}
+
+function restoreData(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = async e => {
+    try {
+      const restored = JSON.parse(e.target.result);
+      if (typeof restored !== 'object' || Array.isArray(restored)) throw new Error();
+      data = restored;
+      // Write back to localStorage and Firebase
+      try { localStorage.setItem(LS_KEY, JSON.stringify(data)); } catch(e) {}
+      try {
+        await fetch(DB_URL, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+      } catch(e) {}
+      // Reload page so all fields repopulate cleanly
+      location.reload();
+    } catch(e) {
+      alert('Could not restore — the file does not appear to be a valid workbook backup.');
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = ''; // reset input
 }
 
 function exportPDF() {
