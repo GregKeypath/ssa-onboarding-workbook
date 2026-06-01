@@ -1835,10 +1835,11 @@ Evaluate the quality of their critical thinking. Return ONLY valid JSON (no mark
     // Skip thinking parts, get the actual response text
     const responseParts = parts.filter(p => !p.thought);
     const text = (responseParts.length ? responseParts : parts).map(p => p.text || '').join('').trim();
-    if (!text) throw new Error('Empty response from Gemini — raw: ' + JSON.stringify(json).slice(0,300));
-    // Strip markdown code fences if present
-    const clean = text.replace(/```json\n?/gi, '').replace(/```\n?/g, '').trim();
-    const fb = JSON.parse(clean);
+    if (!text) throw new Error('Empty response from Gemini');
+    // Extract just the JSON object from wherever it appears in the response
+    const jsonMatch = text.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) throw new Error('No JSON found in response: ' + text.slice(0, 200));
+    const fb = JSON.parse(jsonMatch[0]);
 
     const scoreClass = fb.score >= 8 ? 'score-high' : fb.score >= 5 ? 'score-mid' : 'score-low';
 
