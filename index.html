@@ -640,6 +640,67 @@
   }
   .checklist-item.checked label { text-decoration: line-through; color: #a0aec0; }
 
+  /* AI Feedback */
+  .ai-feedback-btn {
+    margin-top: 14px;
+    background: var(--kp-navy);
+    color: #fff;
+    border: none;
+    padding: 9px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    transition: background 0.15s;
+  }
+  .ai-feedback-btn:hover { background: #162d58; }
+  .ai-feedback-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .ai-feedback-result {
+    margin-top: 14px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    display: none;
+  }
+  .ai-feedback-result.visible { display: block; }
+
+  .ai-score-bar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    background: var(--kp-navy);
+    color: #fff;
+  }
+  .ai-score-circle {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .score-low  { background: #fee2e2; color: #b91c1c; }
+  .score-mid  { background: #fef3c7; color: #b45309; }
+  .score-high { background: #dcfce7; color: #15803d; }
+
+  .ai-score-label { font-size: 13px; line-height: 1.4; color: rgba(255,255,255,0.85); }
+  .ai-score-label strong { color: #fff; font-size: 15px; display: block; margin-bottom: 2px; }
+
+  .ai-feedback-body { padding: 14px 18px; background: #f8fafc; }
+  .ai-feedback-row { margin-bottom: 12px; }
+  .ai-feedback-row:last-child { margin-bottom: 0; }
+  .ai-feedback-row .ai-row-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.07em;
+    text-transform: uppercase; color: #64748b; margin-bottom: 4px;
+  }
+  .ai-feedback-row p { font-size: 13px; color: #1e293b; line-height: 1.55; margin: 0; }
+  .ai-feedback-row.takeaway { background: #eff6ff; border-radius: 7px; padding: 10px 12px; }
+  .ai-feedback-row.takeaway .ai-row-label { color: var(--kp-blue); }
+
   /* Save indicator */
   #save-indicator {
     position: fixed;
@@ -1101,12 +1162,12 @@
     <div class="page-header">
       <div class="page-badge">Core Task</div>
       <h2>Critical Thinking Scenarios</h2>
-      <p>Read each scenario and the SSA's response. Think carefully — was this the right approach? There is no single perfect answer. The goal is to develop your own professional judgement.</p>
+      <p>Read each scenario and the SSA's response. Select your rating, write your reasoning, then hit <strong>Submit for feedback</strong> to receive an AI-generated score and personalised commentary.</p>
     </div>
 
     <div class="tip-box">
       <div class="tip-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
-      <div>There are no trick questions here — but some responses are more effective than others. Consider what the student needed, what best practice looks like, and what you would do differently if at all.</div>
+      <div>There are no trick questions here — but some responses are more effective than others. Write your own reasoning first before submitting. The more detail you give, the more useful the feedback will be.</div>
     </div>
 
     <!-- Scenario A -->
@@ -1117,7 +1178,7 @@
       <div class="field-row" style="margin-top:16px;gap:12px">
         <div style="flex:0 0 auto">
           <label class="field-label">Was this the right approach?</label>
-          <select data-save="ct-a-rating" style="margin-top:4px">
+          <select id="ct-a-rating-el" data-save="ct-a-rating" style="margin-top:4px">
             <option value="">Select…</option>
             <option value="yes">Yes — this was effective</option>
             <option value="partly">Partly — some things worked, some didn't</option>
@@ -1126,7 +1187,12 @@
         </div>
       </div>
       <label class="field-label" style="margin-top:12px">Your reasoning — what would you have done and why?</label>
-      <textarea class="tall" data-save="ct-a-reason" placeholder="Think about: what did the student actually need? What options weren't explored? What does best practice look like here?"></textarea>
+      <textarea class="tall" id="ct-a-reason-el" data-save="ct-a-reason" placeholder="Think about: what did the student actually need? What options weren't explored? What does best practice look like here?"></textarea>
+      <button class="ai-feedback-btn" onclick="getScenarioFeedback('a')">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm-1-5h2v2h-2zm0-8h2v6h-2z"/></svg>
+        Submit for feedback
+      </button>
+      <div class="ai-feedback-result" id="ct-a-feedback"></div>
     </div>
 
     <!-- Scenario B -->
@@ -1137,7 +1203,7 @@
       <div class="field-row" style="margin-top:16px;gap:12px">
         <div style="flex:0 0 auto">
           <label class="field-label">Was this the right approach?</label>
-          <select data-save="ct-b-rating" style="margin-top:4px">
+          <select id="ct-b-rating-el" data-save="ct-b-rating" style="margin-top:4px">
             <option value="">Select…</option>
             <option value="yes">Yes — this was effective</option>
             <option value="partly">Partly — some things worked, some didn't</option>
@@ -1146,7 +1212,12 @@
         </div>
       </div>
       <label class="field-label" style="margin-top:12px">Your reasoning — what would you have done and why?</label>
-      <textarea class="tall" data-save="ct-b-reason" placeholder="Think about: how do you build rapport with a resistant student? When should you adapt your script? What could have opened the conversation?"></textarea>
+      <textarea class="tall" id="ct-b-reason-el" data-save="ct-b-reason" placeholder="Think about: how do you build rapport with a resistant student? When should you adapt your script? What could have opened the conversation?"></textarea>
+      <button class="ai-feedback-btn" onclick="getScenarioFeedback('b')">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm-1-5h2v2h-2zm0-8h2v6h-2z"/></svg>
+        Submit for feedback
+      </button>
+      <div class="ai-feedback-result" id="ct-b-feedback"></div>
     </div>
 
     <!-- Scenario C -->
@@ -1157,7 +1228,7 @@
       <div class="field-row" style="margin-top:16px;gap:12px">
         <div style="flex:0 0 auto">
           <label class="field-label">Was this the right approach?</label>
-          <select data-save="ct-c-rating" style="margin-top:4px">
+          <select id="ct-c-rating-el" data-save="ct-c-rating" style="margin-top:4px">
             <option value="">Select…</option>
             <option value="yes">Yes — this was effective</option>
             <option value="partly">Partly — some things worked, some didn't</option>
@@ -1166,7 +1237,12 @@
         </div>
       </div>
       <label class="field-label" style="margin-top:12px">Your reasoning — what would you have done and why?</label>
-      <textarea class="tall" data-save="ct-c-reason" placeholder="Think about: what questions would help you understand the real reason behind the overwhelm? Is retaining a student at any cost the right outcome? What might happen if the root cause isn't addressed?"></textarea>
+      <textarea class="tall" id="ct-c-reason-el" data-save="ct-c-reason" placeholder="Think about: what questions would help you understand the real reason behind the overwhelm? Is retaining a student at any cost the right outcome? What might happen if the root cause isn't addressed?"></textarea>
+      <button class="ai-feedback-btn" onclick="getScenarioFeedback('c')">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm-1-5h2v2h-2zm0-8h2v6h-2z"/></svg>
+        Submit for feedback
+      </button>
+      <div class="ai-feedback-result" id="ct-c-feedback"></div>
     </div>
 
     <!-- Scenario D -->
@@ -1177,7 +1253,7 @@
       <div class="field-row" style="margin-top:16px;gap:12px">
         <div style="flex:0 0 auto">
           <label class="field-label">Was this the right approach?</label>
-          <select data-save="ct-d-rating" style="margin-top:4px">
+          <select id="ct-d-rating-el" data-save="ct-d-rating" style="margin-top:4px">
             <option value="">Select…</option>
             <option value="yes">Yes — this was effective</option>
             <option value="partly">Partly — some things worked, some didn't</option>
@@ -1186,7 +1262,12 @@
         </div>
       </div>
       <label class="field-label" style="margin-top:12px">Your reasoning — what would you have done and why?</label>
-      <textarea class="tall" data-save="ct-d-reason" placeholder="Think about: why does accurate CRM data matter? Who relies on these records? What are the risks of incomplete documentation?"></textarea>
+      <textarea class="tall" id="ct-d-reason-el" data-save="ct-d-reason" placeholder="Think about: why does accurate CRM data matter? Who relies on these records? What are the risks of incomplete documentation?"></textarea>
+      <button class="ai-feedback-btn" onclick="getScenarioFeedback('d')">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm-1-5h2v2h-2zm0-8h2v6h-2z"/></svg>
+        Submit for feedback
+      </button>
+      <div class="ai-feedback-result" id="ct-d-feedback"></div>
     </div>
 
     <!-- Scenario E -->
@@ -1197,7 +1278,7 @@
       <div class="field-row" style="margin-top:16px;gap:12px">
         <div style="flex:0 0 auto">
           <label class="field-label">Was this the right approach?</label>
-          <select data-save="ct-e-rating" style="margin-top:4px">
+          <select id="ct-e-rating-el" data-save="ct-e-rating" style="margin-top:4px">
             <option value="">Select…</option>
             <option value="yes">Yes — this was effective</option>
             <option value="partly">Partly — some things worked, some didn't</option>
@@ -1206,7 +1287,12 @@
         </div>
       </div>
       <label class="field-label" style="margin-top:12px">Your reasoning — what made this work, or what would you add?</label>
-      <textarea class="tall" data-save="ct-e-reason" placeholder="What did the SSA do well? Is there anything you would add or do differently? What can you take from this example into your own practice?"></textarea>
+      <textarea class="tall" id="ct-e-reason-el" data-save="ct-e-reason" placeholder="What did the SSA do well? Is there anything you would add or do differently? What can you take from this example into your own practice?"></textarea>
+      <button class="ai-feedback-btn" onclick="getScenarioFeedback('e')">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm-1-5h2v2h-2zm0-8h2v6h-2z"/></svg>
+        Submit for feedback
+      </button>
+      <div class="ai-feedback-result" id="ct-e-feedback"></div>
     </div>
 
     <div class="page-actions">
@@ -1640,6 +1726,167 @@ function updateProgress() {
   document.getElementById('progress-pct').textContent = pct + '%';
 }
 
+// ── AI Scenario Feedback ──
+const CT_SCENARIOS = {
+  a: {
+    scenario: "A student calls wanting to withdraw because they are overwhelmed and haven't engaged for three weeks.",
+    action: "The SSA immediately agreed to process the withdrawal with no questions asked.",
+    keyPoints: "The SSA should have explored what was driving the overwhelm, asked questions to understand the student's situation, offered support options (load reduction, study break, academic support), and only processed a withdrawal as a last resort. Student retention starts with curiosity and empathy."
+  },
+  b: {
+    scenario: "A student on a routine check-in call says they are too busy and don't see the point of SSA calls.",
+    action: "The SSA acknowledged this briefly but continued reading from their prepared script.",
+    keyPoints: "When a student signals resistance, continuing with a script signals you are not listening. The SSA should have paused, acknowledged the student's feeling, asked a genuine question about what is going on for them, and adapted the conversation to what the student actually needed in that moment. Rapport is built by responding to the person, not the plan."
+  },
+  c: {
+    scenario: "A distressed student calls wanting to withdraw due to feeling completely overwhelmed.",
+    action: "The SSA quickly offered a study load reduction and booked them into the next intake, retaining the student within minutes.",
+    keyPoints: "Retaining a student without understanding what is driving their distress is a short-term fix that often leads to a second withdrawal. The SSA should have spent time listening, asking open questions to understand the root cause, and only then co-designing a solution with the student. True retention means the student succeeds long-term, not just stays enrolled today."
+  },
+  d: {
+    scenario: "After a high-volume day, an SSA logged all 14 calls with the generic note 'Spoke to student — no concerns noted', despite several involving complex conversations.",
+    action: "The SSA completed documentation for all calls but without meaningful detail.",
+    keyPoints: "Accurate CRM records are essential for student welfare and team accountability. Other SSAs, managers, and university partners rely on these records to identify at-risk students and ensure continuity. Inaccurate documentation also creates compliance and audit risk. Taking an extra two minutes per call to capture the real conversation content is a core part of the role."
+  },
+  e: {
+    scenario: "A hard-to-reach student who had missed multiple contacts finally answered. The SSA spent 20 minutes listening, got re-enrolment agreement, and followed up with a summary email.",
+    action: "The SSA persisted, listened deeply, secured a commitment, and documented the plan in writing.",
+    keyPoints: "This is excellent SSA practice. Persistence in outreach, genuine listening over scripted delivery, securing a concrete commitment, and following up in writing all demonstrate high-quality student support. The email creates accountability for both parties and sets the student up for success."
+  }
+};
+
+async function getScenarioFeedback(key) {
+  const rating = document.getElementById(`ct-${key}-rating-el`)?.value || getVal(`ct-${key}-rating`);
+  const reason = document.getElementById(`ct-${key}-reason-el`)?.value || getVal(`ct-${key}-reason`);
+  const resultEl = document.getElementById(`ct-${key}-feedback`);
+  const btn = resultEl?.previousElementSibling;
+
+  if (!rating || !reason.trim()) {
+    alert('Please select a rating and write your reasoning before submitting.');
+    return;
+  }
+
+  // Get or prompt for API key
+  let apiKey = localStorage.getItem('ssa-anthropic-key');
+  if (!apiKey) {
+    apiKey = prompt('Enter your Anthropic API key to enable AI feedback (stored locally on this device):');
+    if (!apiKey) return;
+    localStorage.setItem('ssa-anthropic-key', apiKey.trim());
+    apiKey = apiKey.trim();
+  }
+
+  const ctx = CT_SCENARIOS[key];
+  btn.disabled = true;
+  btn.innerHTML = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> Getting feedback…`;
+
+  const prompt = `You are an evaluator for a Student Success Advisor (SSA) onboarding program at Keypath Education, an online higher education provider. SSAs focus on student retention — keeping enrolled students engaged and supported.
+
+Scenario: ${ctx.scenario}
+What the SSA in the scenario did: ${ctx.action}
+Key principles a strong response should identify: ${ctx.keyPoints}
+
+New starter's rating: "${rating}"
+New starter's reasoning: "${reason}"
+
+Evaluate the quality of their critical thinking. Return ONLY valid JSON (no markdown, no extra text):
+{
+  "score": <number 1-10>,
+  "scoreLabel": "<short label like 'Strong thinking' or 'Good start' or 'Keep developing'>",
+  "positive": "<1-2 sentences on what they identified well — be specific and genuine>",
+  "develop": "<1 sentence on what they could think more deeply about — constructive and encouraging>",
+  "takeaway": "<one short principle or insight to remember from this scenario>"
+}`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5',
+        max_tokens: 400,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+
+    if (res.status === 401) {
+      localStorage.removeItem('ssa-anthropic-key');
+      alert('API key was invalid. Please click Submit again to enter a new key.');
+      btn.disabled = false;
+      btn.innerHTML = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm-1-5h2v2h-2zm0-8h2v6h-2z"/></svg> Submit for feedback`;
+      return;
+    }
+
+    const json = await res.json();
+    const text = json.content?.[0]?.text || '';
+    const fb = JSON.parse(text);
+
+    const scoreClass = fb.score >= 8 ? 'score-high' : fb.score >= 5 ? 'score-mid' : 'score-low';
+
+    resultEl.innerHTML = `
+      <div class="ai-score-bar">
+        <div class="ai-score-circle ${scoreClass}">${fb.score}</div>
+        <div class="ai-score-label"><strong>${fb.scoreLabel}</strong>${fb.score} out of 10</div>
+      </div>
+      <div class="ai-feedback-body">
+        <div class="ai-feedback-row">
+          <div class="ai-row-label">What you identified well</div>
+          <p>${fb.positive}</p>
+        </div>
+        <div class="ai-feedback-row">
+          <div class="ai-row-label">To develop</div>
+          <p>${fb.develop}</p>
+        </div>
+        <div class="ai-feedback-row takeaway">
+          <div class="ai-row-label">Key takeaway</div>
+          <p>${fb.takeaway}</p>
+        </div>
+      </div>`;
+    resultEl.classList.add('visible');
+
+    // Save feedback to data store
+    setVal(`ct-${key}-feedback`, JSON.stringify(fb));
+
+  } catch(e) {
+    alert('Could not get feedback right now. Check your internet connection and try again.');
+    console.error(e);
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm-1-5h2v2h-2zm0-8h2v6h-2z"/></svg> Re-submit for feedback`;
+}
+
+// Restore saved feedback on page load
+function restoreFeedback() {
+  ['a','b','c','d','e'].forEach(key => {
+    const saved = getVal(`ct-${key}-feedback`);
+    if (!saved) return;
+    try {
+      const fb = JSON.parse(saved);
+      const resultEl = document.getElementById(`ct-${key}-feedback`);
+      if (!resultEl) return;
+      const scoreClass = fb.score >= 8 ? 'score-high' : fb.score >= 5 ? 'score-mid' : 'score-low';
+      resultEl.innerHTML = `
+        <div class="ai-score-bar">
+          <div class="ai-score-circle ${scoreClass}">${fb.score}</div>
+          <div class="ai-score-label"><strong>${fb.scoreLabel}</strong>${fb.score} out of 10</div>
+        </div>
+        <div class="ai-feedback-body">
+          <div class="ai-feedback-row"><div class="ai-row-label">What you identified well</div><p>${fb.positive}</p></div>
+          <div class="ai-feedback-row"><div class="ai-row-label">To develop</div><p>${fb.develop}</p></div>
+          <div class="ai-feedback-row takeaway"><div class="ai-row-label">Key takeaway</div><p>${fb.takeaway}</p></div>
+        </div>`;
+      resultEl.classList.add('visible');
+      const btn = resultEl.previousElementSibling;
+      if (btn) btn.innerHTML = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm-1-5h2v2h-2zm0-8h2v6h-2z"/></svg> Re-submit for feedback`;
+    } catch(e) {}
+  });
+}
+
 // ── Backup & Restore ──
 function backupData() {
   const name = (getVal('starter-name') || starterId).toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
@@ -1916,6 +2163,7 @@ function updateSidebarName() {
   buildAssessment();
   bindFields();
   updateSidebarName();
+  restoreFeedback();
 
   // Keep sidebar name in sync as the user types
   const nameInput = document.getElementById('starter-name');
