@@ -1867,7 +1867,7 @@ Evaluate the quality of their critical thinking. Return ONLY valid JSON (no mark
     setVal(`ct-${key}-feedback`, JSON.stringify(fb));
 
   } catch(e) {
-    alert('Could not get feedback right now. Check your internet connection and try again.');
+    alert('Error: ' + (e && e.message ? e.message : String(e)));
     console.error(e);
   }
 
