@@ -95,6 +95,20 @@
     padding-left: 26px;
   }
 
+  #sidebar-agent-name {
+    padding-left: 26px;
+    margin-top: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--kp-blue);
+    min-height: 0;
+    transition: opacity 0.3s;
+  }
+
+  #sidebar-agent-name:empty {
+    display: none;
+  }
+
   #progress-bar-wrap {
     padding: 14px 20px;
     border-bottom: 1px solid rgba(255,255,255,0.1);
@@ -673,6 +687,7 @@
       <div class="kp-logo-text">key<span>path</span></div>
     </div>
     <h1>SSA Onboarding Workbook</h1>
+    <div id="sidebar-agent-name"></div>
   </div>
 
   <div id="progress-bar-wrap">
@@ -1851,16 +1866,24 @@ function exportPDF() {
   setTimeout(() => w.print(), 600);
 }
 
+function updateSidebarName() {
+  const name = getVal('starter-name').trim();
+  document.getElementById('sidebar-agent-name').textContent = name;
+}
+
 // ── Init ──
 (async () => {
-  // Show starter name in sidebar
-  document.querySelector('#sidebar-header h1').innerHTML =
-    `SSA Onboarding<br>Workbook<br><span style="font-size:11px;color:var(--kp-teal);font-weight:400;margin-top:4px;display:block">👤 ${starterId}</span>`;
-
   await load();
   buildWeekPages();
   buildAssessment();
   bindFields();
+  updateSidebarName();
+
+  // Keep sidebar name in sync as the user types
+  const nameInput = document.getElementById('starter-name');
+  if (nameInput) {
+    nameInput.addEventListener('input', updateSidebarName);
+  }
   updateProgress();
 
   // Restore last page from URL hash
