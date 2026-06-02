@@ -1113,43 +1113,73 @@
     <div class="page-header">
       <div class="page-badge">Core Task</div>
       <h2>Team Connections</h2>
-      <p>Reach out to 3 different SSAs or SEAs — people you haven't worked closely with yet. Have a genuine conversation, not just a quick hello. Record what you learned below.</p>
+      <p>Connect with your fellow Keypathers. Reach out to 3 different SSAs or SEAs you have not worked closely with yet, have a genuine conversation, and record what you learned below.</p>
     </div>
 
     <div class="tip-box">
       <div class="tip-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
-      <div>This is not a formal interview — it is a conversation. Ask them about their life outside work too, not just their role. Building genuine connections early will make your first few months much easier and more enjoyable.</div>
+      <div>This is not a formal interview, it is a conversation. Ask them about their life outside work too, not just their role. Building genuine connections early will make your first few months much easier and more enjoyable.</div>
     </div>
 
-    ${[1, 2, 3].map(n => `
     <div class="card" style="margin-bottom:4px">
       <div class="card-title">
         <div class="icon"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-        Connection ${n}
+        Connection 1
       </div>
       <div class="field-row">
-        <div>
-          <label class="field-label">Name</label>
-          <input type="text" data-save="conn-${n}-name" placeholder="Their name">
-        </div>
-        <div>
-          <label class="field-label">Role</label>
-          <input type="text" data-save="conn-${n}-role" placeholder="e.g. SSA, SEA, Team Lead">
-        </div>
-        <div>
-          <label class="field-label">Date of catch-up</label>
-          <input type="date" data-save="conn-${n}-date">
-        </div>
+        <div><label class="field-label">Name</label><input type="text" data-save="conn-1-name" placeholder="Their name"></div>
+        <div><label class="field-label">Role</label><input type="text" data-save="conn-1-role" placeholder="e.g. SSA, SEA, Team Lead"></div>
+        <div><label class="field-label">Date of catch-up</label><input type="date" data-save="conn-1-date"></div>
       </div>
       <label class="field-label" style="margin-top:14px">What did you learn about them personally?</label>
-      <textarea data-save="conn-${n}-personal" placeholder="e.g. Where they are from, what they do outside work, something that surprised you…"></textarea>
+      <textarea data-save="conn-1-personal" placeholder="e.g. Where they are from, what they do outside work, something that surprised you"></textarea>
       <label class="field-label" style="margin-top:12px">What did you learn about their work and how they approach the role?</label>
-      <textarea data-save="conn-${n}-work" placeholder="e.g. How long they have been in the role, what they find most rewarding or challenging, how they structure their day…"></textarea>
+      <textarea data-save="conn-1-work" placeholder="e.g. How long they have been in the role, what they find most rewarding or challenging, how they structure their day"></textarea>
       <label class="field-label" style="margin-top:12px">What are they currently focused on or working towards?</label>
-      <textarea data-save="conn-${n}-focus" placeholder="e.g. A project, a goal, a skill they are developing, something they are excited about…"></textarea>
+      <textarea data-save="conn-1-focus" placeholder="e.g. A project, a goal, a skill they are developing, something they are excited about"></textarea>
       <label class="field-label" style="margin-top:12px">One thing you will take from this conversation into your own practice</label>
-      <textarea data-save="conn-${n}-takeaway" placeholder="e.g. A tip they shared, an approach you want to try, something that shifted your thinking…"></textarea>
-    </div>`).join('')}
+      <textarea data-save="conn-1-takeaway" placeholder="e.g. A tip they shared, an approach you want to try, something that shifted your thinking"></textarea>
+    </div>
+
+    <div class="card" style="margin-bottom:4px">
+      <div class="card-title">
+        <div class="icon"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        Connection 2
+      </div>
+      <div class="field-row">
+        <div><label class="field-label">Name</label><input type="text" data-save="conn-2-name" placeholder="Their name"></div>
+        <div><label class="field-label">Role</label><input type="text" data-save="conn-2-role" placeholder="e.g. SSA, SEA, Team Lead"></div>
+        <div><label class="field-label">Date of catch-up</label><input type="date" data-save="conn-2-date"></div>
+      </div>
+      <label class="field-label" style="margin-top:14px">What did you learn about them personally?</label>
+      <textarea data-save="conn-2-personal" placeholder="e.g. Where they are from, what they do outside work, something that surprised you"></textarea>
+      <label class="field-label" style="margin-top:12px">What did you learn about their work and how they approach the role?</label>
+      <textarea data-save="conn-2-work" placeholder="e.g. How long they have been in the role, what they find most rewarding or challenging, how they structure their day"></textarea>
+      <label class="field-label" style="margin-top:12px">What are they currently focused on or working towards?</label>
+      <textarea data-save="conn-2-focus" placeholder="e.g. A project, a goal, a skill they are developing, something they are excited about"></textarea>
+      <label class="field-label" style="margin-top:12px">One thing you will take from this conversation into your own practice</label>
+      <textarea data-save="conn-2-takeaway" placeholder="e.g. A tip they shared, an approach you want to try, something that shifted your thinking"></textarea>
+    </div>
+
+    <div class="card" style="margin-bottom:4px">
+      <div class="card-title">
+        <div class="icon"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        Connection 3
+      </div>
+      <div class="field-row">
+        <div><label class="field-label">Name</label><input type="text" data-save="conn-3-name" placeholder="Their name"></div>
+        <div><label class="field-label">Role</label><input type="text" data-save="conn-3-role" placeholder="e.g. SSA, SEA, Team Lead"></div>
+        <div><label class="field-label">Date of catch-up</label><input type="date" data-save="conn-3-date"></div>
+      </div>
+      <label class="field-label" style="margin-top:14px">What did you learn about them personally?</label>
+      <textarea data-save="conn-3-personal" placeholder="e.g. Where they are from, what they do outside work, something that surprised you"></textarea>
+      <label class="field-label" style="margin-top:12px">What did you learn about their work and how they approach the role?</label>
+      <textarea data-save="conn-3-work" placeholder="e.g. How long they have been in the role, what they find most rewarding or challenging, how they structure their day"></textarea>
+      <label class="field-label" style="margin-top:12px">What are they currently focused on or working towards?</label>
+      <textarea data-save="conn-3-focus" placeholder="e.g. A project, a goal, a skill they are developing, something they are excited about"></textarea>
+      <label class="field-label" style="margin-top:12px">One thing you will take from this conversation into your own practice</label>
+      <textarea data-save="conn-3-takeaway" placeholder="e.g. A tip they shared, an approach you want to try, something that shifted your thinking"></textarea>
+    </div>
 
     <div class="page-actions">
       <button class="btn btn-primary" onclick="showPage('week-1', document.querySelector('[data-page=week-1]'))">Next: Week 1 &rarr;</button>
@@ -1315,31 +1345,62 @@
       <div>Students often ask what a unit is really about, whether it is manageable, and how it connects to their career. Knowing the answer confidently builds trust and reduces withdrawal risk. Use the university handbook, Canvas, or your manager as your research sources.</div>
     </div>
 
-    ${[1, 2, 3].map(u => `
     <div class="card" style="margin-bottom:4px">
       <div class="card-title">
         <div class="icon"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 0 3-3h7z"/></svg></div>
-        Unit ${u}
+        Unit 1
       </div>
       <div class="field-row">
-        <div>
-          <label class="field-label">Program</label>
-          <input type="text" data-save="res-u${u}-program" placeholder="e.g. Master of Business Administration">
-        </div>
-        <div>
-          <label class="field-label">Unit / Subject name</label>
-          <input type="text" data-save="res-u${u}-unit" placeholder="e.g. Strategic Management">
-        </div>
+        <div><label class="field-label">Program</label><input type="text" data-save="res-u1-program" placeholder="e.g. Master of Business Administration"></div>
+        <div><label class="field-label">Unit / Subject name</label><input type="text" data-save="res-u1-unit" placeholder="e.g. Strategic Management"></div>
       </div>
       <label class="field-label" style="margin-top:12px">Learning outcomes — what will the student be able to do after this unit?</label>
-      <textarea data-save="res-u${u}-outcomes" placeholder="List 3–5 key learning outcomes from the unit handbook…"></textarea>
+      <textarea data-save="res-u1-outcomes" placeholder="List 3 to 5 key learning outcomes from the unit handbook"></textarea>
       <label class="field-label" style="margin-top:12px">Key assessments — what does the student need to complete?</label>
-      <textarea data-save="res-u${u}-assessments" placeholder="e.g. Group case study (40%), final exam (60%), weekly discussion posts…"></textarea>
+      <textarea data-save="res-u1-assessments" placeholder="e.g. Group case study (40%), final exam (60%), weekly discussion posts"></textarea>
       <label class="field-label" style="margin-top:12px">How I would talk to a student about this unit</label>
-      <textarea class="tall" data-save="res-u${u}-pitch" placeholder="Imagine a student asks: 'What is this unit actually about and is it worth doing?' How would you answer in a way that is honest, clear, and encouraging?"></textarea>
+      <textarea class="tall" data-save="res-u1-pitch" placeholder="Imagine a student asks: 'What is this unit actually about and is it worth doing?' How would you answer in a way that is honest, clear, and encouraging?"></textarea>
       <label class="field-label" style="margin-top:12px">What makes this unit valuable — how does it connect to their career or program goals?</label>
-      <textarea data-save="res-u${u}-value" placeholder="What is the real-world relevance? Why should a student care about this unit?"></textarea>
-    </div>`).join('')}
+      <textarea data-save="res-u1-value" placeholder="What is the real-world relevance? Why should a student care about this unit?"></textarea>
+    </div>
+
+    <div class="card" style="margin-bottom:4px">
+      <div class="card-title">
+        <div class="icon"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 0 3-3h7z"/></svg></div>
+        Unit 2
+      </div>
+      <div class="field-row">
+        <div><label class="field-label">Program</label><input type="text" data-save="res-u2-program" placeholder="e.g. Master of Business Administration"></div>
+        <div><label class="field-label">Unit / Subject name</label><input type="text" data-save="res-u2-unit" placeholder="e.g. Strategic Management"></div>
+      </div>
+      <label class="field-label" style="margin-top:12px">Learning outcomes — what will the student be able to do after this unit?</label>
+      <textarea data-save="res-u2-outcomes" placeholder="List 3 to 5 key learning outcomes from the unit handbook"></textarea>
+      <label class="field-label" style="margin-top:12px">Key assessments — what does the student need to complete?</label>
+      <textarea data-save="res-u2-assessments" placeholder="e.g. Group case study (40%), final exam (60%), weekly discussion posts"></textarea>
+      <label class="field-label" style="margin-top:12px">How I would talk to a student about this unit</label>
+      <textarea class="tall" data-save="res-u2-pitch" placeholder="Imagine a student asks: 'What is this unit actually about and is it worth doing?' How would you answer in a way that is honest, clear, and encouraging?"></textarea>
+      <label class="field-label" style="margin-top:12px">What makes this unit valuable — how does it connect to their career or program goals?</label>
+      <textarea data-save="res-u2-value" placeholder="What is the real-world relevance? Why should a student care about this unit?"></textarea>
+    </div>
+
+    <div class="card" style="margin-bottom:4px">
+      <div class="card-title">
+        <div class="icon"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 0 3-3h7z"/></svg></div>
+        Unit 3
+      </div>
+      <div class="field-row">
+        <div><label class="field-label">Program</label><input type="text" data-save="res-u3-program" placeholder="e.g. Master of Business Administration"></div>
+        <div><label class="field-label">Unit / Subject name</label><input type="text" data-save="res-u3-unit" placeholder="e.g. Strategic Management"></div>
+      </div>
+      <label class="field-label" style="margin-top:12px">Learning outcomes — what will the student be able to do after this unit?</label>
+      <textarea data-save="res-u3-outcomes" placeholder="List 3 to 5 key learning outcomes from the unit handbook"></textarea>
+      <label class="field-label" style="margin-top:12px">Key assessments — what does the student need to complete?</label>
+      <textarea data-save="res-u3-assessments" placeholder="e.g. Group case study (40%), final exam (60%), weekly discussion posts"></textarea>
+      <label class="field-label" style="margin-top:12px">How I would talk to a student about this unit</label>
+      <textarea class="tall" data-save="res-u3-pitch" placeholder="Imagine a student asks: 'What is this unit actually about and is it worth doing?' How would you answer in a way that is honest, clear, and encouraging?"></textarea>
+      <label class="field-label" style="margin-top:12px">What makes this unit valuable — how does it connect to their career or program goals?</label>
+      <textarea data-save="res-u3-value" placeholder="What is the real-world relevance? Why should a student care about this unit?"></textarea>
+    </div>
 
     <div class="page-actions">
       <button class="btn btn-primary" onclick="showPage('connections', document.querySelector('[data-page=connections]'))">Next: Team Connections &rarr;</button>
