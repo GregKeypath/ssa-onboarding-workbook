@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -769,28 +769,16 @@
 
     <div class="nav-group">
       <div class="nav-group-title">Core Tasks</div>
-      <div class="nav-item" data-page="calls" data-role="ssa" onclick="showPage('calls', this)">
+      <div class="nav-item" data-page="calls" onclick="showPage('calls', this)">
         <div class="nav-check"></div> Call Listening Log
       </div>
-      <div class="nav-item" data-page="roleplays" data-role="ssa" onclick="showPage('roleplays', this)">
+      <div class="nav-item" data-page="roleplays" onclick="showPage('roleplays', this)">
         <div class="nav-check"></div> Role Play Scenarios
       </div>
-      <div class="nav-item" data-page="scenarios" data-role="ssa" onclick="showPage('scenarios', this)">
+      <div class="nav-item" data-page="scenarios" onclick="showPage('scenarios', this)">
         <div class="nav-check"></div> Critical Thinking
       </div>
-      <div class="nav-item" data-page="research" data-role="ssa" onclick="showPage('research', this)">
-        <div class="nav-check"></div> Research Task
-      </div>
-      <div class="nav-item" data-page="sea-calls" data-role="sea" onclick="showPage('sea-calls', this)">
-        <div class="nav-check"></div> Call Listening Log
-      </div>
-      <div class="nav-item" data-page="sea-roleplays" data-role="sea" onclick="showPage('sea-roleplays', this)">
-        <div class="nav-check"></div> Role Play Scenarios
-      </div>
-      <div class="nav-item" data-page="sea-scenarios" data-role="sea" onclick="showPage('sea-scenarios', this)">
-        <div class="nav-check"></div> Critical Thinking
-      </div>
-      <div class="nav-item" data-page="sea-research" data-role="sea" onclick="showPage('sea-research', this)">
+      <div class="nav-item" data-page="research" onclick="showPage('research', this)">
         <div class="nav-check"></div> Research Task
       </div>
       <div class="nav-item" data-page="connections" onclick="showPage('connections', this)">
@@ -815,10 +803,7 @@
 
     <div class="nav-group">
       <div class="nav-group-title">Final</div>
-      <div class="nav-item" data-page="assessment" data-role="ssa" onclick="showPage('assessment', this)">
-        <div class="nav-check"></div> Self-Assessment
-      </div>
-      <div class="nav-item" data-page="sea-assessment" data-role="sea" onclick="showPage('sea-assessment', this)">
+      <div class="nav-item" data-page="assessment" onclick="showPage('assessment', this)">
         <div class="nav-check"></div> Self-Assessment
       </div>
     </div>
@@ -945,10 +930,7 @@
       <div class="field-row" style="margin-top:12px">
         <div>
           <label class="field-label">Role</label>
-          <select id="starter-role" data-save="starter-role" onchange="applyRole(this.value === 'Student Enrolment Advisor' ? 'sea' : 'ssa')">
-            <option value="Student Success Advisor">Student Success Advisor (SSA)</option>
-            <option value="Student Enrolment Advisor">Student Enrolment Advisor (SEA)</option>
-          </select>
+          <input type="text" id="starter-role" value="Student Success Advisor" data-save="starter-role">
         </div>
         <div>
           <label class="field-label">Manager</label>
@@ -1266,416 +1248,23 @@
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════════════ -->
-  <!-- SEA PAGES                                      -->
-  <!-- ══════════════════════════════════════════════ -->
-
-  <!-- SEA CALL LISTENING LOG -->
-  <div class="page" id="page-sea-calls">
-    <div class="page-header">
-      <div class="page-badge">Core Task</div>
-      <h2>Call Listening Log</h2>
-      <p>Shadow at least 5 enrolment calls during your first two weeks. For each call, focus on how the SEA identifies the student's needs, matches them to the right program, and moves the conversation forward. Complete one log immediately after each call while it is fresh.</p>
-    </div>
-    <div class="tip-box">
-      <div class="tip-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
-      <div>Ask your buddy or manager to debrief after each call. Great enrolment conversations are consultative, not scripted. Watch for how the SEA listens, adapts and builds trust rather than just presenting information.</div>
-    </div>
-
-    <div class="call-log"><div class="call-log-header">Call 1</div><div class="call-log-body">
-      <div class="call-meta">
-        <div><label class="field-label">Date</label><input type="date" data-save="sea-call1-date"></div>
-        <div><label class="field-label">SEA Observed</label><input type="text" placeholder="Name of SEA" data-save="sea-call1-ssa"></div>
-        <div><label class="field-label">Duration</label><input type="text" placeholder="e.g. 18 min" data-save="sea-call1-duration"></div>
-      </div>
-      <label class="field-label">What need or goal did the student express?</label>
-      <textarea data-save="sea-call1-q1" placeholder="What was the student trying to achieve or change in their life?"></textarea>
-      <label class="field-label">How did the SEA identify the right program for the student?</label>
-      <textarea data-save="sea-call1-q2" placeholder="What questions did they ask? How did they match the student's needs to a program?"></textarea>
-      <label class="field-label">What objections or hesitations came up and how were they handled?</label>
-      <textarea data-save="sea-call1-q3" placeholder="e.g. Cost, time commitment, eligibility — what did the SEA say?"></textarea>
-      <label class="field-label">My overall takeaway from this call</label>
-      <textarea data-save="sea-call1-q4" placeholder="What stood out? What would you do differently or the same?"></textarea>
-    </div></div>
-
-    <div class="call-log"><div class="call-log-header">Call 2</div><div class="call-log-body">
-      <div class="call-meta">
-        <div><label class="field-label">Date</label><input type="date" data-save="sea-call2-date"></div>
-        <div><label class="field-label">SEA Observed</label><input type="text" placeholder="Name of SEA" data-save="sea-call2-ssa"></div>
-        <div><label class="field-label">Duration</label><input type="text" placeholder="e.g. 18 min" data-save="sea-call2-duration"></div>
-      </div>
-      <label class="field-label">What need or goal did the student express?</label>
-      <textarea data-save="sea-call2-q1" placeholder="What was the student trying to achieve or change in their life?"></textarea>
-      <label class="field-label">How did the SEA identify the right program for the student?</label>
-      <textarea data-save="sea-call2-q2" placeholder="What questions did they ask? How did they match the student's needs to a program?"></textarea>
-      <label class="field-label">What objections or hesitations came up and how were they handled?</label>
-      <textarea data-save="sea-call2-q3" placeholder="e.g. Cost, time commitment, eligibility — what did the SEA say?"></textarea>
-      <label class="field-label">My overall takeaway from this call</label>
-      <textarea data-save="sea-call2-q4" placeholder="What stood out? What would you do differently or the same?"></textarea>
-    </div></div>
-
-    <div class="call-log"><div class="call-log-header">Call 3</div><div class="call-log-body">
-      <div class="call-meta">
-        <div><label class="field-label">Date</label><input type="date" data-save="sea-call3-date"></div>
-        <div><label class="field-label">SEA Observed</label><input type="text" placeholder="Name of SEA" data-save="sea-call3-ssa"></div>
-        <div><label class="field-label">Duration</label><input type="text" placeholder="e.g. 18 min" data-save="sea-call3-duration"></div>
-      </div>
-      <label class="field-label">What need or goal did the student express?</label>
-      <textarea data-save="sea-call3-q1" placeholder="What was the student trying to achieve or change in their life?"></textarea>
-      <label class="field-label">How did the SEA identify the right program for the student?</label>
-      <textarea data-save="sea-call3-q2" placeholder="What questions did they ask? How did they match the student's needs to a program?"></textarea>
-      <label class="field-label">What objections or hesitations came up and how were they handled?</label>
-      <textarea data-save="sea-call3-q3" placeholder="e.g. Cost, time commitment, eligibility — what did the SEA say?"></textarea>
-      <label class="field-label">My overall takeaway from this call</label>
-      <textarea data-save="sea-call3-q4" placeholder="What stood out? What would you do differently or the same?"></textarea>
-    </div></div>
-
-    <div class="call-log"><div class="call-log-header">Call 4</div><div class="call-log-body">
-      <div class="call-meta">
-        <div><label class="field-label">Date</label><input type="date" data-save="sea-call4-date"></div>
-        <div><label class="field-label">SEA Observed</label><input type="text" placeholder="Name of SEA" data-save="sea-call4-ssa"></div>
-        <div><label class="field-label">Duration</label><input type="text" placeholder="e.g. 18 min" data-save="sea-call4-duration"></div>
-      </div>
-      <label class="field-label">What need or goal did the student express?</label>
-      <textarea data-save="sea-call4-q1" placeholder="What was the student trying to achieve or change in their life?"></textarea>
-      <label class="field-label">How did the SEA identify the right program for the student?</label>
-      <textarea data-save="sea-call4-q2" placeholder="What questions did they ask? How did they match the student's needs to a program?"></textarea>
-      <label class="field-label">What objections or hesitations came up and how were they handled?</label>
-      <textarea data-save="sea-call4-q3" placeholder="e.g. Cost, time commitment, eligibility — what did the SEA say?"></textarea>
-      <label class="field-label">My overall takeaway from this call</label>
-      <textarea data-save="sea-call4-q4" placeholder="What stood out? What would you do differently or the same?"></textarea>
-    </div></div>
-
-    <div class="call-log"><div class="call-log-header">Call 5</div><div class="call-log-body">
-      <div class="call-meta">
-        <div><label class="field-label">Date</label><input type="date" data-save="sea-call5-date"></div>
-        <div><label class="field-label">SEA Observed</label><input type="text" placeholder="Name of SEA" data-save="sea-call5-ssa"></div>
-        <div><label class="field-label">Duration</label><input type="text" placeholder="e.g. 18 min" data-save="sea-call5-duration"></div>
-      </div>
-      <label class="field-label">What need or goal did the student express?</label>
-      <textarea data-save="sea-call5-q1" placeholder="What was the student trying to achieve or change in their life?"></textarea>
-      <label class="field-label">How did the SEA identify the right program for the student?</label>
-      <textarea data-save="sea-call5-q2" placeholder="What questions did they ask? How did they match the student's needs to a program?"></textarea>
-      <label class="field-label">What objections or hesitations came up and how were they handled?</label>
-      <textarea data-save="sea-call5-q3" placeholder="e.g. Cost, time commitment, eligibility — what did the SEA say?"></textarea>
-      <label class="field-label">My overall takeaway from this call</label>
-      <textarea data-save="sea-call5-q4" placeholder="What stood out? What would you do differently or the same?"></textarea>
-    </div></div>
-
-    <div class="card" style="background:#f0f9ff;border-color:#bae6fd;">
-      <div class="card-title"><div class="icon"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div> Reflection: After completing all 5 call logs</div>
-      <label class="field-label">What pattern did you notice in how great SEAs open a conversation?</label>
-      <textarea class="tall" data-save="sea-calls-pattern" placeholder="e.g. They always ask about the student's career goal before mentioning a program…"></textarea>
-      <label class="field-label">What is one thing about the enrolment conversation you want to make your own?</label>
-      <textarea data-save="sea-calls-focus" placeholder="e.g. The way they handle the FEE-HELP question without losing momentum…"></textarea>
-      <label class="field-label">What is one question you still have about the enrolment process?</label>
-      <textarea data-save="sea-calls-question" placeholder="e.g. At what point do I escalate a complex application situation?"></textarea>
-    </div>
-
-    <div class="page-actions">
-      <button class="btn btn-primary" onclick="showPage('sea-roleplays', document.querySelector('[data-page=sea-roleplays]'))">Next: Role Plays &rarr;</button>
-      <button class="btn btn-secondary" onclick="showPage('welcome', document.querySelector('[data-page=welcome]'))">&larr; Back</button>
-    </div>
-  </div>
-
-  <!-- SEA ROLE PLAYS -->
-  <div class="page" id="page-sea-roleplays">
-    <div class="page-header">
-      <div class="page-badge">Core Task</div>
-      <h2>Role Play Scenarios</h2>
-      <p>Complete these role plays with your buddy or manager before taking live enrolment calls independently. The goal is to develop your consultative approach and confidence handling real situations. Tick the box when you feel ready.</p>
-    </div>
-    <div class="tip-box">
-      <div class="tip-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
-      <div>It is fine to repeat a scenario more than once. Focus on sounding natural and confident, not scripted. If your buddy or manager is unavailable, use the LinkedIn Learning role play resource linked in Core Tasks.</div>
-    </div>
-    <div class="tip-box" style="background:#eff6ff;border-color:#bfdbfe">
-      <div class="tip-icon" style="color:#2AACE2"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 10l4.553-2.069A1 1 0 0 1 21 8.82v6.36a1 1 0 0 1-1.447.889L15 14M3 8a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z"/></svg></div>
-      <div style="color:#1e40af">Want to practise on your own? <a href="https://www.linkedin.com/learning/role-play/scenarios/AQE4fEkwWUJYOQAAAZ6K9dk6ZRHEa94OqFJhyN90aIpSt5f0RPq_TsVN?u=481040578" target="_blank" style="color:#2AACE2;font-weight:600">Open LinkedIn Learning role plays &rarr;</a></div>
-    </div>
-
-    <div class="scenario-card">
-      <div class="scenario-num">Scenario 1</div>
-      <div class="scenario-text">A prospective student calls asking about the Master of Business Administration. They are very interested but worried about managing study alongside full-time work and family commitments. They have not yet decided to apply.</div>
-      <div class="scenario-objective"><strong>Objective:</strong> Use a consultative approach to understand their situation, address their concerns genuinely, and help them feel confident about the decision — without pressuring them.</div>
-      <label class="field-label">Notes / Debrief</label>
-      <textarea data-save="sea-rp1-notes" placeholder="What went well? What was tricky? What will you do differently next time?"></textarea>
-      <label class="scenario-done-check"><input type="checkbox" data-save="sea-rp1-done"> I feel confident with this scenario</label>
-    </div>
-
-    <div class="scenario-card">
-      <div class="scenario-num">Scenario 2</div>
-      <div class="scenario-text">You are following up with a warm lead who expressed interest two weeks ago but has not progressed their application. They answer but seem distracted and say they have been busy.</div>
-      <div class="scenario-objective"><strong>Objective:</strong> Re-engage the student, understand what has held them back, and create a clear next step to move their application forward.</div>
-      <label class="field-label">Notes / Debrief</label>
-      <textarea data-save="sea-rp2-notes" placeholder="What went well? What was tricky? What will you do differently next time?"></textarea>
-      <label class="scenario-done-check"><input type="checkbox" data-save="sea-rp2-done"> I feel confident with this scenario</label>
-    </div>
-
-    <div class="scenario-card">
-      <div class="scenario-num">Scenario 3</div>
-      <div class="scenario-text">A prospective student asks specifically about FEE-HELP. They have heard they can study now and pay later but are not sure how it works, whether they are eligible, or how much it will cost them long term.</div>
-      <div class="scenario-objective"><strong>Objective:</strong> Explain FEE-HELP accurately and simply, answer their questions with confidence, and reassure them without overpromising or providing incorrect information.</div>
-      <label class="field-label">Notes / Debrief</label>
-      <textarea data-save="sea-rp3-notes" placeholder="What went well? What was tricky? What will you do differently next time?"></textarea>
-      <label class="scenario-done-check"><input type="checkbox" data-save="sea-rp3-done"> I feel confident with this scenario</label>
-    </div>
-
-    <div class="scenario-card">
-      <div class="scenario-num">Scenario 4</div>
-      <div class="scenario-text">A prospective student is considering two different universities for the same type of program. They want to know why they should choose your partner university over the other option they are looking at.</div>
-      <div class="scenario-objective"><strong>Objective:</strong> Articulate the partner's value proposition confidently without dismissing the competitor, and focus the conversation on what matters most to this student specifically.</div>
-      <label class="field-label">Notes / Debrief</label>
-      <textarea data-save="sea-rp4-notes" placeholder="What went well? What was tricky? What will you do differently next time?"></textarea>
-      <label class="scenario-done-check"><input type="checkbox" data-save="sea-rp4-done"> I feel confident with this scenario</label>
-    </div>
-
-    <div class="scenario-card">
-      <div class="scenario-num">Scenario 5</div>
-      <div class="scenario-text">You have had a great conversation with a student who is clearly interested. At the end of the call they say "I love it, I just need to talk to my partner first before I commit to anything."</div>
-      <div class="scenario-objective"><strong>Objective:</strong> Maintain the momentum and excitement without applying pressure. Help them have the conversation with their partner by giving them the right information to take away, and book a clear follow-up.</div>
-      <label class="field-label">Notes / Debrief</label>
-      <textarea data-save="sea-rp5-notes" placeholder="What went well? What was tricky? What will you do differently next time?"></textarea>
-      <label class="scenario-done-check"><input type="checkbox" data-save="sea-rp5-done"> I feel confident with this scenario</label>
-    </div>
-
-    <div class="page-actions">
-      <button class="btn btn-primary" onclick="showPage('sea-scenarios', document.querySelector('[data-page=sea-scenarios]'))">Next: Critical Thinking &rarr;</button>
-      <button class="btn btn-secondary" onclick="showPage('sea-calls', document.querySelector('[data-page=sea-calls]'))">&larr; Call Listening Log</button>
-    </div>
-  </div>
-
-  <!-- SEA CRITICAL THINKING SCENARIOS -->
-  <div class="page" id="page-sea-scenarios">
-    <div class="page-header">
-      <div class="page-badge">Core Task</div>
-      <h2>Critical Thinking Scenarios</h2>
-      <p>Read each scenario and the SEA's response. Select your rating, write your reasoning, then hit Submit for feedback to receive an AI-generated score and personalised commentary.</p>
-    </div>
-    <div class="tip-box">
-      <div class="tip-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
-      <div>There are no trick questions here, but some responses are more effective than others. Write your own reasoning first before submitting. The more detail you give, the more useful the feedback will be.<br><br>
-      <span style="font-size:12px;color:#64748b">AI feedback is powered by Google Gemini. If something is not working, <a href="#" onclick="localStorage.removeItem('ssa-gemini-key');alert('API key cleared.');return false;" style="color:var(--kp-blue)">click here to reset it</a>.</span></div>
-    </div>
-
-    <div class="scenario-card">
-      <div class="scenario-num">Scenario A</div>
-      <div class="scenario-text">A prospective student calls asking about postgraduate study. Before the student has said more than a few sentences, the SEA says "Based on what you have told me, I think the MBA would be perfect for you" and spends the rest of the call presenting program features.</div>
-      <div class="scenario-objective"><strong>What the SEA did:</strong> Moved quickly to recommend a program without exploring the student's career goals, current situation, motivations, or what success looks like for them.</div>
-      <div class="field-row" style="margin-top:16px"><div style="flex:0 0 auto"><label class="field-label">Was this the right approach?</label>
-      <select id="sea-ct-a-rating-el" data-save="sea-ct-a-rating" style="margin-top:4px">
-        <option value="">Select...</option>
-        <option value="yes">Yes, this was effective</option>
-        <option value="partly">Partly, some things worked, some did not</option>
-        <option value="no">No, a different approach was needed</option>
-      </select></div></div>
-      <label class="field-label" style="margin-top:12px">Your reasoning, what would you have done and why?</label>
-      <textarea class="tall" id="sea-ct-a-reason-el" data-save="sea-ct-a-reason" placeholder="Think about: what questions should have been asked first? What does a consultative approach actually look like?"></textarea>
-      <button class="ai-feedback-btn" onclick="getSeaScenarioFeedback('a')"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm-1-5h2v2h-2zm0-8h2v6h-2z"/></svg> Submit for feedback</button>
-      <div class="ai-feedback-result" id="sea-ct-a-feedback"></div>
-    </div>
-
-    <div class="scenario-card">
-      <div class="scenario-num">Scenario B</div>
-      <div class="scenario-text">After a good 20-minute conversation, a prospective student says "I love it, I just need to think about it a bit more." The SEA responds "Of course, take all the time you need. I will send you a follow-up email. Chat soon!" and ends the call.</div>
-      <div class="scenario-objective"><strong>What the SEA did:</strong> Accepted the soft objection without exploring what "thinking about it" meant, without booking a specific follow-up, and without giving the student a reason to commit to next steps.</div>
-      <div class="field-row" style="margin-top:16px"><div style="flex:0 0 auto"><label class="field-label">Was this the right approach?</label>
-      <select id="sea-ct-b-rating-el" data-save="sea-ct-b-rating" style="margin-top:4px">
-        <option value="">Select...</option>
-        <option value="yes">Yes, this was effective</option>
-        <option value="partly">Partly, some things worked, some did not</option>
-        <option value="no">No, a different approach was needed</option>
-      </select></div></div>
-      <label class="field-label" style="margin-top:12px">Your reasoning, what would you have done and why?</label>
-      <textarea class="tall" id="sea-ct-b-reason-el" data-save="sea-ct-b-reason" placeholder="Think about: what does 'I need to think about it' usually mean? How do you keep momentum without being pushy?"></textarea>
-      <button class="ai-feedback-btn" onclick="getSeaScenarioFeedback('b')"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm-1-5h2v2h-2zm0-8h2v6h-2z"/></svg> Submit for feedback</button>
-      <div class="ai-feedback-result" id="sea-ct-b-feedback"></div>
-    </div>
-
-    <div class="scenario-card">
-      <div class="scenario-num">Scenario C</div>
-      <div class="scenario-text">A prospective student asks about FEE-HELP. The SEA tells them "It is basically free money from the government, you only pay it back if you earn over a certain amount and it is really manageable." The student thanks them and agrees to apply.</div>
-      <div class="scenario-objective"><strong>What the SEA did:</strong> Simplified FEE-HELP in a way that was misleading, did not explain the threshold accurately, and did not ensure the student had a realistic understanding of their future repayment obligation.</div>
-      <div class="field-row" style="margin-top:16px"><div style="flex:0 0 auto"><label class="field-label">Was this the right approach?</label>
-      <select id="sea-ct-c-rating-el" data-save="sea-ct-c-rating" style="margin-top:4px">
-        <option value="">Select...</option>
-        <option value="yes">Yes, this was effective</option>
-        <option value="partly">Partly, some things worked, some did not</option>
-        <option value="no">No, a different approach was needed</option>
-      </select></div></div>
-      <label class="field-label" style="margin-top:12px">Your reasoning, what would you have done and why?</label>
-      <textarea class="tall" id="sea-ct-c-reason-el" data-save="sea-ct-c-reason" placeholder="Think about: what are the risks of oversimplifying FEE-HELP? What does accurate and helpful look like?"></textarea>
-      <button class="ai-feedback-btn" onclick="getSeaScenarioFeedback('c')"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm-1-5h2v2h-2zm0-8h2v6h-2z"/></svg> Submit for feedback</button>
-      <div class="ai-feedback-result" id="sea-ct-c-feedback"></div>
-    </div>
-
-    <div class="scenario-card">
-      <div class="scenario-num">Scenario D</div>
-      <div class="scenario-text">An SEA has 60 leads in their pipeline. They spend the majority of their time calling the 10 leads they consider "hot" and let the other 50 age without contact. At the end of the fortnight, 3 of the uncontacted leads have enrolled elsewhere.</div>
-      <div class="scenario-objective"><strong>What the SEA did:</strong> Focused effort on high-probability leads but neglected pipeline management discipline, resulting in lost enrolments that may have converted with timely follow-up.</div>
-      <div class="field-row" style="margin-top:16px"><div style="flex:0 0 auto"><label class="field-label">Was this the right approach?</label>
-      <select id="sea-ct-d-rating-el" data-save="sea-ct-d-rating" style="margin-top:4px">
-        <option value="">Select...</option>
-        <option value="yes">Yes, this was effective</option>
-        <option value="partly">Partly, some things worked, some did not</option>
-        <option value="no">No, a different approach was needed</option>
-      </select></div></div>
-      <label class="field-label" style="margin-top:12px">Your reasoning, what would you have done and why?</label>
-      <textarea class="tall" id="sea-ct-d-reason-el" data-save="sea-ct-d-reason" placeholder="Think about: what does good pipeline management look like? How do you prioritise without neglecting?"></textarea>
-      <button class="ai-feedback-btn" onclick="getSeaScenarioFeedback('d')"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm-1-5h2v2h-2zm0-8h2v6h-2z"/></svg> Submit for feedback</button>
-      <div class="ai-feedback-result" id="sea-ct-d-feedback"></div>
-    </div>
-
-    <div class="scenario-card">
-      <div class="scenario-num">Scenario E</div>
-      <div class="scenario-text">An SEA takes an inbound call from a prospective student. They ask open questions about the student's career goals, listen carefully, recommend a specific program with a clear explanation of why it fits, handle a FEE-HELP question accurately, and before hanging up book a follow-up call for the same time next week with an action item for the student to complete.</div>
-      <div class="scenario-objective"><strong>What the SEA did:</strong> Ran a consultative, student-centred enrolment conversation with strong discovery, accurate information, a clear recommendation, and a concrete next step.</div>
-      <div class="field-row" style="margin-top:16px"><div style="flex:0 0 auto"><label class="field-label">Was this the right approach?</label>
-      <select id="sea-ct-e-rating-el" data-save="sea-ct-e-rating" style="margin-top:4px">
-        <option value="">Select...</option>
-        <option value="yes">Yes, this was effective</option>
-        <option value="partly">Partly, some things worked, some did not</option>
-        <option value="no">No, a different approach was needed</option>
-      </select></div></div>
-      <label class="field-label" style="margin-top:12px">Your reasoning, what made this work and what would you take into your own practice?</label>
-      <textarea class="tall" id="sea-ct-e-reason-el" data-save="sea-ct-e-reason" placeholder="What did the SEA do well at each stage? What made it a consultative conversation rather than a sales pitch?"></textarea>
-      <button class="ai-feedback-btn" onclick="getSeaScenarioFeedback('e')"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm-1-5h2v2h-2zm0-8h2v6h-2z"/></svg> Submit for feedback</button>
-      <div class="ai-feedback-result" id="sea-ct-e-feedback"></div>
-    </div>
-
-    <div class="page-actions">
-      <button class="btn btn-primary" onclick="showPage('sea-research', document.querySelector('[data-page=sea-research]'))">Next: Research Task &rarr;</button>
-      <button class="btn btn-secondary" onclick="showPage('sea-roleplays', document.querySelector('[data-page=sea-roleplays]'))">&larr; Role Plays</button>
-    </div>
-  </div>
-
-  <!-- SEA RESEARCH TASK -->
-  <div class="page" id="page-sea-research">
-    <div class="page-header">
-      <div class="page-badge">Core Task</div>
-      <h2>Research Task</h2>
-      <p>Pick two or three programs from the partners you support. Research them deeply so you can have confident, consultative conversations with prospective students. Know the who, the why and the what for each program.</p>
-    </div>
-    <div class="tip-box">
-      <div class="tip-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
-      <div>The best SEAs can talk about a program as if they have studied it themselves. Use the partner website, university handbook, your manager, and your team as research sources. The more you know, the more confidently you can match the right student to the right program.</div>
-    </div>
-
-    <div class="card" style="margin-bottom:4px">
-      <div class="card-title"><div class="icon"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 0 3-3h7z"/></svg></div>Program 1</div>
-      <div class="field-row">
-        <div><label class="field-label">University Partner</label><input type="text" data-save="sea-res-u1-partner" placeholder="e.g. UNSW Sydney"></div>
-        <div><label class="field-label">Program name</label><input type="text" data-save="sea-res-u1-program" placeholder="e.g. Master of Business Administration"></div>
-      </div>
-      <label class="field-label" style="margin-top:12px">Who is this program for? Describe the ideal student.</label>
-      <textarea data-save="sea-res-u1-who" placeholder="e.g. Working professionals with 3 or more years of experience looking to move into leadership or change industry…"></textarea>
-      <label class="field-label" style="margin-top:12px">What are the key value propositions? Why would a student choose this program?</label>
-      <textarea data-save="sea-res-u1-value" placeholder="e.g. Ranked in the top 50 globally, strong alumni network, fully online with flexible study options…"></textarea>
-      <label class="field-label" style="margin-top:12px">FEE-HELP eligibility and any other key financial or admission requirements</label>
-      <textarea data-save="sea-res-u1-feehelp" placeholder="e.g. Australian citizen or permanent resident, no upfront fees required, Commonwealth supported not applicable for postgrad…"></textarea>
-      <label class="field-label" style="margin-top:12px">How I would pitch this program in a conversation</label>
-      <textarea class="tall" data-save="sea-res-u1-pitch" placeholder="Imagine a student says 'Tell me about the MBA.' How would you bring it to life in a way that connects to their goals rather than listing features?"></textarea>
-      <label class="field-label" style="margin-top:12px">Common objections and how I would handle them</label>
-      <textarea data-save="sea-res-u1-objections" placeholder="e.g. 'It is too expensive' — how do you respond? 'I am not sure I have time' — what do you say?"></textarea>
-    </div>
-
-    <div class="card" style="margin-bottom:4px">
-      <div class="card-title"><div class="icon"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 0 3-3h7z"/></svg></div>Program 2</div>
-      <div class="field-row">
-        <div><label class="field-label">University Partner</label><input type="text" data-save="sea-res-u2-partner" placeholder="e.g. UNSW Sydney"></div>
-        <div><label class="field-label">Program name</label><input type="text" data-save="sea-res-u2-program" placeholder="e.g. Master of Business Administration"></div>
-      </div>
-      <label class="field-label" style="margin-top:12px">Who is this program for? Describe the ideal student.</label>
-      <textarea data-save="sea-res-u2-who" placeholder="e.g. Working professionals with 3 or more years of experience looking to move into leadership or change industry…"></textarea>
-      <label class="field-label" style="margin-top:12px">What are the key value propositions? Why would a student choose this program?</label>
-      <textarea data-save="sea-res-u2-value" placeholder="e.g. Ranked in the top 50 globally, strong alumni network, fully online with flexible study options…"></textarea>
-      <label class="field-label" style="margin-top:12px">FEE-HELP eligibility and any other key financial or admission requirements</label>
-      <textarea data-save="sea-res-u2-feehelp" placeholder="e.g. Australian citizen or permanent resident, no upfront fees required, Commonwealth supported not applicable for postgrad…"></textarea>
-      <label class="field-label" style="margin-top:12px">How I would pitch this program in a conversation</label>
-      <textarea class="tall" data-save="sea-res-u2-pitch" placeholder="Imagine a student says 'Tell me about this program.' How would you bring it to life in a way that connects to their goals?"></textarea>
-      <label class="field-label" style="margin-top:12px">Common objections and how I would handle them</label>
-      <textarea data-save="sea-res-u2-objections" placeholder="e.g. 'It is too expensive' — how do you respond? 'I am not sure I have time' — what do you say?"></textarea>
-    </div>
-
-    <div class="card" style="margin-bottom:4px">
-      <div class="card-title"><div class="icon"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 0 3-3h7z"/></svg></div>Program 3</div>
-      <div class="field-row">
-        <div><label class="field-label">University Partner</label><input type="text" data-save="sea-res-u3-partner" placeholder="e.g. UNSW Sydney"></div>
-        <div><label class="field-label">Program name</label><input type="text" data-save="sea-res-u3-program" placeholder="e.g. Master of Business Administration"></div>
-      </div>
-      <label class="field-label" style="margin-top:12px">Who is this program for? Describe the ideal student.</label>
-      <textarea data-save="sea-res-u3-who" placeholder="e.g. Working professionals with 3 or more years of experience looking to move into leadership or change industry…"></textarea>
-      <label class="field-label" style="margin-top:12px">What are the key value propositions? Why would a student choose this program?</label>
-      <textarea data-save="sea-res-u3-value" placeholder="e.g. Ranked in the top 50 globally, strong alumni network, fully online with flexible study options…"></textarea>
-      <label class="field-label" style="margin-top:12px">FEE-HELP eligibility and any other key financial or admission requirements</label>
-      <textarea data-save="sea-res-u3-feehelp" placeholder="e.g. Australian citizen or permanent resident, no upfront fees required, Commonwealth supported not applicable for postgrad…"></textarea>
-      <label class="field-label" style="margin-top:12px">How I would pitch this program in a conversation</label>
-      <textarea class="tall" data-save="sea-res-u3-pitch" placeholder="Imagine a student says 'Tell me about this program.' How would you bring it to life in a way that connects to their goals?"></textarea>
-      <label class="field-label" style="margin-top:12px">Common objections and how I would handle them</label>
-      <textarea data-save="sea-res-u3-objections" placeholder="e.g. 'It is too expensive' — how do you respond? 'I am not sure I have time' — what do you say?"></textarea>
-    </div>
-
-    <div class="page-actions">
-      <button class="btn btn-primary" onclick="showPage('connections', document.querySelector('[data-page=connections]'))">Next: Connect with Peers &rarr;</button>
-      <button class="btn btn-secondary" onclick="showPage('sea-scenarios', document.querySelector('[data-page=sea-scenarios]'))">&larr; Critical Thinking</button>
-    </div>
-  </div>
-
-  <!-- SEA SELF-ASSESSMENT -->
-  <div class="page" id="page-sea-assessment">
-    <div class="page-header">
-      <div class="page-badge">Final</div>
-      <h2>Self-Assessment</h2>
-      <p>Rate yourself honestly across these 10 competencies as you complete your onboarding. Use this before your check-ins with your manager to guide the conversation about where you are and what support you need.</p>
-    </div>
-    <div class="card">
-      <div class="card-title"><div class="icon"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div> Rate yourself 1 (not yet) to 5 (confident)</div>
-      <div id="sea-assessment-items"></div>
-    </div>
-    <div class="card" style="margin-top:4px">
-      <div class="card-title"><div class="icon"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>Reflection</div>
-      <label class="field-label">What are you most proud of from your first 8 weeks?</label>
-      <textarea class="tall" data-save="sea-assess-proud" placeholder="Take a moment to celebrate your wins..."></textarea>
-      <label class="field-label">What is your biggest focus area going forward?</label>
-      <textarea class="tall" data-save="sea-assess-focus" placeholder="What do you want to work on most in the next phase?"></textarea>
-    </div>
-    <div class="card" style="background:#f0fdf4;border-color:#86efac;margin-top:4px">
-      <div class="card-title"><div class="icon"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></div>Sign-Off</div>
-      <div class="field-row">
-        <div>
-          <label class="field-label">Employee Name</label><input type="text" data-save="sea-signoff-employee" placeholder="Your name">
-          <label class="field-label" style="margin-top:10px">Date</label><input type="date" data-save="sea-signoff-employee-date">
-        </div>
-        <div>
-          <label class="field-label">Manager Name</label><input type="text" data-save="sea-signoff-manager" placeholder="Manager's name">
-          <label class="field-label" style="margin-top:10px">Date</label><input type="date" data-save="sea-signoff-manager-date">
-        </div>
-      </div>
-    </div>
-    <div class="page-actions">
-      <button class="btn btn-primary" onclick="exportPDF()">Export PDF Summary</button>
-      <button class="btn btn-outline" onclick="backupData()">Download backup file</button>
-      <button class="btn btn-secondary" onclick="showPage('week-8', document.querySelector('[data-page=week-8]'))">&larr; Back</button>
-    </div>
-  </div>
-
   <!-- LINKEDIN LEARNING -->
   <div class="page" id="page-linkedin">
     <div class="page-header">
       <div class="page-badge">Core Task</div>
       <h2>LinkedIn Learning</h2>
-      <p>These courses have been selected to support your development as a Student Success Advisor. Work through them at your own pace alongside your weekly journey. Tick each one off when you have completed it.</p>
+      <p>These courses have been selected to support your development at Keypath. Work through them at your own pace alongside your weekly journey. Tick each one off when you have completed it.</p>
     </div>
 
     <div class="tip-box">
       <div class="tip-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
-      <div>You can access these through your Keypath LinkedIn Learning account. Each course opens in a new tab. Some are short (under 30 minutes) — a great way to fill gaps between calls or before your weekly catch-up.</div>
+      <div>You can access these through your Keypath LinkedIn Learning account. Each course opens in a new tab. Some are under 30 minutes — a great way to fill time between calls or before a weekly catch-up.</div>
     </div>
 
     <div class="card">
       <div class="card-title">
         <div class="icon"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.4 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.18 6.18l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
-        Core Role Skills
+        Listening and Communication
       </div>
 
       <label class="scenario-done-check" style="display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #f1f5f9">
@@ -1687,10 +1276,33 @@
       </label>
 
       <label class="scenario-done-check" style="display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #f1f5f9">
+        <input type="checkbox" data-save="ll-rapport" style="margin-top:3px;flex-shrink:0">
+        <div>
+          <a href="https://www.linkedin.com/learning/building-rapport-with-customers-21402583" target="_blank" style="font-weight:600;color:var(--kp-navy);text-decoration:none;font-size:14px">Building Rapport with Customers</a>
+          <div style="font-size:12px;color:#64748b;margin-top:2px">Practical techniques for building genuine trust and connection on every call</div>
+        </div>
+      </label>
+
+      <label class="scenario-done-check" style="display:flex;align-items:flex-start;gap:10px;padding:10px 0">
+        <input type="checkbox" data-save="ll-eq-comms" style="margin-top:3px;flex-shrink:0">
+        <div>
+          <a href="https://www.linkedin.com/learning/communicating-with-emotional-intelligence" target="_blank" style="font-weight:600;color:var(--kp-navy);text-decoration:none;font-size:14px">Communicating with Emotional Intelligence</a>
+          <div style="font-size:12px;color:#64748b;margin-top:2px">How to communicate in a way that builds trust and connection with students</div>
+        </div>
+      </label>
+    </div>
+
+    <div class="card" style="margin-top:4px">
+      <div class="card-title">
+        <div class="icon"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        Coaching, Empathy and Difficult Conversations
+      </div>
+
+      <label class="scenario-done-check" style="display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #f1f5f9">
         <input type="checkbox" data-save="ll-coaching-difficult" style="margin-top:3px;flex-shrink:0">
         <div>
           <a href="https://www.linkedin.com/learning/coaching-employees-through-difficult-situations" target="_blank" style="font-weight:600;color:var(--kp-navy);text-decoration:none;font-size:14px">Coaching Employees through Difficult Situations</a>
-          <div style="font-size:12px;color:#64748b;margin-top:2px">Learn how to coach someone through a challenge — directly relevant to at-risk student conversations</div>
+          <div style="font-size:12px;color:#64748b;margin-top:2px">Directly relevant to at-risk student conversations and coaching students through challenges</div>
         </div>
       </label>
 
@@ -1698,7 +1310,7 @@
         <input type="checkbox" data-save="ll-difficult-convos" style="margin-top:3px;flex-shrink:0">
         <div>
           <a href="https://www.linkedin.com/learning/having-difficult-conversations-2018" target="_blank" style="font-weight:600;color:var(--kp-navy);text-decoration:none;font-size:14px">Having Difficult Conversations</a>
-          <div style="font-size:12px;color:#64748b;margin-top:2px">Techniques for navigating conversations where students are distressed, resistant or considering withdrawal</div>
+          <div style="font-size:12px;color:#64748b;margin-top:2px">Techniques for navigating conversations where students are distressed, resistant or hesitant</div>
         </div>
       </label>
 
@@ -1706,7 +1318,7 @@
         <input type="checkbox" data-save="ll-empathy-cs" style="margin-top:3px;flex-shrink:0">
         <div>
           <a href="https://www.linkedin.com/learning/empathy-for-customer-service-professionals-22626867" target="_blank" style="font-weight:600;color:var(--kp-navy);text-decoration:none;font-size:14px">Empathy for Customer Service Professionals</a>
-          <div style="font-size:12px;color:#64748b;margin-top:2px">Retention is built on empathy and compassion — this course goes deep on how to apply both</div>
+          <div style="font-size:12px;color:#64748b;margin-top:2px">Retention and enrolment are both built on empathy and compassion — this course goes deep on how to apply both</div>
         </div>
       </label>
 
@@ -1721,23 +1333,54 @@
 
     <div class="card" style="margin-top:4px">
       <div class="card-title">
-        <div class="icon"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
-        Supporting Skills
+        <div class="icon"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        Consultative Sales and Pipeline
+      </div>
+
+      <label class="scenario-done-check" style="display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #f1f5f9">
+        <input type="checkbox" data-save="ll-purpose-sales" style="margin-top:3px;flex-shrink:0">
+        <div>
+          <a href="https://www.linkedin.com/learning/purpose-driven-sales-2021" target="_blank" style="font-weight:600;color:var(--kp-navy);text-decoration:none;font-size:14px">Purpose-Driven Sales</a>
+          <div style="font-size:12px;color:#64748b;margin-top:2px">How to sell in a way that genuinely serves the customer — directly aligned to Keypath's consultative approach</div>
+        </div>
+      </label>
+
+      <label class="scenario-done-check" style="display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #f1f5f9">
+        <input type="checkbox" data-save="ll-sales-discovery" style="margin-top:3px;flex-shrink:0">
+        <div>
+          <a href="https://www.linkedin.com/learning/sales-discovery" target="_blank" style="font-weight:600;color:var(--kp-navy);text-decoration:none;font-size:14px">Sales Discovery</a>
+          <div style="font-size:12px;color:#64748b;margin-top:2px">Master the discovery conversation — asking the right questions to understand a student's real goals before recommending a program</div>
+        </div>
+      </label>
+
+      <label class="scenario-done-check" style="display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #f1f5f9">
+        <input type="checkbox" data-save="ll-pipeline" style="margin-top:3px;flex-shrink:0">
+        <div>
+          <a href="https://www.linkedin.com/learning/sales-pipeline-management" target="_blank" style="font-weight:600;color:var(--kp-navy);text-decoration:none;font-size:14px">Sales Pipeline Management</a>
+          <div style="font-size:12px;color:#64748b;margin-top:2px">Structure and prioritise your pipeline so every prospective student gets the follow-up they deserve</div>
+        </div>
+      </label>
+
+      <label class="scenario-done-check" style="display:flex;align-items:flex-start;gap:10px;padding:10px 0">
+        <input type="checkbox" data-save="ll-closing" style="margin-top:3px;flex-shrink:0">
+        <div>
+          <a href="https://www.linkedin.com/learning/sales-closing-strategies" target="_blank" style="font-weight:600;color:var(--kp-navy);text-decoration:none;font-size:14px">Sales: Closing Strategies</a>
+          <div style="font-size:12px;color:#64748b;margin-top:2px">How to bring a conversation to a confident, clear next step without being pushy</div>
+        </div>
+      </label>
+    </div>
+
+    <div class="card" style="margin-top:4px">
+      <div class="card-title">
+        <div class="icon"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
+        Personal Effectiveness
       </div>
 
       <label class="scenario-done-check" style="display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #f1f5f9">
         <input type="checkbox" data-save="ll-eq-develop" style="margin-top:3px;flex-shrink:0">
         <div>
           <a href="https://www.linkedin.com/learning/developing-your-emotional-intelligence-22196221" target="_blank" style="font-weight:600;color:var(--kp-navy);text-decoration:none;font-size:14px">Developing Your Emotional Intelligence</a>
-          <div style="font-size:12px;color:#64748b;margin-top:2px">Understand and manage your own emotions while reading students' needs accurately</div>
-        </div>
-      </label>
-
-      <label class="scenario-done-check" style="display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #f1f5f9">
-        <input type="checkbox" data-save="ll-eq-comms" style="margin-top:3px;flex-shrink:0">
-        <div>
-          <a href="https://www.linkedin.com/learning/communicating-with-emotional-intelligence" target="_blank" style="font-weight:600;color:var(--kp-navy);text-decoration:none;font-size:14px">Communicating with Emotional Intelligence</a>
-          <div style="font-size:12px;color:#64748b;margin-top:2px">How to communicate in a way that builds trust and connection with students</div>
+          <div style="font-size:12px;color:#64748b;margin-top:2px">Understand and manage your own emotions while reading students needs accurately</div>
         </div>
       </label>
 
@@ -1745,30 +1388,23 @@
         <input type="checkbox" data-save="ll-time-mgmt" style="margin-top:3px;flex-shrink:0">
         <div>
           <a href="https://www.linkedin.com/learning/time-management-fundamentals-14548057" target="_blank" style="font-weight:600;color:var(--kp-navy);text-decoration:none;font-size:14px">Time Management Fundamentals</a>
-          <div style="font-size:12px;color:#64748b;margin-top:2px">Manage a high volume of students and daily contact KPIs without burning out</div>
+          <div style="font-size:12px;color:#64748b;margin-top:2px">Manage high call volumes and daily KPIs without burning out</div>
         </div>
       </label>
 
-      <label class="scenario-done-check" style="display:flex;align-items:flex-start;gap:10px;padding:10px 0">
+      <label class="scenario-done-check" style="display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #f1f5f9">
         <input type="checkbox" data-save="ll-prioritising" style="margin-top:3px;flex-shrink:0">
         <div>
           <a href="https://www.linkedin.com/learning/prioritizing-your-tasks" target="_blank" style="font-weight:600;color:var(--kp-navy);text-decoration:none;font-size:14px">Prioritizing Your Tasks</a>
           <div style="font-size:12px;color:#64748b;margin-top:2px">Know which students and tasks need your attention first on any given day</div>
         </div>
       </label>
-    </div>
-
-    <div class="card" style="margin-top:4px">
-      <div class="card-title">
-        <div class="icon"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 0 3-3h7z"/></svg></div>
-        Industry Context
-      </div>
 
       <label class="scenario-done-check" style="display:flex;align-items:flex-start;gap:10px;padding:10px 0">
         <input type="checkbox" data-save="ll-adult-learning" style="margin-top:3px;flex-shrink:0">
         <div>
           <a href="https://www.linkedin.com/learning/effectively-teaching-employees-the-basics-of-adult-learning" target="_blank" style="font-weight:600;color:var(--kp-navy);text-decoration:none;font-size:14px">Effectively Teaching Employees: The Basics of Adult Learning</a>
-          <div style="font-size:12px;color:#64748b;margin-top:2px">Understand how adult learners think, what motivates them, and why they disengage — essential context for every student conversation</div>
+          <div style="font-size:12px;color:#64748b;margin-top:2px">Understand how adult learners think, what motivates them and why they disengage — essential context for every student conversation</div>
         </div>
       </label>
     </div>
@@ -1778,7 +1414,6 @@
       <button class="btn btn-secondary" onclick="showPage('connections', document.querySelector('[data-page=connections]'))">&larr; Connect with Peers</button>
     </div>
   </div>
-
   <!-- CRITICAL THINKING SCENARIOS -->
   <div class="page" id="page-scenarios">
     <div class="page-header">
@@ -2991,14 +2626,6 @@ function updateSidebarName() {
   updateSidebarName();
   restoreFeedback();
 
-  // Apply role based on saved value or URL param
-  const urlRole = new URLSearchParams(location.search).get('role');
-  const savedRole = getVal('starter-role');
-  const isSea = urlRole === 'sea' || savedRole === 'Student Enrolment Advisor';
-  const roleEl = document.getElementById('starter-role');
-  if (roleEl && isSea) roleEl.value = 'Student Enrolment Advisor';
-  applyRole(isSea ? 'sea' : 'ssa');
-
   // Keep sidebar name in sync as the user types
   const nameInput = document.getElementById('starter-name');
   if (nameInput) {
@@ -3008,7 +2635,7 @@ function updateSidebarName() {
 
   // Restore last page from URL hash
   const hash = location.hash.replace('#', '');
-  const validPages = ['welcome', 'calls', 'roleplays', 'scenarios', 'research', 'sea-calls', 'sea-roleplays', 'sea-scenarios', 'sea-research', 'sea-assessment', 'connections', 'linkedin', 'week-1', 'week-2', 'week-3', 'week-4', 'week-5', 'week-6', 'week-7', 'week-8', 'assessment'];
+  const validPages = ['welcome', 'calls', 'roleplays', 'scenarios', 'research', 'connections', 'linkedin', 'week-1', 'week-2', 'week-3', 'week-4', 'week-5', 'week-6', 'week-7', 'week-8', 'assessment'];
   if (hash && validPages.includes(hash)) {
     const navEl = document.querySelector(`[data-page="${hash}"]`);
     showPage(hash, navEl);
