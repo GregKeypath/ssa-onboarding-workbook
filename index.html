@@ -784,6 +784,9 @@
       <div class="nav-item" data-page="connections" onclick="showPage('connections', this)">
         <div class="nav-check"></div> Connect with Peers
       </div>
+      <div class="nav-item" data-page="linkedin" onclick="showPage('linkedin', this)">
+        <div class="nav-check"></div> LinkedIn Learning
+      </div>
     </div>
 
     <div class="nav-group">
@@ -1240,8 +1243,128 @@
     </div>
 
     <div class="page-actions">
-      <button class="btn btn-primary" onclick="showPage('week-1', document.querySelector('[data-page=week-1]'))">Next: Week 1 &rarr;</button>
+      <button class="btn btn-primary" onclick="showPage('linkedin', document.querySelector('[data-page=linkedin]'))">Next: LinkedIn Learning &rarr;</button>
       <button class="btn btn-secondary" onclick="showPage('research', document.querySelector('[data-page=research]'))">&larr; Research Task</button>
+    </div>
+  </div>
+
+  <!-- LINKEDIN LEARNING -->
+  <div class="page" id="page-linkedin">
+    <div class="page-header">
+      <div class="page-badge">Core Task</div>
+      <h2>LinkedIn Learning</h2>
+      <p>These courses have been selected to support your development as a Student Success Advisor. Work through them at your own pace alongside your weekly journey. Tick each one off when you have completed it.</p>
+    </div>
+
+    <div class="tip-box">
+      <div class="tip-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div>You can access these through your Keypath LinkedIn Learning account. Each course opens in a new tab. Some are short (under 30 minutes) — a great way to fill gaps between calls or before your weekly catch-up.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="icon"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.4 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.18 6.18l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+        Core Role Skills
+      </div>
+
+      <label class="scenario-done-check" style="display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #f1f5f9">
+        <input type="checkbox" data-save="ll-active-listening" style="margin-top:3px;flex-shrink:0">
+        <div>
+          <a href="https://www.linkedin.com/learning/active-listening-the-secret-to-effective-communication" target="_blank" style="font-weight:600;color:var(--kp-navy);text-decoration:none;font-size:14px">Active Listening: The Secret to Effective Communication</a>
+          <div style="font-size:12px;color:#64748b;margin-top:2px">Build the listening skills that underpin every great student conversation</div>
+        </div>
+      </label>
+
+      <label class="scenario-done-check" style="display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #f1f5f9">
+        <input type="checkbox" data-save="ll-coaching-difficult" style="margin-top:3px;flex-shrink:0">
+        <div>
+          <a href="https://www.linkedin.com/learning/coaching-employees-through-difficult-situations" target="_blank" style="font-weight:600;color:var(--kp-navy);text-decoration:none;font-size:14px">Coaching Employees through Difficult Situations</a>
+          <div style="font-size:12px;color:#64748b;margin-top:2px">Learn how to coach someone through a challenge — directly relevant to at-risk student conversations</div>
+        </div>
+      </label>
+
+      <label class="scenario-done-check" style="display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #f1f5f9">
+        <input type="checkbox" data-save="ll-difficult-convos" style="margin-top:3px;flex-shrink:0">
+        <div>
+          <a href="https://www.linkedin.com/learning/having-difficult-conversations-2018" target="_blank" style="font-weight:600;color:var(--kp-navy);text-decoration:none;font-size:14px">Having Difficult Conversations</a>
+          <div style="font-size:12px;color:#64748b;margin-top:2px">Techniques for navigating conversations where students are distressed, resistant or considering withdrawal</div>
+        </div>
+      </label>
+
+      <label class="scenario-done-check" style="display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #f1f5f9">
+        <input type="checkbox" data-save="ll-empathy-cs" style="margin-top:3px;flex-shrink:0">
+        <div>
+          <a href="https://www.linkedin.com/learning/empathy-for-customer-service-professionals-22626867" target="_blank" style="font-weight:600;color:var(--kp-navy);text-decoration:none;font-size:14px">Empathy for Customer Service Professionals</a>
+          <div style="font-size:12px;color:#64748b;margin-top:2px">Retention is built on empathy and compassion — this course goes deep on how to apply both</div>
+        </div>
+      </label>
+
+      <label class="scenario-done-check" style="display:flex;align-items:flex-start;gap:10px;padding:10px 0">
+        <input type="checkbox" data-save="ll-complaints" style="margin-top:3px;flex-shrink:0">
+        <div>
+          <a href="https://www.linkedin.com/learning/handling-customer-complaints-with-empathy" target="_blank" style="font-weight:600;color:var(--kp-navy);text-decoration:none;font-size:14px">Handling Customer Complaints with Empathy</a>
+          <div style="font-size:12px;color:#64748b;margin-top:2px">Practical techniques for students who are frustrated, unhappy or escalating</div>
+        </div>
+      </label>
+    </div>
+
+    <div class="card" style="margin-top:4px">
+      <div class="card-title">
+        <div class="icon"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+        Supporting Skills
+      </div>
+
+      <label class="scenario-done-check" style="display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #f1f5f9">
+        <input type="checkbox" data-save="ll-eq-develop" style="margin-top:3px;flex-shrink:0">
+        <div>
+          <a href="https://www.linkedin.com/learning/developing-your-emotional-intelligence-22196221" target="_blank" style="font-weight:600;color:var(--kp-navy);text-decoration:none;font-size:14px">Developing Your Emotional Intelligence</a>
+          <div style="font-size:12px;color:#64748b;margin-top:2px">Understand and manage your own emotions while reading students' needs accurately</div>
+        </div>
+      </label>
+
+      <label class="scenario-done-check" style="display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #f1f5f9">
+        <input type="checkbox" data-save="ll-eq-comms" style="margin-top:3px;flex-shrink:0">
+        <div>
+          <a href="https://www.linkedin.com/learning/communicating-with-emotional-intelligence" target="_blank" style="font-weight:600;color:var(--kp-navy);text-decoration:none;font-size:14px">Communicating with Emotional Intelligence</a>
+          <div style="font-size:12px;color:#64748b;margin-top:2px">How to communicate in a way that builds trust and connection with students</div>
+        </div>
+      </label>
+
+      <label class="scenario-done-check" style="display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #f1f5f9">
+        <input type="checkbox" data-save="ll-time-mgmt" style="margin-top:3px;flex-shrink:0">
+        <div>
+          <a href="https://www.linkedin.com/learning/time-management-fundamentals-14548057" target="_blank" style="font-weight:600;color:var(--kp-navy);text-decoration:none;font-size:14px">Time Management Fundamentals</a>
+          <div style="font-size:12px;color:#64748b;margin-top:2px">Manage a high volume of students and daily contact KPIs without burning out</div>
+        </div>
+      </label>
+
+      <label class="scenario-done-check" style="display:flex;align-items:flex-start;gap:10px;padding:10px 0">
+        <input type="checkbox" data-save="ll-prioritising" style="margin-top:3px;flex-shrink:0">
+        <div>
+          <a href="https://www.linkedin.com/learning/prioritizing-your-tasks" target="_blank" style="font-weight:600;color:var(--kp-navy);text-decoration:none;font-size:14px">Prioritizing Your Tasks</a>
+          <div style="font-size:12px;color:#64748b;margin-top:2px">Know which students and tasks need your attention first on any given day</div>
+        </div>
+      </label>
+    </div>
+
+    <div class="card" style="margin-top:4px">
+      <div class="card-title">
+        <div class="icon"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 0 3-3h7z"/></svg></div>
+        Industry Context
+      </div>
+
+      <label class="scenario-done-check" style="display:flex;align-items:flex-start;gap:10px;padding:10px 0">
+        <input type="checkbox" data-save="ll-adult-learning" style="margin-top:3px;flex-shrink:0">
+        <div>
+          <a href="https://www.linkedin.com/learning/effectively-teaching-employees-the-basics-of-adult-learning" target="_blank" style="font-weight:600;color:var(--kp-navy);text-decoration:none;font-size:14px">Effectively Teaching Employees: The Basics of Adult Learning</a>
+          <div style="font-size:12px;color:#64748b;margin-top:2px">Understand how adult learners think, what motivates them, and why they disengage — essential context for every student conversation</div>
+        </div>
+      </label>
+    </div>
+
+    <div class="page-actions">
+      <button class="btn btn-primary" onclick="showPage('week-1', document.querySelector('[data-page=week-1]'))">Next: Week 1 &rarr;</button>
+      <button class="btn btn-secondary" onclick="showPage('connections', document.querySelector('[data-page=connections]'))">&larr; Connect with Peers</button>
     </div>
   </div>
 
@@ -2324,7 +2447,7 @@ function updateSidebarName() {
 
   // Restore last page from URL hash
   const hash = location.hash.replace('#', '');
-  const validPages = ['welcome', 'calls', 'roleplays', 'scenarios', 'research', 'connections', 'week-1', 'week-2', 'week-3', 'week-4', 'week-5', 'week-6', 'week-7', 'week-8', 'assessment'];
+  const validPages = ['welcome', 'calls', 'roleplays', 'scenarios', 'research', 'connections', 'linkedin', 'week-1', 'week-2', 'week-3', 'week-4', 'week-5', 'week-6', 'week-7', 'week-8', 'assessment'];
   if (hash && validPages.includes(hash)) {
     const navEl = document.querySelector(`[data-page="${hash}"]`);
     showPage(hash, navEl);
