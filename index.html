@@ -2162,13 +2162,7 @@ Speak directly to them using "you/your". Return ONLY valid JSON (no markdown, no
     if (!jsonMatch) throw new Error('No JSON found in response: ' + text.slice(0, 200));
     const fb = JSON.parse(jsonMatch[0]);
 
-    const scoreClass = fb.score >= 8 ? 'score-high' : fb.score >= 5 ? 'score-mid' : 'score-low';
-
     resultEl.innerHTML = `
-      <div class="ai-score-bar">
-        <div class="ai-score-circle ${scoreClass}">${fb.score}</div>
-        <div class="ai-score-label"><strong>${fb.scoreLabel}</strong>${fb.score} out of 10</div>
-      </div>
       <div class="ai-feedback-body">
         <div class="ai-feedback-row">
           <div class="ai-row-label">What you identified well</div>
@@ -2206,12 +2200,7 @@ function restoreFeedback() {
       const fb = JSON.parse(saved);
       const resultEl = document.getElementById(`ct-${key}-feedback`);
       if (!resultEl) return;
-      const scoreClass = fb.score >= 8 ? 'score-high' : fb.score >= 5 ? 'score-mid' : 'score-low';
       resultEl.innerHTML = `
-        <div class="ai-score-bar">
-          <div class="ai-score-circle ${scoreClass}">${fb.score}</div>
-          <div class="ai-score-label"><strong>${fb.scoreLabel}</strong>${fb.score} out of 10</div>
-        </div>
         <div class="ai-feedback-body">
           <div class="ai-feedback-row"><div class="ai-row-label">What you identified well</div><p>${fb.positive}</p></div>
           <div class="ai-feedback-row"><div class="ai-row-label">To develop</div><p>${fb.develop}</p></div>
@@ -2522,7 +2511,6 @@ function exportPDF() {
     ctHtml += `<h3>Scenario ${id}: ${desc}</h3><table>
       ${row('Rating', ratingText[v(`ct-${key}-rating`)] || '—')}
       ${row('Reasoning', v(`ct-${key}-reason`))}
-      ${aiFb ? row('AI Score', `${aiFb.score}/10 — ${aiFb.scoreLabel}`) : ''}
       ${aiFb ? row('What you identified well', aiFb.positive) : ''}
       ${aiFb ? row('To develop', aiFb.develop) : ''}
       ${aiFb ? row('Coaching tip', aiFb.takeaway) : ''}
