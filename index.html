@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SSA Onboarding Workbook | Keypath Education</title>
+<title>SSA Onboarding Journal | Keypath Education</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230B1C38'/%3E%3Crect x='6' y='6' width='8' height='8' rx='1.5' fill='%232AACE2'/%3E%3Crect x='18' y='6' width='8' height='8' rx='1.5' fill='%232AACE2'/%3E%3Crect x='6' y='18' width='8' height='8' rx='1.5' fill='%232AACE2'/%3E%3Crect x='18' y='18' width='8' height='8' rx='1.5' fill='%232AACE2' opacity='.4'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -747,7 +747,7 @@
       </div>
       <div class="kp-logo-text">key<span>path</span></div>
     </div>
-    <h1>SSA Onboarding Workbook</h1>
+    <h1>SSA Onboarding Journal</h1>
     <div id="sidebar-agent-name"></div>
   </div>
 
@@ -835,7 +835,7 @@
   <div class="page active" id="page-welcome">
     <div class="welcome-hero">
       <h2>Welcome to Keypath</h2>
-      <p>We are glad you are here. This workbook supports your first 8 weeks as a Student Success Advisor. Work through each section at your own pace and bookmark this page so you can return to your progress at any time.</p>
+      <p>We are glad you are here. This journal supports your first 8 weeks as a Student Success Advisor. Work through each section at your own pace and bookmark this page so you can return to your progress at any time.</p>
     </div>
 
     <div class="card" style="background:linear-gradient(135deg,#0B1C38 0%,#162d58 100%);color:#fff;border-color:#1e3a6e">
@@ -1673,7 +1673,7 @@ const DB_ROOT = 'https://ssa-onboarding-workbook-default-rtdb.asia-southeast1.fi
 // Starter ID from URL ?starter=name, or prompt on first load
 let starterId = new URLSearchParams(location.search).get('starter');
 if (!starterId) {
-  starterId = prompt('Enter your name to load your workbook (e.g. jane-smith):') || 'default';
+  starterId = prompt('Enter your name to load your journal (e.g. jane-smith):') || 'default';
   starterId = starterId.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
   const url = new URL(location.href);
   url.searchParams.set('starter', starterId);
@@ -2367,7 +2367,7 @@ function restoreData(event) {
       // Reload page so all fields repopulate cleanly
       location.reload();
     } catch(e) {
-      alert('Could not restore — the file does not appear to be a valid workbook backup.');
+      alert('Could not restore — the file does not appear to be a valid journal backup.');
     }
   };
   reader.readAsText(file);
@@ -2570,7 +2570,7 @@ function exportPDF() {
   </head><body>
   <button class="print-btn no-print" onclick="window.print()">Print / Save as PDF</button>
   <div class="cover">
-    <h1>SSA Onboarding Workbook</h1>
+    <h1>SSA Onboarding Journal</h1>
     <div class="sub">Keypath Education</div>
     <div class="meta">
       ${starterName} &nbsp;|&nbsp; ${v('starter-role') || 'Student Success Advisor'} &nbsp;|&nbsp; Manager: ${v('starter-manager') || '—'}<br>
@@ -2614,7 +2614,7 @@ function applyRole(role) {
     el.style.display = (roles.includes(role) || el.dataset.role === '') ? '' : 'none';
   });
   // Update sidebar title
-  const title = role === 'sea' ? 'SEA Onboarding<br>Workbook' : 'SSA Onboarding<br>Workbook';
+  const title = role === 'sea' ? 'SEA Onboarding<br>Journal' : 'SSA Onboarding<br>Journal';
   const h1 = document.querySelector('#sidebar-header h1');
   if (h1) h1.innerHTML = title;
 }
