@@ -1994,10 +1994,12 @@ function bindFields() {
     const key = el.dataset.save;
     const saved = getVal(key);
 
+    el.setAttribute('autocomplete', 'off');
+
     if (el.type === 'checkbox') {
       el.checked = saved === 'true';
     } else {
-      if (saved) el.value = saved;
+      el.value = saved || el.defaultValue;
     }
 
     el.addEventListener('input', () => {
