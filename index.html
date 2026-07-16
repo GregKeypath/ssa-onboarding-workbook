@@ -1699,8 +1699,8 @@ async function load() {
     if (res.ok) {
       const remote = await res.json();
       if (remote && typeof remote === 'object') {
-        data = { ...data, ...remote };
-        localStorage.setItem(LS_KEY, JSON.stringify(data)); // keep local in sync
+        data = remote;
+        localStorage.setItem(LS_KEY, JSON.stringify(data));
       }
     }
   } catch(e) { /* offline or rules issue — local data still loaded above */ }
